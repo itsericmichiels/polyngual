@@ -10,6 +10,7 @@ import { ScrollToForm } from '@/components/ScrollToForm';
 import { ContentStudio } from '@/components/ContentStudio';
 import { RevealObserver } from '@/components/RevealObserver';
 import { BenefitVisual } from '@/components/BenefitVisual';
+import { WordGame } from '@/components/WordGame';
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -70,9 +71,7 @@ export default async function LandingPage({ params }: Props) {
               <span className="nowrap">
                 <span className="hero-mark">
                   {t.hero.headlineMark}
-                  <svg viewBox="0 0 200 24" preserveAspectRatio="none" aria-hidden>
-                    <path d="M6 6 Q100 34 194 6" />
-                  </svg>
+                  <span className="hero-wave" aria-hidden />
                 </span>
                 {t.hero.headlineAfter.slice(0, 1)}
               </span>
@@ -117,6 +116,24 @@ export default async function LandingPage({ params }: Props) {
           </ol>
         </section>
 
+        <section className="games shell" aria-labelledby="games-title">
+          <div className="games-copy" data-reveal>
+            <p className="eyebrow">{t.games.eyebrow}</p>
+            <h2 id="games-title">{t.games.title}</h2>
+            <p className="games-sub">{t.games.sub}</p>
+            <ul className="games-points">
+              {t.games.points.map((point) => (
+                <li key={point.title}>
+                  <strong>{point.title}.</strong> {point.body}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div data-reveal style={{ '--r': 1 } as React.CSSProperties}>
+            <WordGame copy={t.games.game} />
+          </div>
+        </section>
+
         <section className="content-section" aria-labelledby="studio-title">
           <div className="shell">
             <div className="section-head section-head-dark" data-reveal>
@@ -143,9 +160,7 @@ export default async function LandingPage({ params }: Props) {
           <div className="offer-card" data-reveal>
             <div className="offer-figure" aria-hidden>
               <span className="offer-pct">50%</span>
-              <svg viewBox="0 0 120 24" preserveAspectRatio="none">
-                <path d="M6 6 Q60 30 114 6" />
-              </svg>
+              <span className="offer-forever">para siempre</span>
             </div>
             <div className="offer-copy">
               <p id="offer-title">

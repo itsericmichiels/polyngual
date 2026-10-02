@@ -50,7 +50,7 @@ Page views work on every plan. The `waitlist_signup` custom event needs a Vercel
 - Brand tokens are taken from the brand guide and live in `src/app/globals.css`: Midnight and Paper carry the page; Lagoon, Cobalt and Marigold are accents.
 - Fonts: Nunito 800/900 for headings and Nunito Sans for body text, via `next/font`, with Latin and Latin Extended subsets.
 - Motion: custom ease-out curves, short UI transitions, a 0.97 press scale on buttons, and staggered blur-in reveals. Hover effects only run on devices with a mouse. Everything respects `prefers-reduced-motion`, and the hero demo pauses when it is off screen or the tab is hidden.
-- The hero "speaking" card and the content studio are illustrative examples, labelled as such. No real audio is processed.
+- The hero "speaking" card, the word game and the content studio are illustrative examples, labelled as such. No real audio is processed. The benefit visuals loop only while on screen.
 - `public/og.png` is the share image (1200×630). `src/app/icon.png` and `apple-icon.png` are made from the logo icon.
 
 ## Deploy

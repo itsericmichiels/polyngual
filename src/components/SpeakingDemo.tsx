@@ -119,9 +119,6 @@ export function SpeakingDemo({ copy }: { copy: Dictionary['demo'] }) {
             return (
               <span key={i} className="demo-word" data-spoken={i <= spoken} data-flagged={flagged}>
                 {word}
-                <svg className="demo-smile" viewBox="0 0 40 10" preserveAspectRatio="none" aria-hidden>
-                  <path d="M3 3 Q20 12 37 3" />
-                </svg>
               </span>
             );
           })}

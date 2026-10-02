@@ -77,9 +77,11 @@ export function WaitlistForm({ copy, privacyHref }: { copy: Dictionary['form']; 
   if (status === 'done') {
     return (
       <div className="form-success" role="status">
-        <svg className="success-smile" viewBox="0 0 64 28" aria-hidden>
-          <path d="M6 6 Q32 34 58 6" />
-        </svg>
+        <span className="success-check" aria-hidden>
+          <svg viewBox="0 0 24 24">
+            <path d="M5.5 12.5 L10 17 L18.5 7.5" />
+          </svg>
+        </span>
         <p>{copy.success}</p>
       </div>
     );

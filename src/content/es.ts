@@ -19,7 +19,8 @@ export const es = {
     headlineBefore: 'Habla inglés ',
     headlineMark: 'de verdad',
     headlineAfter: ', y comprueba cuánto mejoras cada semana.',
-    sub: 'Polyngual escucha cómo hablas, te dice exactamente qué corregir y te prepara para el TOEFL, el TOEIC y la vida real. Sin anuncios. A tu ritmo.',
+    // TOEFL and TOEIC are covered further down (benefit 3 and the content library), not in the hero.
+    sub: 'Polyngual escucha cómo hablas, te dice exactamente qué corregir y te prepara para la vida real. Sin anuncios. A tu ritmo.',
   },
   form: {
     label: 'Tu correo',
@@ -81,6 +82,32 @@ export const es = {
         body: 'Simulacros de TOEFL y TOEIC con corrección inmediata y ejercicios hechos para tus puntos débiles.',
       },
     ],
+  },
+  games: {
+    eyebrow: 'Aprende jugando',
+    title: 'Juegos hechos con las palabras que tú necesitas.',
+    sub: 'Polyngual convierte el vocabulario que te cuesta en juegos personalizados. Así practicas sin que parezca que estudias.',
+    points: [
+      { title: 'Con tus palabras', body: 'Las que fallaste en tu última práctica, no una lista genérica.' },
+      { title: 'Partidas cortas', body: 'Un par de minutos, cuando quieras: en el bus, en la cola, en el sofá.' },
+    ],
+    game: {
+      name: 'Completa la frase',
+      weekWords: 'Tus palabras',
+      round: 'Ronda',
+      points: 'Puntos',
+      right: '¡Bien!',
+      wrong: 'Casi. Era',
+      doneTitle: '¡Partida terminada!',
+      doneBody: 'palabras acertadas',
+      again: 'Jugar otra vez',
+      note: 'Ejemplo de juego con palabras de muestra.',
+      rounds: [
+        { before: 'I need to finish this report before the ', after: '.', options: ['headline', 'deadline', 'lifeline'], answer: 'deadline' },
+        { before: 'Can I ', after: ' your pen for a second?', options: ['borrow', 'lend', 'borrowing'], answer: 'borrow' },
+        { before: '', after: ' it was raining, we went for a walk.', options: ['However', 'Despite', 'Although'], answer: 'Although' },
+      ],
+    },
   },
   studio: {
     eyebrow: 'Contenido sin fin',
@@ -233,6 +260,7 @@ export const es = {
     ] satisfies StudioFormat[],
     library: [
       { kind: 'Podcasts', title: 'Con tus palabras', body: 'Dos voces conversan dos o tres minutos usando justo el vocabulario que estás trabajando. Luego practicas cada palabra en voz alta.' },
+      { kind: 'Juegos', title: 'Para aprender jugando', body: 'Partidas cortas creadas con el vocabulario que necesitas.' },
       { kind: 'Historias', title: 'Por capítulos', body: 'Aventura, misterio, animales, espacio, deportes, fantasía o vida escolar. Con narrador y personajes de voces distintas.' },
       { kind: 'Explicaciones', title: 'En el momento', body: 'Pregunta esa duda de gramática o pronunciación y escucha una explicación corta, con un ejemplo para practicar.' },
       { kind: 'Vídeo semanal', title: 'Tu resumen', body: 'Menos de un minuto, en vertical: las frases que dijiste bien, cuánto practicaste y qué toca reforzar.' },
