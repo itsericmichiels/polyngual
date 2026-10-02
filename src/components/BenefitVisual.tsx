@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 // Looping illustrations for the three benefits. Each runs only while on screen and
 // shows a still, finished state when the visitor prefers reduced motion.
 
-function useLoop(steps: number, ms: number, finalStep: number) {
+function useLoop(steps: number, ms: number | number[], finalStep: number) {
   const ref = useRef<HTMLDivElement>(null);
   const [step, setStep] = useState(0);
   const [running, setRunning] = useState(false);
@@ -29,11 +29,12 @@ function useLoop(steps: number, ms: number, finalStep: number) {
     };
   }, [finalStep]);
 
+  const duration = Array.isArray(ms) ? ms[step] ?? ms[ms.length - 1] : ms;
   useEffect(() => {
     if (!running) return;
-    const id = window.setInterval(() => setStep((s) => (s + 1) % steps), ms);
-    return () => window.clearInterval(id);
-  }, [running, steps, ms]);
+    const id = window.setTimeout(() => setStep((s) => (s + 1) % steps), duration);
+    return () => window.clearTimeout(id);
+  }, [running, steps, duration, step]);
 
   return { ref, step };
 }
@@ -111,29 +112,31 @@ const CHECKS = [
   { label: 'Conectores: practícalos hoy', ok: false },
 ];
 
+const TASK_SECONDS = 45;
+const SHOWN_SECONDS = 8; // the visual joins the answer in its last seconds, then counts down in real time
+
 function ExamVisual() {
-  // step 0: answering; 1-3: feedback items arrive; 4-5: hold.
-  const { ref, step } = useLoop(6, 1100, 5);
-  const [seconds, setSeconds] = useState(45);
-  useEffect(() => {
-    if (step === 0) setSeconds(45);
-  }, [step]);
+  // step 0: answering (real-time countdown); 1-3: feedback items arrive; 4: hold.
+  const { ref, step } = useLoop(5, [SHOWN_SECONDS * 1000 + 300, 900, 900, 900, 2600], 4);
+  const [seconds, setSeconds] = useState(SHOWN_SECONDS);
   useEffect(() => {
     if (step !== 0) return;
-    const id = window.setInterval(() => setSeconds((s) => Math.max(s - 7, 0)), 160);
+    setSeconds(SHOWN_SECONDS);
+    const id = window.setInterval(() => setSeconds((s) => Math.max(s - 1, 0)), 1000);
     return () => window.clearInterval(id);
   }, [step]);
-  const time = step === 0 ? seconds : 0;
+  const answering = step === 0;
+  const elapsed = answering ? (TASK_SECONDS - seconds) / TASK_SECONDS : 1;
   return (
     <div ref={ref} className="bv bv-exam" aria-hidden>
       <div className="bv-exam-head">
         <span>TOEFL · Speaking</span>
-        <span className="bv-timer" data-done={step > 0}>
-          {step === 0 ? `0:${String(time).padStart(2, '0')}` : 'Corregido'}
+        <span className="bv-timer" data-done={!answering}>
+          {answering ? `0:${String(seconds).padStart(2, '0')}` : 'Corregido'}
         </span>
       </div>
       <span className="bv-progress">
-        <span style={{ transform: `scaleX(${step === 0 ? 1 - time / 45 : 1})` }} />
+        <span style={{ transform: `scaleX(${elapsed})` }} />
       </span>
       <ul>
         {CHECKS.map((c, i) => (

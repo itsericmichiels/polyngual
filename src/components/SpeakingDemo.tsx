@@ -98,7 +98,8 @@ export function SpeakingDemo({ copy }: { copy: Dictionary['demo'] }) {
   }, [phase, index]);
 
   const showFeedback = phase === 'feedback';
-  const delta = shownScore - baseline;
+  // Improvement is measured against the first sentence, so the badge only appears once the score has actually risen.
+  const delta = shownScore - copy.sentences[0].score;
 
   return (
     <figure ref={root} className="demo" data-phase={phase} aria-label={copy.caption}>

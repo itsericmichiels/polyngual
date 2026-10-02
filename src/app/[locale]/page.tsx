@@ -11,6 +11,7 @@ import { ContentStudio } from '@/components/ContentStudio';
 import { RevealObserver } from '@/components/RevealObserver';
 import { BenefitVisual } from '@/components/BenefitVisual';
 import { WordGame } from '@/components/WordGame';
+import { SoundHeadline } from '@/components/SoundHeadline';
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -65,26 +66,15 @@ export default async function LandingPage({ params }: Props) {
               <span className="live-dot" aria-hidden />
               {t.hero.eyebrow}
             </p>
-            <h1 className="hero-title enter" style={{ '--e': 1 } as React.CSSProperties}>
-              {t.hero.headlineBefore}
-              {/* Keep the punctuation glued to the highlighted phrase so it never wraps alone. */}
-              <span className="nowrap">
-                <span className="hero-mark">
-                  {t.hero.headlineMark}
-                  <span className="hero-wave" aria-hidden />
-                </span>
-                {t.hero.headlineAfter.slice(0, 1)}
-              </span>
-              {t.hero.headlineAfter.slice(1)}
-            </h1>
-            <p className="hero-sub enter" style={{ '--e': 2 } as React.CSSProperties}>
+            <SoundHeadline before={t.hero.headlineBefore} mark={t.hero.headlineMark} after={t.hero.headlineAfter} />
+            <p className="hero-sub enter" style={{ '--e': 11 } as React.CSSProperties}>
               {t.hero.sub}
             </p>
-            <div id="lista" className="hero-form enter" style={{ '--e': 3 } as React.CSSProperties}>
+            <div id="lista" className="hero-form enter" style={{ '--e': 12 } as React.CSSProperties}>
               <WaitlistForm copy={t.form} privacyHref={privacyHref} />
             </div>
           </div>
-          <div className="hero-demo enter" style={{ '--e': 2 } as React.CSSProperties}>
+          <div className="hero-demo enter" style={{ '--e': 8 } as React.CSSProperties}>
             <SpeakingDemo copy={t.demo} />
           </div>
         </div>

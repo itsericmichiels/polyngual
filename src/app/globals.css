@@ -318,7 +318,7 @@ svg {
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='10' viewBox='0 0 28 10'%3E%3Cpath d='M0 5 Q7 0 14 5 T28 5' fill='none' stroke='%23FFC857' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x 0 50% / auto 100%;
   clip-path: inset(0 100% 0 0);
   animation:
-    wipe 900ms var(--ease-draw) 700ms forwards,
+    wipe 900ms var(--ease-draw) forwards,
     wave-run 2.4s linear infinite;
 }
 
@@ -331,6 +331,88 @@ svg {
 @keyframes wave-run {
   to {
     background-position: -28px 50%;
+  }
+}
+
+/* Words become sound: each word arrives as a burst of bars, then the letters resolve out of it. */
+.sw {
+  position: relative;
+  display: inline-block;
+}
+
+.sw-text {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(10px);
+  transform: scaleY(0.6);
+  transform-origin: 50% 60%;
+  animation: sw-text 520ms var(--ease-out) forwards;
+  animation-delay: calc(var(--t) + 420ms);
+}
+
+.sw-bars {
+  position: absolute;
+  inset: 22% 4% 14%;
+  display: flex;
+  align-items: center;
+  gap: clamp(2px, 0.3vw, 4px);
+  pointer-events: none;
+  animation: sw-bars-out 340ms var(--ease-out) forwards;
+  animation-delay: calc(var(--t) + 440ms);
+}
+
+.sw-bars span {
+  flex: 1;
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(180deg, var(--lagoon), var(--cobalt));
+  transform: scaleY(0);
+  animation: sw-bar 520ms var(--ease-in-out) both;
+  animation-delay: calc(var(--t) + var(--b) * 18ms);
+}
+
+.hero-mark .sw-bars span {
+  background: linear-gradient(180deg, var(--marigold), var(--lagoon));
+}
+
+.sw-punct {
+  display: inline-block;
+  opacity: 0;
+  animation: enter 400ms var(--ease-out) forwards;
+  animation-delay: calc(var(--t) + 600ms);
+}
+
+@keyframes sw-bar {
+  0% {
+    opacity: 0;
+    transform: scaleY(0.05);
+  }
+  12% {
+    opacity: 1;
+  }
+  35% {
+    transform: scaleY(var(--h));
+  }
+  65% {
+    transform: scaleY(calc(var(--h) * 0.45));
+  }
+  100% {
+    transform: scaleY(calc(var(--h) * 0.85));
+  }
+}
+
+@keyframes sw-bars-out {
+  to {
+    opacity: 0;
+    transform: scaleY(0.2);
+  }
+}
+
+@keyframes sw-text {
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: none;
   }
 }
 
@@ -693,12 +775,15 @@ svg {
   height: 100%;
   display: flex;
   align-items: center;
-  transform: scaleY(0.1);
-  transition: transform 380ms var(--ease-out);
+  /* Idle: a low, breathing wave rather than a flat line. */
+  transform: scaleY(0.26);
+  opacity: 0.55;
+  transition: transform 420ms var(--ease-out), opacity 420ms var(--ease-out);
 }
 
 .wave[data-active='true'] .wave-bar {
   transform: scaleY(var(--h));
+  opacity: 1;
 }
 
 .wave-bar span {
@@ -1108,7 +1193,7 @@ svg {
   height: 100%;
   background: var(--cobalt);
   transform-origin: left;
-  transition: transform 160ms linear;
+  transition: transform 1000ms linear;
 }
 
 .bv-exam ul {
