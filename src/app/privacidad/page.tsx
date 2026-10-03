@@ -42,7 +42,8 @@ export default function PrivacyPage() {
       <h2>Con quién trabajamos</h2>
       <p>
         Guardamos la lista y enviamos los correos con <strong>Resend</strong> (Resend, Inc., Estados Unidos), que trata los
-        datos por cuenta nuestra. La web está alojada en <strong>Vercel</strong>, y medimos las visitas con Vercel Web
+        datos por cuenta nuestra. Organizamos la lista en nuestro CRM, <strong>HighLevel</strong> (HighLevel, Inc., Estados
+        Unidos). La web está alojada en <strong>Vercel</strong>, y medimos las visitas con Vercel Web
         Analytics, que no usa cookies ni identifica a personas.
       </p>
 

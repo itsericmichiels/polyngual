@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { saveSignup, sendEmail } from '@/lib/resend';
+import { syncSignupToCrm } from '@/lib/gohighlevel';
 import { confirmationEmail } from '@/lib/confirmation-email';
 import { normalizeEmail, readCountry, readTrafficSource } from '@/lib/signup';
 import { unsubscribeUrl } from '@/lib/unsubscribe-token';
@@ -22,14 +23,17 @@ export async function POST(request: NextRequest) {
   if (!source.referrer) source.referrer = (request.headers.get('referer') ?? '').slice(0, 500);
 
   try {
-    const result = await saveSignup({
+    const record = {
       email,
       country: readCountry(request.headers.get('x-vercel-ip-country')),
       source,
       signedUpAt: new Date(),
-    });
+    };
+    const result = await saveSignup(record);
 
     if (result.created) {
+      // The signup is already saved in Resend; a CRM hiccup should not show the visitor an error.
+      await syncSignupToCrm(record, result.order).catch((error) => console.error('[waitlist] GoHighLevel sync failed', error));
       const link = unsubscribeUrl(siteUrl(), email, process.env.WAITLIST_SECRET ?? '');
       const message = confirmationEmail(link);
       await sendEmail({ to: email, ...message, unsubscribeUrl: link }).catch((error) => {

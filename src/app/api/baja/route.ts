@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { deleteContact } from '@/lib/resend';
+import { deleteCrmContact } from '@/lib/gohighlevel';
 import { normalizeEmail } from '@/lib/signup';
 import { verifyEmailSignature } from '@/lib/unsubscribe-token';
 
@@ -17,7 +18,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.redirect(new URL('/baja?estado=invalido', request.url), 303);
   }
   try {
-    await deleteContact(email);
+    await Promise.all([deleteContact(email), deleteCrmContact(email)]);
   } catch (error) {
     console.error('[waitlist] unsubscribe failed', error);
     return NextResponse.redirect(new URL('/baja?estado=error', request.url), 303);

@@ -42,6 +42,17 @@ How signups behave:
 - The unsubscribe link deletes the contact from Resend entirely, which also covers deletion requests. If you share one Resend account with Voxeo, that removes the address from Voxeo's lists too; use a separate Resend account or team if that matters.
 - Resend allows only a few API requests per second; the code retries briefly when Resend says to slow down.
 
+## CRM: GoHighLevel (optional)
+
+Each new signup is also copied into the Polyngual sub-account of GoHighLevel, so the list can be filtered and used in workflows there. Resend still sends the confirmation email.
+
+1. Use a separate sub-account for Polyngual (not Voxeo's), with Polyngual's own business name and address, since those appear in email footers.
+2. In that sub-account: Settings → Private Integrations → create one with the contacts scopes (view, edit). Put the token in `GHL_TOKEN`.
+3. Put the sub-account's Location ID (Settings → Business Profile) in `GHL_LOCATION_ID`.
+4. Optional: create a custom contact field with the key `signup_order` (number) to see each person's place in line.
+
+What lands in GoHighLevel: email, country, source ("Polyngual waitlist (instagram)") and tags: `polyngual-waitlist` on everyone, `polyngual-fundador` for the first 200, and `fuente:…` / `campana:…` from the UTM parameters. Tags need no setup and can trigger workflows. If GoHighLevel is down or misconfigured, the signup still succeeds (it's already in Resend) and the error is logged in Vercel. The unsubscribe link deletes the contact from GoHighLevel too.
+
 ## Analytics
 
 Vercel Web Analytics, which sets no cookies, so there is no cookie banner. Turn it on in the Vercel project (Analytics tab).
