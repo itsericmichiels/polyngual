@@ -29,6 +29,11 @@ function ghl(token: string, path: string, init: RequestInit = {}) {
   });
 }
 
+async function failure(what: string, res: Response): Promise<Error> {
+  const detail = (await res.text().catch(() => '')).slice(0, 300);
+  return new Error(`GoHighLevel ${what} failed: ${res.status} ${detail}`);
+}
+
 const tag = (prefix: string, value: string) => `${prefix}:${value.toLowerCase().replace(/[^a-z0-9._-]+/g, '-').slice(0, 40)}`;
 
 export function signupTags(record: SignupRecord, order: number | null): string[] {
@@ -55,7 +60,7 @@ export async function syncSignupToCrm(record: SignupRecord, order: number | null
       customFields: order === null ? [] : [{ key: 'signup_order', field_value: String(order) }],
     }),
   });
-  if (!res.ok) throw new Error(`GoHighLevel upsert failed: ${res.status}`);
+  if (!res.ok) throw await failure('upsert', res);
 }
 
 // Unsubscribe also removes the person from the CRM, matching the privacy policy's promise.
@@ -64,10 +69,10 @@ export async function deleteCrmContact(email: string): Promise<void> {
   if (!cfg) return;
   const query = new URLSearchParams({ locationId: cfg.locationId, email });
   const found = await ghl(cfg.token, `/contacts/search/duplicate?${query}`);
-  if (!found.ok) throw new Error(`GoHighLevel lookup failed: ${found.status}`);
+  if (!found.ok) throw await failure('lookup', found);
   const body = (await found.json()) as { contact?: { id?: string } | null };
   const id = body.contact?.id;
   if (!id) return;
   const res = await ghl(cfg.token, `/contacts/${id}`, { method: 'DELETE' });
-  if (!res.ok && res.status !== 404) throw new Error(`GoHighLevel delete failed: ${res.status}`);
+  if (!res.ok && res.status !== 404) throw await failure('delete', res);
 }

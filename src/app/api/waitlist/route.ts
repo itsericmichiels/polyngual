@@ -31,15 +31,20 @@ export async function POST(request: NextRequest) {
     };
     const result = await saveSignup(record);
 
+    // One line per signup so the Vercel logs show each step (no email address, only the outcome).
+    console.info('[waitlist] signup', { created: result.created, order: result.order, country: record.country });
+
     if (result.created) {
       // The signup is already saved in Resend; a CRM hiccup should not show the visitor an error.
-      await syncSignupToCrm(record, result.order).catch((error) => console.error('[waitlist] GoHighLevel sync failed', error));
+      await syncSignupToCrm(record, result.order)
+        .then(() => console.info('[waitlist] GoHighLevel sync ok'))
+        .catch((error) => console.error('[waitlist] GoHighLevel sync failed', error));
       const link = unsubscribeUrl(siteUrl(), email, process.env.WAITLIST_SECRET ?? '');
       const message = confirmationEmail(link);
-      await sendEmail({ to: email, ...message, unsubscribeUrl: link }).catch((error) => {
+      await sendEmail({ to: email, ...message, unsubscribeUrl: link })
+        .then(() => console.info('[waitlist] confirmation email sent'))
         // The signup is saved; a failed email should not show the visitor an error.
-        console.error('[waitlist] confirmation email failed', error);
-      });
+        .catch((error) => console.error('[waitlist] confirmation email failed', error));
     }
     return NextResponse.json({ ok: true });
   } catch (error) {
