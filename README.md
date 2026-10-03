@@ -8,10 +8,12 @@ It is a standalone Next.js app, kept separate from the Voxeo repo and Vercel pro
 | Route | What it is |
 |---|---|
 | `/` | Redirects to `/es` |
-| `/es` | Landing page (Spanish, default). `/en` is added by putting `'en'` in `src/content/index.ts` and adding an `en.ts` dictionary; hreflang tags and the sitemap pick it up automatically |
-| `/privacidad` | Privacy policy |
-| `/baja` | Unsubscribe and delete my data (linked from every email) |
-| `POST /api/waitlist` | Signup: validates the email, requires consent, saves to Resend, sends the confirmation email |
+| `/es` | Landing page in Spanish (default, `x-default` in hreflang) |
+| `/en` | Landing page in English. Copy lives in `src/content/en.ts`, same shape as `es.ts`; a new language is a new dictionary plus an entry in `src/content/index.ts` |
+| `/privacidad`, `/en/privacy` | Privacy policy (Spanish path fixed by the brief; `/es/privacy` redirects to it) |
+| `/baja` | Unsubscribe and delete my data (linked from every email; `?l=en` shows it in English) |
+| `/api/diagnostico?key=WAITLIST_SECRET` | Private setup check: which settings are present, Resend domain status, GoHighLevel access; `&to=` sends a test email |
+| `POST /api/waitlist` | Signup: validates the email, requires consent, saves to Resend, copies to GoHighLevel, sends the confirmation email in the page's language |
 | `POST /api/baja` | Signed unsubscribe link and mail clients' one-click unsubscribe (RFC 8058) |
 
 ## Run locally

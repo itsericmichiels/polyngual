@@ -31,7 +31,7 @@ function readSource(): Record<string, string> {
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-export function WaitlistForm({ copy, privacyHref }: { copy: Dictionary['form']; privacyHref: string }) {
+export function WaitlistForm({ copy, privacyHref, locale }: { copy: Dictionary['form']; privacyHref: string; locale: string }) {
   const [status, setStatus] = useState<Status>('idle');
   const [error, setError] = useState<FieldError>(null);
   const source = useRef<Record<string, string>>({});
@@ -57,7 +57,7 @@ export function WaitlistForm({ copy, privacyHref }: { copy: Dictionary['form']; 
       const res = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ email, consent, company: form.get('company'), source: source.current }),
+        body: JSON.stringify({ email, consent, locale, company: form.get('company'), source: source.current }),
       });
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));

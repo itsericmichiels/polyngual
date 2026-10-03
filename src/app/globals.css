@@ -276,6 +276,32 @@ svg {
   padding-bottom: 22px;
 }
 
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-lang {
+  display: grid;
+  place-items: center;
+  min-width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  color: var(--muted-dark);
+  font: 800 14px/1 var(--font-display);
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  transition: color 160ms var(--ease-out), background-color 160ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .nav-lang:hover {
+    color: var(--paper);
+    background: rgba(251, 248, 243, 0.08);
+  }
+}
+
 .nav-logo img {
   width: auto;
   height: 30px;

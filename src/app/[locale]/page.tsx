@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { LOCALES, getDictionary, isLocale } from '@/content';
+import { DEFAULT_LOCALE, LOCALES, getDictionary, isLocale } from '@/content';
 import { CONTACT_EMAIL, SOCIAL_LINKS } from '@/lib/site';
 import { SpeakingDemo } from '@/components/SpeakingDemo';
 import { WaitlistForm } from '@/components/WaitlistForm';
@@ -27,18 +27,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: meta.description,
     alternates: {
       canonical: `/${locale}`,
-      languages: { ...Object.fromEntries(LOCALES.map((l) => [l, `/${l}`])), 'x-default': '/es' },
+      languages: { ...Object.fromEntries(LOCALES.map((l) => [l, `/${l}`])), 'x-default': `/${DEFAULT_LOCALE}` },
     },
     openGraph: {
       type: 'website',
-      locale: 'es_ES',
+      locale: getDictionary(locale).ogLocale,
       url: `/${locale}`,
       siteName: 'Polyngual',
       title: meta.title,
       description: meta.description,
-      images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Polyngual' }],
+      images: [{ url: getDictionary(locale).ogImage, width: 1200, height: 630, alt: 'Polyngual' }],
     },
-    twitter: { card: 'summary_large_image', title: meta.title, description: meta.description, images: ['/og.png'] },
+    twitter: { card: 'summary_large_image', title: meta.title, description: meta.description, images: [getDictionary(locale).ogImage] },
   };
 }
 
@@ -46,7 +46,7 @@ export default async function LandingPage({ params }: Props) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const t = getDictionary(locale);
-  const privacyHref = '/privacidad';
+  const privacyHref = t.privacyHref;
 
   return (
     <>
@@ -57,7 +57,12 @@ export default async function LandingPage({ params }: Props) {
           <Link href={`/${locale}`} className="nav-logo" aria-label="Polyngual">
             <Image src="/polyngual-wordmark.png" alt="Polyngual" width={900} height={204} priority />
           </Link>
-          <ScrollToForm label={t.nav.cta} className="btn btn-ghost" />
+          <div className="nav-actions">
+            <Link href={t.switcher.href} hrefLang={t.switcher.hrefLang} className="nav-lang" aria-label={t.switcher.name} title={t.switcher.name}>
+              {t.switcher.label}
+            </Link>
+            <ScrollToForm label={t.nav.cta} className="btn btn-ghost" />
+          </div>
         </nav>
 
         <div className="hero-grid shell">
@@ -71,7 +76,7 @@ export default async function LandingPage({ params }: Props) {
               {t.hero.sub}
             </p>
             <div id="lista" className="hero-form enter" style={{ '--e': 12 } as React.CSSProperties}>
-              <WaitlistForm copy={t.form} privacyHref={privacyHref} />
+              <WaitlistForm copy={t.form} privacyHref={privacyHref} locale={locale} />
             </div>
           </div>
           <div className="hero-demo enter" style={{ '--e': 8 } as React.CSSProperties}>
@@ -100,7 +105,7 @@ export default async function LandingPage({ params }: Props) {
                   <h3>{item.title}</h3>
                   <p>{item.body}</p>
                 </div>
-                <BenefitVisual kind={i} />
+                <BenefitVisual kind={i} copy={t.visuals} />
               </li>
             ))}
           </ol>
@@ -150,7 +155,7 @@ export default async function LandingPage({ params }: Props) {
           <div className="offer-card" data-reveal>
             <div className="offer-figure" aria-hidden>
               <span className="offer-pct">50%</span>
-              <span className="offer-forever">para siempre</span>
+              <span className="offer-forever">{t.offer.forever}</span>
             </div>
             <div className="offer-copy">
               <p id="offer-title">
@@ -182,7 +187,7 @@ export default async function LandingPage({ params }: Props) {
               <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
             </li>
           </ul>
-          <ul className="footer-social" aria-label="Redes sociales">
+          <ul className="footer-social" aria-label={t.footer.social}>
             {SOCIAL_LINKS.map((link) => (
               <li key={link.label}>
                 <a href={link.href} rel="noopener" target="_blank">

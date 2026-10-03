@@ -38,7 +38,7 @@ const tag = (prefix: string, value: string) => `${prefix}:${value.toLowerCase().
 
 export function signupTags(record: SignupRecord, order: number | null): string[] {
   const { source } = record;
-  const tags = ['polyngual-waitlist'];
+  const tags = ['polyngual-waitlist', `idioma:${record.locale ?? 'es'}`];
   if (order !== null && order <= FOUNDER_SPOTS) tags.push('polyngual-fundador');
   if (source.utmSource) tags.push(tag('fuente', source.utmSource));
   if (source.utmCampaign) tags.push(tag('campana', source.utmCampaign));

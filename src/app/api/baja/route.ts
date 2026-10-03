@@ -13,15 +13,16 @@ export async function POST(request: NextRequest) {
   const form = await request.formData().catch(() => null);
   const email = normalizeEmail(form?.get('e') ?? url.searchParams.get('e'));
   const token = String(form?.get('t') ?? url.searchParams.get('t') ?? '');
+  const lang = (form?.get('l') ?? url.searchParams.get('l')) === 'en' ? '&l=en' : '';
 
   if (!email || !verifyEmailSignature(email, token, process.env.WAITLIST_SECRET ?? '')) {
-    return NextResponse.redirect(new URL('/baja?estado=invalido', request.url), 303);
+    return NextResponse.redirect(new URL(`/baja?estado=invalido${lang}`, request.url), 303);
   }
   try {
     await Promise.all([deleteContact(email), deleteCrmContact(email)]);
   } catch (error) {
     console.error('[waitlist] unsubscribe failed', error);
-    return NextResponse.redirect(new URL('/baja?estado=error', request.url), 303);
+    return NextResponse.redirect(new URL(`/baja?estado=error${lang}`, request.url), 303);
   }
-  return NextResponse.redirect(new URL('/baja?estado=hecho', request.url), 303);
+  return NextResponse.redirect(new URL(`/baja?estado=hecho${lang}`, request.url), 303);
 }

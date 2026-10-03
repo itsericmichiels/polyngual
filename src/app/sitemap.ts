@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${base}/${locale}`,
       alternates: { languages: Object.fromEntries(LOCALES.map((l) => [l, `${base}/${l}`])) },
     })),
-    { url: `${base}/privacidad` },
+    { url: `${base}/privacidad`, alternates: { languages: { es: `${base}/privacidad`, en: `${base}/en/privacy` } } },
+    { url: `${base}/en/privacy`, alternates: { languages: { es: `${base}/privacidad`, en: `${base}/en/privacy` } } },
   ];
 }

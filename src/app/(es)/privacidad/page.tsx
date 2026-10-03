@@ -5,7 +5,7 @@ import { CONTACT_EMAIL } from '@/lib/site';
 export const metadata: Metadata = {
   title: 'Política de privacidad | Polyngual',
   description: 'Qué datos guarda Polyngual de su lista de espera, para qué y cómo borrarlos.',
-  alternates: { canonical: '/privacidad' },
+  alternates: { canonical: '/privacidad', languages: { es: '/privacidad', en: '/en/privacy' } },
 };
 
 // Plain-language policy for the waitlist only. Review with a lawyer before collecting anything else.
@@ -30,6 +30,7 @@ export default function PrivacyPage() {
         <li>El país desde el que te apuntaste, deducido de tu conexión (la lista no guarda tu dirección IP).</li>
         <li>La fecha y el orden en que te apuntaste, para la oferta de fundadores.</li>
         <li>Cómo llegaste a la página: el enlace o la campaña de origen, si la hay.</li>
+        <li>El idioma de la página en la que te apuntaste, para escribirte en él.</li>
       </ul>
 
       <h2>Para qué</h2>

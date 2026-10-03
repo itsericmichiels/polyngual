@@ -8,7 +8,7 @@ const API = 'https://api.resend.com';
 // Exact signup order only matters for the first-200 founder offer; stop counting after this.
 const ORDER_COUNT_LIMIT = 500;
 
-export type SignupRecord = { email: string; country: string; source: TrafficSource; signedUpAt: Date };
+export type SignupRecord = { email: string; country: string; source: TrafficSource; signedUpAt: Date; locale?: string };
 export type SignupResult = { created: boolean; order: number | null };
 
 function config() {

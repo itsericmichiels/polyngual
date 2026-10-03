@@ -2,7 +2,10 @@ import type { Metadata, Viewport } from 'next';
 import { Nunito, Nunito_Sans } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import { siteUrl } from '@/lib/site';
-import './globals.css';
+import '@/app/globals.css';
+
+// Shared <html> shell. Each language gets its own root layout (app/[locale] and app/(es))
+// so the lang attribute is right for screen readers, translation prompts and search engines.
 
 const display = Nunito({
   subsets: ['latin', 'latin-ext'],
@@ -18,19 +21,19 @@ const body = Nunito_Sans({
   display: 'swap',
 });
 
-export const metadata: Metadata = {
+export const rootMetadata: Metadata = {
   metadataBase: new URL(siteUrl()),
   applicationName: 'Polyngual',
 };
 
-export const viewport: Viewport = {
+export const rootViewport: Viewport = {
   themeColor: '#021940',
   colorScheme: 'light',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export function RootDocument({ lang, children }: { lang: string; children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${display.variable} ${body.variable}`}>
+    <html lang={lang} className={`${display.variable} ${body.variable}`}>
       <body>
         {children}
         <Analytics />
