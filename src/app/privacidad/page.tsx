@@ -16,7 +16,7 @@ export default function PrivacyPage() {
         ← Volver
       </Link>
       <h1>Política de privacidad</h1>
-      <p className="legal-updated">Última actualización: 2 de octubre de 2026</p>
+      <p className="legal-updated">Última actualización: 3 de octubre de 2026</p>
 
       <h2>Quién recoge tus datos</h2>
       <p>
@@ -41,9 +41,9 @@ export default function PrivacyPage() {
 
       <h2>Con quién trabajamos</h2>
       <p>
-        Guardamos la lista y enviamos los correos con <strong>Brevo</strong> (Sendinblue SAS, Francia), que trata los datos
-        dentro de la Unión Europea por cuenta nuestra. La web está alojada en <strong>Vercel</strong>, y medimos las visitas
-        con Vercel Web Analytics, que no usa cookies ni identifica a personas.
+        Guardamos la lista y enviamos los correos con <strong>Resend</strong> (Resend, Inc., Estados Unidos), que trata los
+        datos por cuenta nuestra. La web está alojada en <strong>Vercel</strong>, y medimos las visitas con Vercel Web
+        Analytics, que no usa cookies ni identifica a personas.
       </p>
 
       <h2>Cuánto tiempo</h2>

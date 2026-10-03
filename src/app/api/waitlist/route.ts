@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server';
-import { saveSignup, sendEmail } from '@/lib/brevo';
+import { saveSignup, sendEmail } from '@/lib/resend';
 import { confirmationEmail } from '@/lib/confirmation-email';
 import { normalizeEmail, readCountry, readTrafficSource } from '@/lib/signup';
 import { unsubscribeUrl } from '@/lib/unsubscribe-token';

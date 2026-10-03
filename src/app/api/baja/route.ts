@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server';
-import { deleteContact } from '@/lib/brevo';
+import { deleteContact } from '@/lib/resend';
 import { normalizeEmail } from '@/lib/signup';
 import { verifyEmailSignature } from '@/lib/unsubscribe-token';
 

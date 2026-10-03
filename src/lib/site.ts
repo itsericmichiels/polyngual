@@ -1,6 +1,6 @@
-export const siteUrl = () => (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://polyngual.com').replace(/\/$/, '');
+export const siteUrl = () => (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://polyngual.app').replace(/\/$/, '');
 
-export const CONTACT_EMAIL = 'hola@polyngual.com';
+export const CONTACT_EMAIL = 'hola@polyngual.app';
 
 export const SOCIAL_LINKS = [
   { label: 'Instagram', href: 'https://instagram.com/polyngual' },

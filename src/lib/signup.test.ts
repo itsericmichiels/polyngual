@@ -29,5 +29,5 @@ test('unsubscribe signatures verify only for the signed email', () => {
   assert.ok(verifyEmailSignature('ana@example.com', sig, 'secret'));
   assert.ok(!verifyEmailSignature('bob@example.com', sig, 'secret'));
   assert.ok(!verifyEmailSignature('ana@example.com', sig, ''));
-  assert.match(unsubscribeUrl('https://polyngual.com/', 'ana@example.com', 'secret'), /^https:\/\/polyngual\.com\/baja\?e=ana%40example\.com&t=/);
+  assert.match(unsubscribeUrl('https://polyngual.app/', 'ana@example.com', 'secret'), /^https:\/\/polyngual\.app\/baja\?e=ana%40example\.com&t=/);
 });
