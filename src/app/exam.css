@@ -1,0 +1,1333 @@
+/* Exam landing pages (/toefl-practice, /es/preparacion-toefl, ...). Uses the brand tokens in globals.css.
+   One loud element, the loop diagram; everything around it stays plain. */
+
+.x-page {
+  --gap-tone: #f0936f;
+  --gap-tone-soft: #fdeee7;
+  --x-section: clamp(72px, 9vw, 128px);
+}
+
+.x-section {
+  padding-top: var(--x-section);
+}
+
+.x-h2,
+.x-head h2,
+.x-gapmap-copy h2 {
+  font-size: clamp(1.9rem, 1.3rem + 2.2vw, 3rem);
+  max-width: 20ch;
+}
+
+.x-head {
+  display: grid;
+  gap: 16px;
+  max-width: 44rem;
+  margin-bottom: clamp(32px, 4vw, 56px);
+}
+
+.x-head p,
+.x-gapmap-copy p {
+  color: var(--muted-light);
+  font-size: 1.12rem;
+  max-width: 38em;
+}
+
+/* ---------- Hero ---------- */
+
+.x-hero {
+  position: relative;
+  isolation: isolate;
+  background: var(--midnight);
+  color: var(--paper);
+  padding-bottom: clamp(64px, 8vw, 112px);
+  overflow: hidden;
+}
+
+.x-nav-cta {
+  min-height: 42px;
+}
+
+.x-hero-inner {
+  position: relative;
+  display: grid;
+  gap: 24px;
+  padding-top: clamp(28px, 6vw, 80px);
+}
+
+.x-hero-title {
+  font-size: clamp(2.3rem, 1.4rem + 3.6vw, 4.4rem);
+  line-height: 1.03;
+  letter-spacing: -0.03em;
+  max-width: 17ch;
+}
+
+.x-hero-sub {
+  max-width: 36em;
+  font-size: clamp(1.06rem, 1rem + 0.3vw, 1.22rem);
+  color: var(--muted-dark);
+}
+
+.x-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 22px;
+  margin-top: 8px;
+}
+
+.x-hero-note {
+  font-size: 0.95rem;
+  color: rgba(251, 248, 243, 0.6);
+}
+
+/* A quiet echo of the loop behind the headline. */
+.x-hero-orbit {
+  position: absolute;
+  z-index: -1;
+  right: max(-120px, -8vw);
+  top: 0;
+  width: min(520px, 46vw);
+  fill: none;
+  stroke: rgba(44, 200, 189, 0.22);
+  stroke-width: 1.2;
+}
+
+.x-hero-orbit circle:nth-child(n + 3) {
+  fill: var(--midnight);
+  stroke: rgba(255, 200, 87, 0.5);
+}
+
+.x-hero-orbit-core {
+  stroke: rgba(48, 71, 232, 0.5);
+  fill: rgba(48, 71, 232, 0.12);
+}
+
+/* ---------- The loop ---------- */
+
+.x-loop {
+  margin: 0;
+  --lit-ms: 320ms;
+}
+
+.x-loop-stage {
+  position: relative;
+}
+
+.x-loop-svg,
+.x-loop-pill,
+.x-loop-node,
+.x-loop-return {
+  display: none;
+}
+
+.x-loop-caption {
+  margin-top: 28px;
+  font: 800 clamp(1.15rem, 1rem + 0.6vw, 1.45rem) / 1.3 var(--font-display);
+  max-width: 34ch;
+}
+
+/* Centre list (shared by both layouts). */
+.x-loop-centre {
+  display: grid;
+  gap: 6px;
+  padding: 22px;
+  border-radius: var(--radius);
+  background: var(--midnight);
+  color: var(--paper);
+}
+
+.x-loop-centre-title {
+  font: 900 1.35rem/1.1 var(--font-display);
+}
+
+.x-loop-centre-meta {
+  display: flex;
+  gap: 10px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--lagoon);
+}
+
+.x-loop-centre-meta span:first-child {
+  color: var(--marigold);
+}
+
+.x-loop-centre-sub {
+  font-size: 0.78rem;
+  color: rgba(251, 248, 243, 0.55);
+}
+
+.x-loop-gaps {
+  list-style: none;
+  margin: 6px 0 4px;
+  padding: 0;
+  display: grid;
+}
+
+.x-loop-gaps li {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition:
+    grid-template-rows 420ms var(--ease-out) 380ms,
+    opacity 300ms var(--ease-out) 380ms;
+}
+
+.x-loop-gaps li > span {
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+  padding: 3px 0 3px 16px;
+  font-size: 0.92rem;
+  line-height: 1.3;
+}
+
+.x-loop-gaps li > span::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gap-tone);
+}
+
+.x-loop-gaps li > span::after {
+  /* The strike that crosses an item out before it leaves. */
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: var(--lagoon);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 360ms var(--ease-draw);
+}
+
+.x-loop-gaps li[data-cleared] {
+  grid-template-rows: 0fr;
+  opacity: 0;
+}
+
+.x-loop-gaps li[data-cleared] > span::after {
+  transform: scaleX(1);
+}
+
+/* Reduced motion: cleared items stay visible, crossed out, so the shorter list still reads. */
+.x-loop[data-static] .x-loop-gaps li[data-cleared] {
+  grid-template-rows: 1fr;
+  opacity: 0.55;
+  transition: none;
+}
+
+.x-loop[data-static] .x-loop-gaps li > span::after {
+  transition: none;
+}
+
+/* Vertical flow: the phone layout and, on the circle, the text version. */
+.x-loop-flow {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+.x-loop-flow > li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 14px;
+  padding-bottom: 22px;
+}
+
+.x-loop-flow > li::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 40px;
+  bottom: 2px;
+  width: 2px;
+  background: var(--line-light);
+}
+
+.x-loop-flow > li:last-child::before {
+  display: none;
+}
+
+.x-loop-flow strong {
+  display: block;
+  font: 900 1.12rem/1.25 var(--font-display);
+  padding-top: 7px;
+}
+
+.x-loop-flow p {
+  color: var(--muted-light);
+  margin-top: 4px;
+}
+
+.x-loop-num {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 2px var(--midnight);
+  font: 900 1rem/1 var(--font-display);
+  transition:
+    background-color var(--lit-ms) var(--ease-out),
+    color var(--lit-ms) var(--ease-out),
+    box-shadow var(--lit-ms) var(--ease-out);
+}
+
+.x-loop-flow-formats {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.x-loop-flow-formats li {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--lagoon-100);
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition:
+    background-color var(--lit-ms) var(--ease-out),
+    opacity var(--lit-ms) var(--ease-out);
+}
+
+.x-loop-flow-return {
+  display: inline-flex;
+  margin-top: 10px !important;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--marigold-100);
+  color: var(--midnight) !important;
+  font-weight: 700;
+}
+
+.x-loop-flow-return::before {
+  content: '↺';
+  margin-right: 8px;
+}
+
+/* Lit states, shared. Before the animation starts (data-armed) the markers wait in outline; JS lights them
+   up. Text in the vertical flow never fades, so it keeps full contrast throughout. */
+
+.x-loop[data-armed] .x-loop-flow > li[data-lit] .x-loop-num {
+  background: var(--lagoon);
+  box-shadow: inset 0 0 0 2px var(--lagoon);
+}
+
+.x-loop[data-armed] .x-loop-flow-formats li[data-lit] {
+  background: var(--lagoon);
+}
+
+.x-loop[data-armed] .x-loop-flow-formats li:not([data-lit]) {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--lagoon-100);
+}
+
+.x-loop-flow-return {
+  transition: background-color var(--lit-ms) var(--ease-out), box-shadow var(--lit-ms) var(--ease-out);
+}
+
+.x-loop[data-armed] .x-loop-flow-return:not([data-lit]) {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--marigold-100);
+}
+
+/* ---------- The circle, from 760px ---------- */
+
+@media (min-width: 760px) {
+  .x-loop-stage {
+    width: min(100%, 700px);
+    aspect-ratio: 1;
+    margin-inline: auto;
+  }
+
+  .x-loop-caption {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .x-loop-svg {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .x-loop-ring {
+    fill: none;
+    stroke: var(--line-light);
+    stroke-width: 0.35;
+    stroke-dasharray: 0.8 1.4;
+  }
+
+  .x-loop-arc {
+    fill: none;
+    stroke: var(--midnight);
+    stroke-width: 0.7;
+    stroke-linecap: round;
+    transition: stroke var(--lit-ms) var(--ease-out), opacity var(--lit-ms) var(--ease-out);
+  }
+
+  .x-loop-arc-return {
+    stroke: var(--marigold);
+    stroke-width: 1;
+  }
+
+  .x-loop-head {
+    fill: var(--midnight);
+  }
+
+  .x-loop-core {
+    fill: var(--midnight);
+  }
+
+  .x-loop-spoke {
+    stroke: var(--lagoon-700);
+    stroke-width: 0.45;
+    stroke-linecap: round;
+    transition: opacity var(--lit-ms) var(--ease-out);
+  }
+
+  .x-loop-tip {
+    fill: var(--lagoon-700);
+  }
+
+  .x-loop-pill,
+  .x-loop-node,
+  .x-loop-return {
+    display: flex;
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    translate: -50% -50%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .x-loop-pill {
+    gap: 10px;
+    max-width: 240px;
+    padding: 8px 16px 8px 8px;
+    border-radius: 999px;
+    background: var(--paper);
+    box-shadow: 0 0 0 1.5px var(--midnight), 0 10px 24px -14px rgba(2, 25, 64, 0.5);
+    font: 800 1rem/1.15 var(--font-display);
+    text-align: left;
+    transition:
+      background-color var(--lit-ms) var(--ease-out),
+      color var(--lit-ms) var(--ease-out),
+      opacity var(--lit-ms) var(--ease-out),
+      transform var(--lit-ms) var(--ease-out);
+  }
+
+  .x-loop-pill .x-loop-num {
+    flex: none;
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+
+  .x-loop-node {
+    width: 15%;
+    min-height: 44px;
+    padding: 6px 8px;
+    border-radius: 14px;
+    background: var(--lagoon-100);
+    color: var(--midnight);
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1.2;
+    transition:
+      background-color var(--lit-ms) var(--ease-out),
+      opacity var(--lit-ms) var(--ease-out);
+  }
+
+  .x-loop-return {
+    left: 13%;
+    top: 13%;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--marigold-100);
+    color: var(--midnight);
+    font-size: 0.85rem;
+    font-weight: 800;
+    white-space: nowrap;
+    transition: opacity var(--lit-ms) var(--ease-out);
+  }
+
+  .x-loop-centre {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    width: 34%;
+    padding: 0;
+    background: none;
+    text-align: center;
+    justify-items: center;
+    gap: 4px;
+  }
+
+  .x-loop-centre-title {
+    font-size: 1.3rem;
+  }
+
+  .x-loop-gaps {
+    justify-self: center;
+    text-align: left;
+    margin: 4px 0 2px;
+  }
+
+  .x-loop-gaps li > span {
+    font-size: 0.82rem;
+    padding: 1px 0 1px 13px;
+  }
+
+  .x-loop-gaps li > span::before {
+    width: 6px;
+    height: 6px;
+  }
+
+  .x-loop-gaps li > span::after {
+    left: 12px;
+  }
+
+  .x-loop-flow {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* Circle lit states. */
+  .x-loop[data-armed] .x-loop-pill:not([data-lit]),
+  .x-loop[data-armed] .x-loop-arc:not([data-lit]),
+  .x-loop[data-armed] .x-loop-return:not([data-lit]) {
+    opacity: 0.3;
+  }
+
+  .x-loop[data-armed] .x-loop-node:not([data-lit]),
+  .x-loop[data-armed] .x-loop-spoke:not([data-lit]) {
+    opacity: 0.25;
+  }
+
+  .x-loop-pill[data-lit] {
+    transform: scale(1.04);
+  }
+
+  .x-loop[data-armed] .x-loop-pill[data-lit] .x-loop-num {
+    background: var(--lagoon);
+    box-shadow: inset 0 0 0 2px var(--lagoon);
+  }
+
+  .x-loop[data-done] .x-loop-pill[data-lit] {
+    transform: none;
+  }
+
+  .x-loop[data-armed] .x-loop-node[data-lit] {
+    background: var(--lagoon);
+  }
+}
+
+/* ---------- 3 steps ---------- */
+
+.x-steps {
+  list-style: none;
+  margin: clamp(28px, 4vw, 48px) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(24px, 3vw, 44px);
+  counter-reset: step;
+}
+
+.x-steps li {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding-top: 20px;
+  border-top: 2px solid var(--midnight);
+}
+
+.x-steps-num {
+  font: 900 2.6rem/1 var(--font-display);
+  color: var(--cobalt);
+}
+
+.x-steps h3 {
+  font-size: 1.3rem;
+  line-height: 1.2;
+}
+
+.x-steps p {
+  color: var(--muted-light);
+}
+
+/* ---------- Gap map example ---------- */
+
+.x-gapmap {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+
+.x-gapmap-copy {
+  display: grid;
+  gap: 16px;
+}
+
+.x-card {
+  border-radius: var(--radius);
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--line-light), 0 24px 48px -32px rgba(2, 25, 64, 0.45);
+  padding: clamp(20px, 3vw, 30px);
+}
+
+.x-card-head {
+  display: grid;
+  gap: 8px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line-light);
+}
+
+.x-example {
+  justify-self: start;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1.5px dashed var(--midnight-700);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--midnight-700);
+}
+
+.x-card-head p {
+  font-weight: 700;
+}
+
+.x-card-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.x-card-rows li {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line-light);
+}
+
+.x-tone {
+  margin-top: 2px;
+}
+
+.x-tone[data-tone='strong'] {
+  color: var(--lagoon-700);
+}
+
+.x-tone[data-tone='building'] {
+  color: #c9921c;
+}
+
+.x-tone[data-tone='gap'] {
+  color: #d9673f;
+}
+
+.x-card-skill {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 12px;
+}
+
+.x-card-skill span {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+[data-tone='strong'] .x-card-skill span {
+  color: var(--lagoon-700);
+}
+
+[data-tone='building'] .x-card-skill span {
+  color: #8a6110;
+}
+
+[data-tone='gap'] .x-card-skill span {
+  color: #b04a24;
+}
+
+.x-card-detail {
+  color: var(--muted-light);
+  font-size: 0.95rem;
+  margin-top: 2px;
+}
+
+.x-card-next {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--lagoon-100);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+/* ---------- Practice formats ---------- */
+
+.x-formats {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(32px, 5vw, 72px);
+}
+
+.x-formats li {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  column-gap: 14px;
+  row-gap: 6px;
+  padding: 22px 0;
+  border-top: 1px solid var(--line-light);
+}
+
+.x-formats li > :not(svg) {
+  grid-column: 2;
+}
+
+.x-format-icon {
+  grid-row: 1 / span 3;
+  color: var(--cobalt);
+  margin-top: 2px;
+}
+
+.x-formats h3 {
+  font-size: 1.15rem;
+  line-height: 1.25;
+}
+
+.x-formats p {
+  color: var(--muted-light);
+}
+
+.x-fixes {
+  color: var(--midnight) !important;
+  font-size: 0.95rem;
+}
+
+.x-fixes span {
+  font-weight: 800;
+  color: var(--lagoon-700);
+}
+
+/* ---------- Curriculum vs. plan ---------- */
+
+.x-compare {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 24px);
+  margin-top: clamp(28px, 4vw, 48px);
+}
+
+.x-compare-col {
+  border-radius: var(--radius);
+  padding: clamp(22px, 3vw, 34px);
+  box-shadow: inset 0 0 0 1.5px var(--line-light);
+}
+
+.x-compare-col h3 {
+  font-size: 1.35rem;
+  margin-bottom: 14px;
+}
+
+.x-compare-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.x-compare-col li {
+  position: relative;
+  padding-left: 26px;
+  color: var(--muted-light);
+}
+
+.x-compare-col li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 0.6em;
+  width: 12px;
+  height: 2px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.x-compare-ours {
+  background: var(--midnight);
+  color: var(--paper);
+  box-shadow: none;
+}
+
+.x-compare-ours li {
+  color: var(--paper);
+}
+
+.x-compare-ours li::before {
+  top: 0.35em;
+  width: 13px;
+  height: 7px;
+  background: none;
+  border-left: 2px solid var(--lagoon);
+  border-bottom: 2px solid var(--lagoon);
+  transform: rotate(-45deg);
+  opacity: 1;
+}
+
+/* ---------- Exam facts ---------- */
+
+.x-facts {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.98rem;
+}
+
+.x-facts th,
+.x-facts td {
+  text-align: left;
+  vertical-align: top;
+  padding: 16px 16px 16px 0;
+  border-bottom: 1px solid var(--line-light);
+}
+
+.x-facts thead th {
+  font-size: 0.85rem;
+  color: var(--muted-light);
+  border-bottom: 2px solid var(--midnight);
+}
+
+.x-facts tbody th {
+  font: 900 1.1rem/1.3 var(--font-display);
+  white-space: nowrap;
+}
+
+.x-facts td:nth-child(3) {
+  white-space: nowrap;
+}
+
+.x-facts-note {
+  margin-top: 20px;
+  max-width: 46em;
+}
+
+.x-facts-source {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: var(--muted-light);
+}
+
+.x-proof-placeholder {
+  margin-top: var(--x-section);
+  padding: 28px;
+  border: 2px dashed var(--gap-tone);
+  border-radius: var(--radius);
+  color: #b04a24;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ---------- FAQ ---------- */
+
+.x-faq {
+  padding-bottom: var(--x-section);
+}
+
+.x-faq-list {
+  margin-top: clamp(24px, 3vw, 40px);
+  max-width: 54rem;
+}
+
+.x-faq details {
+  border-bottom: 1px solid var(--line-light);
+}
+
+.x-faq summary {
+  position: relative;
+  list-style: none;
+  cursor: pointer;
+  padding: 20px 44px 20px 0;
+  font: 800 1.12rem/1.35 var(--font-display);
+}
+
+.x-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.x-faq summary::after {
+  content: '';
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-right: 2.5px solid var(--cobalt);
+  border-bottom: 2.5px solid var(--cobalt);
+  transform: translateY(-70%) rotate(45deg);
+  transition: transform 200ms var(--ease-out);
+}
+
+.x-faq details[open] summary::after {
+  transform: translateY(-30%) rotate(-135deg);
+}
+
+.x-faq details p {
+  padding: 0 0 22px;
+  color: var(--muted-light);
+  max-width: 44em;
+}
+
+/* ---------- Final CTA + footer ---------- */
+
+.x-final h2 {
+  max-width: 18ch;
+}
+
+.x-footer-inner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 28px 40px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  border-top: 1.5px solid var(--line-dark);
+}
+
+.x-footer-brand {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.x-footer-label {
+  font-weight: 800;
+  color: var(--paper);
+  margin-bottom: 10px;
+}
+
+.x-footer nav ul,
+.x-footer-links {
+  display: grid !important;
+  gap: 8px;
+  align-content: start;
+}
+
+.x-footer a[aria-current='page'] {
+  color: var(--paper);
+}
+
+.x-footer-disclaimer {
+  grid-column: 1 / -1;
+  font-size: 13.5px;
+  max-width: 60em;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .x-nav-cta:hover,
+  .btn-primary:hover {
+    background: #45d3c9;
+  }
+}
+
+/* ---------- Narrow screens ---------- */
+
+@media (max-width: 900px) {
+  .x-steps,
+  .x-gapmap,
+  .x-compare {
+    grid-template-columns: 1fr;
+  }
+
+  .x-formats {
+    grid-template-columns: 1fr;
+  }
+
+  .x-facts thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .x-facts,
+  .x-facts tbody,
+  .x-facts tr,
+  .x-facts th,
+  .x-facts td {
+    display: block;
+  }
+
+  .x-facts tr {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line-light);
+  }
+
+  .x-facts th,
+  .x-facts td {
+    border: 0;
+    padding: 4px 0;
+  }
+
+  .x-facts td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--muted-light);
+  }
+
+  .x-facts td:nth-child(3) {
+    white-space: normal;
+  }
+
+  .x-footer-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .x-footer-brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .x-nav-cta {
+    display: none;
+  }
+
+  .x-hero-actions .btn {
+    width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .x-page .closing .btn {
+    white-space: normal;
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .x-loop *,
+  .x-faq summary::after {
+    transition: none !important;
+  }
+}
+
+/* ---------- Motion ----------
+   Page load: the headline rises in, then its first sentence ("what you already know") dims so the
+   second ("what you are missing") carries the line; sub and CTA follow with the site's blur-in.
+   On scroll, each section arrives through [data-reveal] (globals.css) and adds one detail of its own,
+   keyed off [data-in]. Everything is gated on [data-reveal-on], which only JS sets, and reduced motion
+   turns it all off. */
+
+.x-hero-title > span {
+  display: inline;
+  transition: color 900ms var(--ease-out) 1400ms;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .x-hero-title {
+    /* Transform only, no opacity: the headline counts as painted at once for LCP. */
+    animation: x-rise 800ms var(--ease-out) both;
+  }
+
+  [data-reveal-on] .x-h1-known {
+    color: rgba(251, 248, 243, 0.5);
+  }
+
+  .x-hero-orbit-dots {
+    transform-origin: 100px 100px;
+    animation: x-orbit 48s linear infinite;
+  }
+
+  .x-hero-orbit-core {
+    transform-origin: 100px 100px;
+    animation: x-breathe 5s var(--ease-in-out) infinite;
+  }
+}
+
+@keyframes x-rise {
+  from {
+    transform: translateY(22px);
+  }
+}
+
+@keyframes x-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes x-breathe {
+  50% {
+    transform: scale(1.12);
+  }
+}
+
+/* 3 steps: the rule above each step draws left to right, and the number rises after it. */
+.x-steps li {
+  position: relative;
+  border-top-color: transparent;
+}
+
+.x-steps li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -2px;
+  height: 2px;
+  background: var(--midnight);
+  transform-origin: left;
+  transition: transform 700ms var(--ease-draw) calc(var(--r, 0) * 120ms + 150ms);
+}
+
+.x-steps-num {
+  transition:
+    transform 600ms var(--ease-out) calc(var(--r, 0) * 120ms + 450ms),
+    opacity 600ms var(--ease-out) calc(var(--r, 0) * 120ms + 450ms);
+}
+
+[data-reveal-on] .x-steps li:not([data-in])::before {
+  transform: scaleX(0);
+}
+
+[data-reveal-on] .x-steps li:not([data-in]) .x-steps-num {
+  transform: translateY(14px);
+  opacity: 0;
+}
+
+/* Gap map: rows land one by one, each status mark pops, and today's practice slides in last. */
+.x-card-rows li {
+  transition:
+    opacity 500ms var(--ease-out) calc(var(--k, 0) * 110ms + 350ms),
+    transform 500ms var(--ease-out) calc(var(--k, 0) * 110ms + 350ms);
+}
+
+.x-tone {
+  transition: transform 450ms cubic-bezier(0.34, 1.56, 0.64, 1) calc(var(--k, 0) * 110ms + 550ms);
+}
+
+.x-card-next {
+  transition:
+    opacity 500ms var(--ease-out) 1100ms,
+    transform 500ms var(--ease-out) 1100ms;
+}
+
+[data-reveal-on] .x-card:not([data-in]) .x-card-rows li {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+[data-reveal-on] .x-card:not([data-in]) .x-tone {
+  transform: scale(0.3);
+}
+
+[data-reveal-on] .x-card:not([data-in]) .x-card-next {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+/* Practice formats: the icon springs in as its row arrives. */
+.x-format-icon {
+  transition: transform 550ms cubic-bezier(0.34, 1.56, 0.64, 1) calc(var(--r, 0) * 80ms + 200ms);
+}
+
+[data-reveal-on] .x-formats li:not([data-in]) .x-format-icon {
+  transform: scale(0.4) rotate(-20deg);
+}
+
+/* Curriculum vs. plan: your plan's ticks are drawn one after another. */
+.x-compare-ours li::before {
+  transition:
+    clip-path 380ms var(--ease-draw) calc(var(--k, 0) * 160ms + 500ms);
+  clip-path: inset(0 0 0 0);
+}
+
+[data-reveal-on] .x-compare-ours:not([data-in]) li::before {
+  clip-path: inset(0 0 0 100%);
+}
+
+/* FAQ: answers open and close smoothly where the browser can animate to auto height. */
+@supports (interpolate-size: allow-keywords) {
+  .x-faq {
+    interpolate-size: allow-keywords;
+  }
+
+  .x-faq details::details-content {
+    height: 0;
+    overflow: clip;
+    transition:
+      height 320ms var(--ease-out),
+      content-visibility 320ms allow-discrete;
+  }
+
+  .x-faq details[open]::details-content {
+    height: auto;
+  }
+}
+
+.x-faq details p {
+  transition: opacity 320ms var(--ease-out), transform 320ms var(--ease-out);
+}
+
+.x-faq details:not([open]) p {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+/* Buttons: a soft sheen crosses the primary CTA once it is on screen. */
+.x-page .btn-primary {
+  overflow: hidden;
+}
+
+.x-page .btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.55) 50%, transparent 65%);
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .x-hero-actions .btn-primary::after {
+    animation: x-sheen 1100ms var(--ease-in-out) 1500ms;
+  }
+
+  [data-in] .btn-primary::after {
+    animation: x-sheen 1100ms var(--ease-in-out) 500ms;
+  }
+}
+
+@keyframes x-sheen {
+  to {
+    transform: translateX(120%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .x-h1-known {
+    color: inherit;
+  }
+  .x-faq details::details-content {
+    transition: none;
+  }
+}
+
+/* ---------- Version picker (IELTS Academic / General Training, Cambridge B2 / C1) ---------- */
+
+.x-variants {
+  margin-bottom: clamp(32px, 4vw, 48px);
+  padding: clamp(22px, 3vw, 34px);
+  border-radius: var(--radius);
+  background: var(--marigold-100);
+  max-width: 56rem;
+}
+
+.x-variants-title {
+  font-size: 1.35rem;
+}
+
+.x-variants-intro {
+  margin-top: 8px;
+  color: var(--muted-light);
+}
+
+.x-variants-tabs {
+  display: inline-flex;
+  gap: 4px;
+  margin-top: 18px;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(2, 25, 64, 0.08);
+}
+
+.x-variants-tabs button {
+  min-height: 44px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--midnight);
+  font: 800 0.98rem/1 var(--font-display);
+  cursor: pointer;
+  transition: background-color 200ms var(--ease-out), color 200ms var(--ease-out);
+}
+
+.x-variants-tabs button[aria-selected='true'] {
+  background: var(--midnight);
+  color: var(--paper);
+}
+
+.x-variants-panel {
+  margin-top: 18px;
+  animation: x-panel-in 300ms var(--ease-out);
+}
+
+.x-variants-who {
+  font-weight: 700;
+}
+
+.x-variants-panel ul {
+  margin: 10px 0 18px;
+  padding-left: 20px;
+  display: grid;
+  gap: 6px;
+  color: var(--muted-light);
+}
+
+@keyframes x-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+@media (max-width: 480px) {
+  .x-variants-tabs {
+    display: flex;
+  }
+  .x-variants-tabs button {
+    flex: 1;
+    padding: 0 10px;
+  }
+  .x-variants-panel .btn {
+    width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+}

@@ -8,6 +8,8 @@ export type StudioFormat = { id: string; label: string; prompt: string; options:
 
 export const es = {
   locale: 'es',
+  ogLocale: 'es_ES',
+  privacyHref: '/privacidad',
   meta: {
     title: 'Polyngual | Aprende inglés hablando y prepara tu TOEFL o TOEIC',
     description:
@@ -82,6 +84,17 @@ export const es = {
         body: 'Simulacros de TOEFL y TOEIC con corrección inmediata y ejercicios hechos para tus puntos débiles.',
       },
     ],
+    visuals: {
+      wordsToWork: 'Palabras para trabajar',
+      yourLevel: 'Tu nivel',
+      share: 'Compartir {level} en LinkedIn ↗',
+      marked: 'Corregido',
+      checks: [
+        { label: 'Organización', ok: true },
+        { label: 'Vocabulario', ok: true },
+        { label: 'Conectores: practícalos hoy', ok: false },
+      ],
+    },
   },
   games: {
     eyebrow: 'Aprende jugando',
@@ -272,6 +285,7 @@ export const es = {
   },
   offer: {
     eyebrow: 'Oferta de fundadores',
+    forever: 'para siempre',
     body: 'las primeras 200 personas de la lista tendrán 50% de descuento en el plan anual, para siempre.',
     cta: 'Quiero mi lugar',
   },
@@ -284,6 +298,8 @@ export const es = {
     privacy: 'Política de privacidad',
     contact: 'Contacto',
     rights: 'Polyngual',
+    social: 'Redes sociales',
+    examPrep: 'Preparación {exam}',
   },
 };
 

@@ -8,8 +8,9 @@ It is a standalone Next.js app, kept separate from the Voxeo repo and Vercel pro
 | Route | What it is |
 |---|---|
 | `/` | Redirects to `/es` |
-| `/es` | Landing page (Spanish, default). `/en` is added by putting `'en'` in `src/content/index.ts` and adding an `en.ts` dictionary; hreflang tags and the sitemap pick it up automatically |
-| `/privacidad` | Privacy policy |
+| `/es`, `/en` | Waitlist landing page in Spanish (default) and English, with hreflang between them. Copy in `src/content/es.ts` and `en.ts` (same shape); signups from `/en` get the English confirmation email and unsubscribe page |
+| `/toefl-practice`, `/es/preparacion-toefl` | Standalone exam landing pages (not in the navigation; linked from footers and the sitemap, with hreflang between each pair). Registry in `src/lib/exams.ts`, copy in `src/content/exams/` |
+| `/privacidad`, `/privacy` | Privacy policy (Spanish, English): keep the two in step |
 | `/baja` | Unsubscribe and delete my data (linked from every email) |
 | `POST /api/waitlist` | Signup: validates the email, requires consent, saves to Resend, sends the confirmation email |
 | `POST /api/baja` | Signed unsubscribe link and mail clients' one-click unsubscribe (RFC 8058) |
@@ -52,6 +53,13 @@ Each new signup is also copied into the Polyngual sub-account of GoHighLevel, so
 4. Optional: create a custom contact field with the key `signup_order` (number) to see each person's place in line.
 
 What lands in GoHighLevel: email, country, source ("Polyngual waitlist (instagram)") and tags: `polyngual-waitlist` on everyone, `polyngual-fundador` for the first 200, and `fuente:…` / `campana:…` from the UTM parameters. Tags need no setup and can trigger workflows. If GoHighLevel is down or misconfigured, the signup still succeeds (it's already in Resend) and the error is logged in Vercel. The unsubscribe link deletes the contact from GoHighLevel too.
+
+## Exam landing pages
+
+- Add an exam by writing `src/content/exams/<exam>.en.ts` and `.es.ts` (same shape as TOEFL), registering them in `src/content/exams/index.ts`, adding an `src/app/<exam>-practice/` route like `toefl-practice`, and listing the exam in `PUBLISHED_EXAMS`. Footers, cross-links, the Spanish route and the sitemap pick it up from there.
+- Every "Take the free mock test" button goes to `NEXT_PUBLIC_MOCK_TEST_URL` with `?exam=`, `lang=` and UTM parameters (plus `variant=` from the IELTS and Cambridge pickers). Unset, it goes to the waitlist form in the page's language (`/en#lista` or `/es#lista`), which stores the same parameters in the signup's landing URL.
+- Each click sends the `mock_test_cta` event (`exam`, `lang`, `placement`) to Vercel Analytics; like `waitlist_signup`, custom events need a Pro plan.
+- A placeholder for real learner proof is marked in `src/components/exam/ExamPage.tsx`; it renders only outside production.
 
 ## Analytics
 

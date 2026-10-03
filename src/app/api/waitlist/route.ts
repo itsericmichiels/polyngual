@@ -3,7 +3,7 @@ import { saveSignup, sendEmail } from '@/lib/resend';
 import { syncSignupToCrm } from '@/lib/gohighlevel';
 import { confirmationEmail } from '@/lib/confirmation-email';
 import { normalizeEmail, readCountry, readTrafficSource } from '@/lib/signup';
-import { unsubscribeUrl } from '@/lib/unsubscribe-token';
+import { oneClickUnsubscribeUrl, unsubscribeUrl } from '@/lib/unsubscribe-token';
 import { siteUrl } from '@/lib/site';
 
 export const runtime = 'nodejs';
@@ -39,9 +39,12 @@ export async function POST(request: NextRequest) {
       await syncSignupToCrm(record, result.order)
         .then(() => console.info('[waitlist] GoHighLevel sync ok'))
         .catch((error) => console.error('[waitlist] GoHighLevel sync failed', error));
-      const link = unsubscribeUrl(siteUrl(), email, process.env.WAITLIST_SECRET ?? '');
-      const message = confirmationEmail(link);
-      await sendEmail({ to: email, ...message, unsubscribeUrl: link })
+      // Email in the language of the page the visitor signed up on.
+      const lang = body.locale === 'en' ? 'en' : 'es';
+      const secret = process.env.WAITLIST_SECRET ?? '';
+      const link = unsubscribeUrl(siteUrl(), email, secret, lang);
+      const message = confirmationEmail(link, lang);
+      await sendEmail({ to: email, ...message, oneClickUnsubscribeUrl: oneClickUnsubscribeUrl(siteUrl(), email, secret, lang) })
         .then(() => console.info('[waitlist] confirmation email sent'))
         // The signup is saved; a failed email should not show the visitor an error.
         .catch((error) => console.error('[waitlist] confirmation email failed', error));

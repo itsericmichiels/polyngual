@@ -137,7 +137,8 @@ export async function sendEmail(message: {
   subject: string;
   html: string;
   text: string;
-  unsubscribeUrl: string;
+  /** One-click unsubscribe endpoint for the List-Unsubscribe header (RFC 8058). */
+  oneClickUnsubscribeUrl: string;
 }): Promise<void> {
   const cfg = config();
   if (!cfg) {
@@ -157,7 +158,7 @@ export async function sendEmail(message: {
       html: message.html,
       text: message.text,
       headers: {
-        'List-Unsubscribe': `<${message.unsubscribeUrl}>`,
+        'List-Unsubscribe': `<${message.oneClickUnsubscribeUrl}>`,
         'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
       },
       tags: [{ name: 'category', value: 'waitlist_confirmation' }],

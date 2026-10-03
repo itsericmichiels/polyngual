@@ -5,7 +5,7 @@ import { CONTACT_EMAIL } from '@/lib/site';
 export const metadata: Metadata = {
   title: 'Política de privacidad | Polyngual',
   description: 'Qué datos guarda Polyngual de su lista de espera, para qué y cómo borrarlos.',
-  alternates: { canonical: '/privacidad' },
+  alternates: { canonical: '/privacidad', languages: { es: '/privacidad', en: '/privacy' } },
 };
 
 // Plain-language policy for the waitlist only. Review with a lawyer before collecting anything else.

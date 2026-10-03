@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { LOCALES, getDictionary, isLocale } from '@/content';
 import { CONTACT_EMAIL, SOCIAL_LINKS } from '@/lib/site';
+import { EXAM_NAMES, PUBLISHED_EXAMS, examPath } from '@/lib/exams';
 import { SpeakingDemo } from '@/components/SpeakingDemo';
 import { WaitlistForm } from '@/components/WaitlistForm';
 import { ScrollToForm } from '@/components/ScrollToForm';
@@ -31,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     openGraph: {
       type: 'website',
-      locale: 'es_ES',
+      locale: getDictionary(locale).ogLocale,
       url: `/${locale}`,
       siteName: 'Polyngual',
       title: meta.title,
@@ -46,10 +47,11 @@ export default async function LandingPage({ params }: Props) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const t = getDictionary(locale);
-  const privacyHref = '/privacidad';
+  const privacyHref = t.privacyHref;
 
+  // The root <html> is Spanish; the English page marks its own language here.
   return (
-    <>
+    <div lang={locale}>
       <RevealObserver />
       <header className="hero">
         <div className="grain" aria-hidden />
@@ -71,7 +73,7 @@ export default async function LandingPage({ params }: Props) {
               {t.hero.sub}
             </p>
             <div id="lista" className="hero-form enter" style={{ '--e': 12 } as React.CSSProperties}>
-              <WaitlistForm copy={t.form} privacyHref={privacyHref} />
+              <WaitlistForm copy={t.form} privacyHref={privacyHref} locale={locale} />
             </div>
           </div>
           <div className="hero-demo enter" style={{ '--e': 8 } as React.CSSProperties}>
@@ -100,7 +102,7 @@ export default async function LandingPage({ params }: Props) {
                   <h3>{item.title}</h3>
                   <p>{item.body}</p>
                 </div>
-                <BenefitVisual kind={i} />
+                <BenefitVisual kind={i} copy={t.benefits.visuals} />
               </li>
             ))}
           </ol>
@@ -150,7 +152,7 @@ export default async function LandingPage({ params }: Props) {
           <div className="offer-card" data-reveal>
             <div className="offer-figure" aria-hidden>
               <span className="offer-pct">50%</span>
-              <span className="offer-forever">para siempre</span>
+              <span className="offer-forever">{t.offer.forever}</span>
             </div>
             <div className="offer-copy">
               <p id="offer-title">
@@ -178,11 +180,17 @@ export default async function LandingPage({ params }: Props) {
             <li>
               <Link href={privacyHref}>{t.footer.privacy}</Link>
             </li>
+            {/* Exam prep: the standalone exam pages are linked here rather than in the navigation. */}
+            {PUBLISHED_EXAMS.map((exam) => (
+              <li key={exam}>
+                <Link href={examPath(exam, locale)}>{t.footer.examPrep.replace('{exam}', EXAM_NAMES[exam])}</Link>
+              </li>
+            ))}
             <li>
               <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
             </li>
           </ul>
-          <ul className="footer-social" aria-label="Redes sociales">
+          <ul className="footer-social" aria-label={t.footer.social}>
             {SOCIAL_LINKS.map((link) => (
               <li key={link.label}>
                 <a href={link.href} rel="noopener" target="_blank">
@@ -196,6 +204,6 @@ export default async function LandingPage({ params }: Props) {
           </p>
         </div>
       </footer>
-    </>
+    </div>
   );
 }
