@@ -47,19 +47,28 @@ export function signupTags(record: SignupRecord, order: number | null): string[]
 
 export async function syncSignupToCrm(record: SignupRecord, order: number | null): Promise<void> {
   const cfg = config();
-  if (!cfg) return;
+  if (!cfg) {
+    // Say so in the Vercel logs rather than skipping silently; locally this is expected.
+    if (process.env.VERCEL) throw new Error('GoHighLevel is not configured (GHL_TOKEN / GHL_LOCATION_ID missing)');
+    return;
+  }
   const { source } = record;
-  const res = await ghl(cfg.token, '/contacts/upsert', {
-    method: 'POST',
-    body: JSON.stringify({
-      locationId: cfg.locationId,
-      email: record.email,
-      country: record.country || undefined,
-      source: source.utmSource ? `Polyngual waitlist (${source.utmSource})` : 'Polyngual waitlist',
-      tags: signupTags(record, order),
-      customFields: order === null ? [] : [{ key: 'signup_order', field_value: String(order) }],
-    }),
-  });
+  const contact = {
+    locationId: cfg.locationId,
+    email: record.email,
+    country: record.country || undefined,
+    source: source.utmSource ? `Polyngual waitlist (${source.utmSource})` : 'Polyngual waitlist',
+    tags: signupTags(record, order),
+  };
+  const upsert = (body: object) => ghl(cfg.token, '/contacts/upsert', { method: 'POST', body: JSON.stringify(body) });
+
+  // signup_order is an optional custom field. If it was never created in GoHighLevel the API can
+  // reject the whole request, so retry without it rather than losing the contact.
+  let res = order === null ? await upsert(contact) : await upsert({ ...contact, customFields: [{ key: 'signup_order', field_value: String(order) }] });
+  if (!res.ok && order !== null && (res.status === 400 || res.status === 422)) {
+    console.warn('[waitlist] GoHighLevel rejected signup_order; retrying without it', (await res.text().catch(() => '')).slice(0, 300));
+    res = await upsert(contact);
+  }
   if (!res.ok) throw await failure('upsert', res);
 }
 
