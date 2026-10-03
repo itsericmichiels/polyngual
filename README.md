@@ -1,7 +1,7 @@
 # Polyngual: waitlist site
 
 The "coming soon" waitlist page for Polyngual, the consumer language brand built on Voxeo's technology.
-It is a standalone Next.js app with no imports from the Voxeo monorepo, so it can move into its own repo and Vercel project as is (see the brief).
+It is a standalone Next.js app, kept separate from the Voxeo repo and Vercel project (see the brief).
 
 ## Routes
 
@@ -55,4 +55,4 @@ Page views work on every plan. The `waitlist_signup` custom event needs a Vercel
 
 ## Deploy
 
-Create a new Vercel project with **Root Directory = `polyngual`** (or move this folder into its own repo), add the environment variables above, and point polyngual.com at it.
+Import this repo as a new Vercel project (framework preset Next.js, root directory left as is), add the environment variables above, and point polyngual.com at it.
