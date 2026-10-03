@@ -20,7 +20,7 @@ export default function PrivacyPage() {
 
       <h2>Quién recoge tus datos</h2>
       <p>
-        Polyngual, un proyecto de Eric Michiels, es responsable de los datos de su lista de espera. Puedes escribirnos a{' '}
+        Polyngual es responsable de los datos de su lista de espera. Puedes escribirnos a{' '}
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> para cualquier cosa relacionada con tus datos.
       </p>
 

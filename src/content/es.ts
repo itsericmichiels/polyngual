@@ -283,7 +283,6 @@ export const es = {
   footer: {
     privacy: 'Política de privacidad',
     contact: 'Contacto',
-    poweredBy: 'Con la tecnología de Voxeo',
     rights: 'Polyngual',
   },
 };

@@ -192,7 +192,7 @@ export default async function LandingPage({ params }: Props) {
             ))}
           </ul>
           <p className="footer-fine">
-            © {new Date().getFullYear()} {t.footer.rights} · {t.footer.poweredBy}
+            © {new Date().getFullYear()} {t.footer.rights}
           </p>
         </div>
       </footer>

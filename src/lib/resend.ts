@@ -132,7 +132,7 @@ export async function sendEmail(message: {
     return;
   }
   const fromEmail = process.env.WAITLIST_FROM_EMAIL;
-  const fromName = process.env.WAITLIST_FROM_NAME ?? 'Eric de Polyngual';
+  const fromName = process.env.WAITLIST_FROM_NAME ?? 'Polyngual';
   const res = await resend(cfg.apiKey, '/emails', {
     method: 'POST',
     body: JSON.stringify({
