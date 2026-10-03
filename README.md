@@ -32,7 +32,7 @@ Resend stores the waitlist (as contacts in one segment) and sends the confirmati
 3. **Contact properties:** in Resend → Audience → Properties, create these (exact keys, lower case):
    `signup_order` (number), and `country`, `signup_date`, `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`, `referrer`, `landing` (all string).
 4. **API key:** in Resend → API Keys, create a key named `polyngual-waitlist` with full access (it must manage contacts, not only send), and put it in `RESEND_API_KEY`.
-5. Set `WAITLIST_FROM_EMAIL` to an address on the verified domain, `WAITLIST_REPLY_TO` to the inbox you read (polyngualapp@gmail.com), and `WAITLIST_SECRET` to a long random string (`openssl rand -base64 32`).
+5. Set `WAITLIST_FROM_EMAIL` to hello@polyngual.app (an address on the verified domain), `WAITLIST_REPLY_TO` to the inbox you read (polyngualapp@gmail.com), and `WAITLIST_SECRET` to a long random string (`openssl rand -base64 32`).
 
 How signups behave:
 - Country comes from Vercel's `x-vercel-ip-country` header. Source comes from first-touch UTM parameters, the referrer and the landing URL.
