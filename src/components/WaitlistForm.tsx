@@ -57,7 +57,7 @@ export function WaitlistForm({ copy, privacyHref, locale }: { copy: Dictionary['
       const res = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ email, consent, company: form.get('company'), source: source.current, locale }),
+        body: JSON.stringify({ email, consent, locale, company: form.get('company'), source: source.current }),
       });
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));

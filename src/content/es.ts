@@ -1,5 +1,5 @@
-// Spanish page copy. Headline, subheadline, benefits, offer and form text are final copy from the brief.
-// An English dictionary with the same shape can be added later for /en.
+// Spanish page copy. Headline, benefits, offer and form text are final copy from the brief.
+// en.ts has the same shape; every visible string on the landing page comes from one of these files.
 
 export type Highlight = { text: string; mark?: boolean };
 export type ScriptLine = { who: string; parts: Highlight[] };
@@ -8,8 +8,11 @@ export type StudioFormat = { id: string; label: string; prompt: string; options:
 
 export const es = {
   locale: 'es',
+  htmlLang: 'es',
   ogLocale: 'es_ES',
+  ogImage: '/og.png',
   privacyHref: '/privacidad',
+  switcher: { label: 'EN', href: '/en', name: 'Read in English', hrefLang: 'en' },
   meta: {
     title: 'Polyngual | Aprende inglés hablando y prepara tu TOEFL o TOEIC',
     description:
@@ -84,17 +87,6 @@ export const es = {
         body: 'Simulacros de TOEFL y TOEIC con corrección inmediata y ejercicios hechos para tus puntos débiles.',
       },
     ],
-    visuals: {
-      wordsToWork: 'Palabras para trabajar',
-      yourLevel: 'Tu nivel',
-      share: 'Compartir {level} en LinkedIn ↗',
-      marked: 'Corregido',
-      checks: [
-        { label: 'Organización', ok: true },
-        { label: 'Vocabulario', ok: true },
-        { label: 'Conectores: practícalos hoy', ok: false },
-      ],
-    },
   },
   games: {
     eyebrow: 'Aprende jugando',
@@ -270,7 +262,7 @@ export const es = {
           },
         ],
       },
-    ] satisfies StudioFormat[],
+    ] satisfies StudioFormat[] as StudioFormat[],
     library: [
       { kind: 'Podcasts', title: 'Con tus palabras', body: 'Dos voces conversan dos o tres minutos usando justo el vocabulario que estás trabajando. Luego practicas cada palabra en voz alta.' },
       { kind: 'Juegos', title: 'Para aprender jugando', body: 'Partidas cortas creadas con el vocabulario que necesitas.' },
@@ -285,20 +277,27 @@ export const es = {
   },
   offer: {
     eyebrow: 'Oferta de fundadores',
-    forever: 'para siempre',
     body: 'las primeras 200 personas de la lista tendrán 50% de descuento en el plan anual, para siempre.',
     cta: 'Quiero mi lugar',
+    forever: 'para siempre',
   },
   closing: {
     title: 'Tu inglés, cada semana un poco mejor.',
     body: 'Apúntate hoy y sé de los primeros en probarlo.',
     cta: 'Quiero mi lugar',
   },
+  visuals: {
+    wordsLabel: 'Palabras para trabajar',
+    levelLabel: 'Tu nivel',
+    share: 'Compartir {level} en LinkedIn ↗',
+    corrected: 'Corregido',
+    checks: ['Organización', 'Vocabulario', 'Conectores: practícalos hoy'],
+  },
   footer: {
+    social: 'Redes sociales',
     privacy: 'Política de privacidad',
     contact: 'Contacto',
     rights: 'Polyngual',
-    social: 'Redes sociales',
     examPrep: 'Preparación {exam}',
   },
 };

@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
   const form = await request.formData().catch(() => null);
   const email = normalizeEmail(form?.get('e') ?? url.searchParams.get('e'));
   const token = String(form?.get('t') ?? url.searchParams.get('t') ?? '');
-  const lang = url.searchParams.get('lang') === 'en' ? '&lang=en' : '';
+  const lang = (form?.get('l') ?? url.searchParams.get('l')) === 'en' ? '&l=en' : '';
 
   if (!email || !verifyEmailSignature(email, token, process.env.WAITLIST_SECRET ?? '')) {
     return NextResponse.redirect(new URL(`/baja?estado=invalido${lang}`, request.url), 303);

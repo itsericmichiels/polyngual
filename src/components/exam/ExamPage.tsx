@@ -50,7 +50,7 @@ export function ExamPage({ t, jsonLd }: { t: ExamPageContent; jsonLd: object }) 
   const heroRest = heroRestParts.join(' ');
 
   return (
-    <div lang={locale} className="x-page">
+    <div className="x-page">
       <RevealObserver />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
@@ -282,7 +282,7 @@ export function ExamPage({ t, jsonLd }: { t: ExamPageContent; jsonLd: object }) 
               </Link>
             </li>
             <li>
-              <Link href={locale === 'en' ? '/privacy' : '/privacidad'}>{t.footer.privacy}</Link>
+              <Link href={locale === 'en' ? '/en/privacy' : '/privacidad'}>{t.footer.privacy}</Link>
             </li>
           </ul>
           <p className="x-footer-disclaimer">{t.footer.disclaimer}</p>

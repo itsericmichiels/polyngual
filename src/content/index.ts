@@ -1,11 +1,11 @@
-import { en } from './en';
 import { es, type Dictionary } from './es';
+import { en } from './en';
 
-// Each locale needs a dictionary with the same shape as es.ts. /es stays the default.
 export const LOCALES = ['es', 'en'] as const;
 export type Locale = (typeof LOCALES)[number];
+export const DEFAULT_LOCALE: Locale = 'es';
 
 const dictionaries: Record<Locale, Dictionary> = { es, en };
 
-export const isLocale = (value: string): value is Locale => (LOCALES as readonly string[]).includes(value);
+export const isLocale = (value: unknown): value is Locale => typeof value === 'string' && (LOCALES as readonly string[]).includes(value);
 export const getDictionary = (locale: Locale) => dictionaries[locale];

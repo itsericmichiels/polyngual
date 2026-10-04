@@ -11,8 +11,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${base}/${locale}`,
       alternates: { languages: Object.fromEntries(LOCALES.map((l) => [l, `${base}/${l}`])) },
     })),
-    { url: `${base}/privacidad`, alternates: { languages: { es: `${base}/privacidad`, en: `${base}/privacy` } } },
-    { url: `${base}/privacy`, alternates: { languages: { es: `${base}/privacidad`, en: `${base}/privacy` } } },
+    { url: `${base}/privacidad`, alternates: { languages: { es: `${base}/privacidad`, en: `${base}/en/privacy` } } },
+    { url: `${base}/en/privacy`, alternates: { languages: { es: `${base}/privacidad`, en: `${base}/en/privacy` } } },
     // Exam landing pages: standalone (not in the main navigation) but listed here and in footers.
     ...PUBLISHED_EXAMS.flatMap((exam) =>
       (['en', 'es'] as const).map((locale) => ({

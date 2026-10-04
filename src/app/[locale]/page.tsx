@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { LOCALES, getDictionary, isLocale } from '@/content';
-import { CONTACT_EMAIL, SOCIAL_LINKS } from '@/lib/site';
+import { DEFAULT_LOCALE, LOCALES, getDictionary, isLocale } from '@/content';
 import { EXAM_NAMES, PUBLISHED_EXAMS, examPath } from '@/lib/exams';
+import { CONTACT_EMAIL, SOCIAL_LINKS } from '@/lib/site';
 import { SpeakingDemo } from '@/components/SpeakingDemo';
 import { WaitlistForm } from '@/components/WaitlistForm';
 import { ScrollToForm } from '@/components/ScrollToForm';
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: meta.description,
     alternates: {
       canonical: `/${locale}`,
-      languages: { ...Object.fromEntries(LOCALES.map((l) => [l, `/${l}`])), 'x-default': '/es' },
+      languages: { ...Object.fromEntries(LOCALES.map((l) => [l, `/${l}`])), 'x-default': `/${DEFAULT_LOCALE}` },
     },
     openGraph: {
       type: 'website',
@@ -37,9 +37,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: 'Polyngual',
       title: meta.title,
       description: meta.description,
-      images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Polyngual' }],
+      images: [{ url: getDictionary(locale).ogImage, width: 1200, height: 630, alt: 'Polyngual' }],
     },
-    twitter: { card: 'summary_large_image', title: meta.title, description: meta.description, images: ['/og.png'] },
+    twitter: { card: 'summary_large_image', title: meta.title, description: meta.description, images: [getDictionary(locale).ogImage] },
   };
 }
 
@@ -49,9 +49,8 @@ export default async function LandingPage({ params }: Props) {
   const t = getDictionary(locale);
   const privacyHref = t.privacyHref;
 
-  // The root <html> is Spanish; the English page marks its own language here.
   return (
-    <div lang={locale}>
+    <>
       <RevealObserver />
       <header className="hero">
         <div className="grain" aria-hidden />
@@ -59,7 +58,12 @@ export default async function LandingPage({ params }: Props) {
           <Link href={`/${locale}`} className="nav-logo" aria-label="Polyngual">
             <Image src="/polyngual-wordmark.png" alt="Polyngual" width={900} height={204} priority />
           </Link>
-          <ScrollToForm label={t.nav.cta} className="btn btn-ghost" />
+          <div className="nav-actions">
+            <Link href={t.switcher.href} hrefLang={t.switcher.hrefLang} className="nav-lang" aria-label={t.switcher.name} title={t.switcher.name}>
+              {t.switcher.label}
+            </Link>
+            <ScrollToForm label={t.nav.cta} className="btn btn-ghost" />
+          </div>
         </nav>
 
         <div className="hero-grid shell">
@@ -102,7 +106,7 @@ export default async function LandingPage({ params }: Props) {
                   <h3>{item.title}</h3>
                   <p>{item.body}</p>
                 </div>
-                <BenefitVisual kind={i} copy={t.benefits.visuals} />
+                <BenefitVisual kind={i} copy={t.visuals} />
               </li>
             ))}
           </ol>
@@ -180,15 +184,15 @@ export default async function LandingPage({ params }: Props) {
             <li>
               <Link href={privacyHref}>{t.footer.privacy}</Link>
             </li>
+            <li>
+              <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+            </li>
             {/* Exam prep: the standalone exam pages are linked here rather than in the navigation. */}
             {PUBLISHED_EXAMS.map((exam) => (
               <li key={exam}>
                 <Link href={examPath(exam, locale)}>{t.footer.examPrep.replace('{exam}', EXAM_NAMES[exam])}</Link>
               </li>
             ))}
-            <li>
-              <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
-            </li>
           </ul>
           <ul className="footer-social" aria-label={t.footer.social}>
             {SOCIAL_LINKS.map((link) => (
@@ -204,6 +208,6 @@ export default async function LandingPage({ params }: Props) {
           </p>
         </div>
       </footer>
-    </div>
+    </>
   );
 }

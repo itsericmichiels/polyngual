@@ -8,7 +8,7 @@ const API = 'https://api.resend.com';
 // Exact signup order only matters for the first-200 founder offer; stop counting after this.
 const ORDER_COUNT_LIMIT = 500;
 
-export type SignupRecord = { email: string; country: string; source: TrafficSource; signedUpAt: Date };
+export type SignupRecord = { email: string; country: string; source: TrafficSource; signedUpAt: Date; locale?: string };
 export type SignupResult = { created: boolean; order: number | null };
 
 function config() {
@@ -137,8 +137,7 @@ export async function sendEmail(message: {
   subject: string;
   html: string;
   text: string;
-  /** One-click unsubscribe endpoint for the List-Unsubscribe header (RFC 8058). */
-  oneClickUnsubscribeUrl: string;
+  unsubscribeUrl: string;
 }): Promise<void> {
   const cfg = config();
   if (!cfg) {
@@ -158,7 +157,7 @@ export async function sendEmail(message: {
       html: message.html,
       text: message.text,
       headers: {
-        'List-Unsubscribe': `<${message.oneClickUnsubscribeUrl}>`,
+        'List-Unsubscribe': `<${message.unsubscribeUrl}>`,
         'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
       },
       tags: [{ name: 'category', value: 'waitlist_confirmation' }],

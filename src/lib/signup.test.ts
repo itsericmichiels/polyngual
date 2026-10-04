@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { normalizeEmail, readCountry, readTrafficSource } from './signup.ts';
 import { oneClickUnsubscribeUrl, signEmail, unsubscribeUrl, verifyEmailSignature } from './unsubscribe-token.ts';
+import { confirmationEmail } from './confirmation-email.ts';
 
 test('normalizes valid emails and rejects invalid ones', () => {
   assert.equal(normalizeEmail('  Ana@Example.COM '), 'ana@example.com');
@@ -32,19 +33,19 @@ test('unsubscribe signatures verify only for the signed email', () => {
   assert.match(unsubscribeUrl('https://polyngual.app/', 'ana@example.com', 'secret'), /^https:\/\/polyngual\.app\/baja\?e=ana%40example\.com&t=/);
 });
 
-test('English signups get an English unsubscribe link and confirmation email', async () => {
-  assert.match(unsubscribeUrl('https://polyngual.app', 'ana@example.com', 'secret', 'en'), /&lang=en$/);
-  assert.doesNotMatch(unsubscribeUrl('https://polyngual.app', 'ana@example.com', 'secret'), /lang=/);
-  const { confirmationEmail } = await import('./confirmation-email.ts');
-  const en = confirmationEmail('https://polyngual.app/baja?lang=en', 'en');
-  assert.equal(en.subject, 'You are on the Polyngual waitlist');
-  assert.match(en.html, /<html lang="en">/);
-  assert.match(confirmationEmail('https://polyngual.app/baja').subject, /Ya estás en la lista/);
+test('English unsubscribe links keep the language; one-click points at the deleting endpoint', () => {
+  assert.match(unsubscribeUrl('https://polyngual.app', 'ana@example.com', 'secret', 'en'), /\/baja\?e=.*&l=en$/);
+  assert.doesNotMatch(unsubscribeUrl('https://polyngual.app', 'ana@example.com', 'secret', 'es'), /l=/);
+  assert.match(oneClickUnsubscribeUrl('https://polyngual.app', 'ana@example.com', 'secret'), /^https:\/\/polyngual\.app\/api\/baja\?e=ana%40example\.com&t=/);
 });
 
-test('the one-click unsubscribe header points at the API route that deletes the contact', () => {
-  const page = unsubscribeUrl('https://polyngual.app', 'ana@example.com', 'secret', 'en');
-  const oneClick = oneClickUnsubscribeUrl('https://polyngual.app', 'ana@example.com', 'secret', 'en');
-  assert.match(oneClick, /^https:\/\/polyngual\.app\/api\/baja\?e=ana%40example\.com&t=[^&]+&lang=en$/);
-  assert.equal(oneClick.split('?')[1], page.split('?')[1]);
+test('confirmation email is written in the signup language', () => {
+  const es = confirmationEmail('https://x/baja', 'es');
+  const en = confirmationEmail('https://x/baja?l=en', 'en');
+  assert.equal(es.subject, 'Ya estás en la lista de Polyngual');
+  assert.match(es.text, /El equipo de Polyngual/);
+  assert.equal(en.subject, 'You’re on the Polyngual waitlist');
+  assert.match(en.html, /<html lang="en">/);
+  assert.match(en.text, /The Polyngual team/);
+  assert.doesNotMatch(en.text + es.text, /Eric|Voxeo/);
 });

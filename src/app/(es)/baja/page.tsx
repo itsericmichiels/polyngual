@@ -2,22 +2,19 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { CONTACT_EMAIL } from '@/lib/site';
 
-type Props = { searchParams: Promise<{ e?: string; t?: string; estado?: string; lang?: string }> };
+export const metadata: Metadata = { title: 'Darte de baja | Polyngual', robots: { index: false } };
 
-export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
-  const { lang } = await searchParams;
-  return { title: lang === 'en' ? 'Unsubscribe | Polyngual' : 'Darte de baja | Polyngual', robots: { index: false } };
-}
+type Props = { searchParams: Promise<{ e?: string; t?: string; estado?: string; l?: string }> };
 
-// Reached from the link in every email. English signups get `lang=en` in that link.
+// Unsubscribe page. Spanish by default; links in emails sent to /en signups add l=en.
 const COPY = {
   es: {
     back: '← Volver',
     home: '/es',
     title: 'Darte de baja',
-    confirm: (e: string) => (
+    confirm: (email: string) => (
       <>
-        Vamos a quitar <strong>{e}</strong> de la lista de espera y borrar los datos que guardamos.
+        Vamos a quitar <strong>{email}</strong> de la lista de espera y borrar los datos que guardamos.
       </>
     ),
     button: 'Darme de baja',
@@ -31,28 +28,28 @@ const COPY = {
     back: '← Back',
     home: '/en',
     title: 'Unsubscribe',
-    confirm: (e: string) => (
+    confirm: (email: string) => (
       <>
-        We will remove <strong>{e}</strong> from the waitlist and delete the data we keep.
+        We’ll remove <strong>{email}</strong> from the waitlist and delete the data we hold.
       </>
     ),
     button: 'Unsubscribe me',
     messages: {
-      hecho: 'Done. You have been unsubscribed and your data has been deleted. Thanks for your interest in Polyngual.',
-      invalido: `This link is not valid or is incomplete. Write to ${CONTACT_EMAIL} and we will do it by hand.`,
-      error: `We could not complete it right now. Try again in a while or write to ${CONTACT_EMAIL}.`,
+      hecho: 'Done. You’ve been unsubscribed and your data has been deleted. Thanks for your interest in Polyngual.',
+      invalido: `This link is invalid or incomplete. Email us at ${CONTACT_EMAIL} and we’ll do it by hand.`,
+      error: `We couldn’t finish that just now. Please try again later or email us at ${CONTACT_EMAIL}.`,
     } as Record<string, string>,
   },
 };
 
 export default async function UnsubscribePage({ searchParams }: Props) {
-  const { e, t, estado, lang } = await searchParams;
-  const locale = lang === 'en' ? 'en' : 'es';
-  const c = COPY[locale];
+  const { e, t, estado, l } = await searchParams;
+  const lang = l === 'en' ? 'en' : 'es';
+  const c = COPY[lang];
   const message = estado ? c.messages[estado] : null;
 
   return (
-    <main className="legal shell" lang={locale}>
+    <main className="legal shell" lang={lang}>
       <Link href={c.home} className="legal-back">
         {c.back}
       </Link>
@@ -60,10 +57,11 @@ export default async function UnsubscribePage({ searchParams }: Props) {
       {message ? (
         <p>{message}</p>
       ) : e && t ? (
-        <form method="post" action={locale === 'en' ? '/api/baja?lang=en' : '/api/baja'} className="unsubscribe">
+        <form method="post" action="/api/baja" className="unsubscribe">
           <p>{c.confirm(e)}</p>
           <input type="hidden" name="e" value={e} />
           <input type="hidden" name="t" value={t} />
+          {lang === 'en' ? <input type="hidden" name="l" value="en" /> : null}
           <button type="submit" className="btn btn-dark">
             <span>{c.button}</span>
           </button>
