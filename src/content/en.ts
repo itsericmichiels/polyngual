@@ -171,5 +171,6 @@ export const en: Dictionary = {
     privacy: 'Privacy policy',
     contact: 'Contact',
     rights: 'Polyngual',
+    examPrep: '{exam} practice',
   },
 };

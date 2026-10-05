@@ -10,6 +10,7 @@ It is a standalone Next.js app, kept separate from the Voxeo repo and Vercel pro
 | `/` | Redirects to `/es` |
 | `/es` | Landing page in Spanish (default, `x-default` in hreflang) |
 | `/en` | Landing page in English. Copy lives in `src/content/en.ts`, same shape as `es.ts`; a new language is a new dictionary plus an entry in `src/content/index.ts` |
+| `/toefl-practice`, `/toeic-practice`, `/ielts-practice`, `/cambridge-practice` and `/es/preparacion-{toefl,toeic,ielts,cambridge}` | Standalone exam landing pages (not in the navigation; linked from footers and the sitemap, with hreflang between each pair). Registry in `src/lib/exams.ts`, copy in `src/content/exams/` |
 | `/privacidad`, `/en/privacy` | Privacy policy (Spanish path fixed by the brief; `/es/privacy` redirects to it) |
 | `/baja` | Unsubscribe and delete my data (linked from every email; `?l=en` shows it in English) |
 | `/api/diagnostico?key=WAITLIST_SECRET` | Private setup check: which settings are present, Resend domain status, GoHighLevel access; `&to=` sends a test email |
@@ -54,6 +55,13 @@ Each new signup is also copied into the Polyngual sub-account of GoHighLevel, so
 4. Optional: create a custom contact field with the key `signup_order` (number) to see each person's place in line.
 
 What lands in GoHighLevel: email, country, source ("Polyngual waitlist (instagram)") and tags: `polyngual-waitlist` on everyone, `polyngual-fundador` for the first 200, and `fuente:…` / `campana:…` from the UTM parameters. Tags need no setup and can trigger workflows. If GoHighLevel is down or misconfigured, the signup still succeeds (it's already in Resend) and the error is logged in Vercel. The unsubscribe link deletes the contact from GoHighLevel too.
+
+## Exam landing pages
+
+- Each page is one content file per language in `src/content/exams/` rendered by `src/components/exam/ExamPage.tsx`. English pages live under `src/app/(en)` (their own `lang="en"` layout); Spanish ones are `src/app/[locale]/[slug]`.
+- Every "Take the free mock test" button goes to `NEXT_PUBLIC_MOCK_TEST_URL` with `?exam=`, `lang=` and UTM parameters (plus `variant=` from the IELTS and Cambridge pickers). Unset, it goes to the waitlist form in the page's language (`/en#lista` or `/es#lista`), which stores the same parameters in the signup's landing URL.
+- Each click sends the `mock_test_cta` event (`exam`, `lang`, `placement`, `variant`) to Vercel Analytics.
+- A placeholder for real learner proof is marked in `ExamPage.tsx`; it renders only outside production. Do not fill it with invented testimonials or figures.
 
 ## Analytics
 

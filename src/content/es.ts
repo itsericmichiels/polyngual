@@ -298,6 +298,7 @@ export const es = {
     privacy: 'Política de privacidad',
     contact: 'Contacto',
     rights: 'Polyngual',
+    examPrep: 'Preparación {exam}',
   },
 };
 

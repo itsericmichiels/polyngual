@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { DEFAULT_LOCALE, LOCALES, getDictionary, isLocale } from '@/content';
+import { EXAM_NAMES, PUBLISHED_EXAMS, examPath } from '@/lib/exams';
 import { CONTACT_EMAIL, SOCIAL_LINKS } from '@/lib/site';
 import { SpeakingDemo } from '@/components/SpeakingDemo';
 import { WaitlistForm } from '@/components/WaitlistForm';
@@ -186,6 +187,12 @@ export default async function LandingPage({ params }: Props) {
             <li>
               <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
             </li>
+            {/* Exam prep: the standalone exam pages are linked here rather than in the navigation. */}
+            {PUBLISHED_EXAMS.map((exam) => (
+              <li key={exam}>
+                <Link href={examPath(exam, locale)}>{t.footer.examPrep.replace('{exam}', EXAM_NAMES[exam])}</Link>
+              </li>
+            ))}
           </ul>
           <ul className="footer-social" aria-label={t.footer.social}>
             {SOCIAL_LINKS.map((link) => (
