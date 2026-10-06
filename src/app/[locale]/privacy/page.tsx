@@ -10,7 +10,7 @@ export const generateStaticParams = () => [{ locale: 'en' }, { locale: 'es' }];
 
 export const metadata: Metadata = {
   title: 'Privacy policy | Polyngual',
-  description: 'What Polyngual keeps from its waitlist, why, and how to delete it.',
+  description: 'What Polyngual keeps from its waitlist and its learning app, why, and how to delete it.',
   alternates: { canonical: '/en/privacy', languages: { en: '/en/privacy', es: '/privacidad' } },
 };
 
@@ -24,7 +24,7 @@ export default async function PrivacyPageEn({ params }: { params: Promise<{ loca
         ← Back
       </Link>
       <h1>Privacy policy</h1>
-      <p className="legal-updated">Last updated: 3 October 2026</p>
+      <p className="legal-updated">Last updated: 6 October 2026</p>
 
       <h2>Who collects your data</h2>
       <p>
@@ -58,6 +58,38 @@ export default async function PrivacyPageEn({ params }: { params: Promise<{ loca
 
       <h2>How long</h2>
       <p>Until you unsubscribe or until the waitlist is no longer needed, whichever comes first.</p>
+
+      <h2>The learning app (learn.polyngual.app)</h2>
+      <p>When you create an account to learn with Polyngual, we also keep what the app needs to teach you:</p>
+      <ul>
+        <li>Your email address, the name you want us to use, and the language you use the app in.</li>
+        <li>
+          Your answers when you start: why you’re learning, your exam and its date if you have one, your level check, the
+          minutes a day you chose and the time you want a reminder, with your time zone.
+        </li>
+        <li>What you practise and how it goes: your answers to exercises, the words you’re learning, your scores and your progress.</li>
+        <li>
+          Your voice when you do a speaking exercise. To score your pronunciation we send the recording to{' '}
+          <strong>Microsoft Azure AI Speech</strong>, which returns the score; we don’t keep that recording. If you record
+          your name on your profile, we keep it until you delete it.
+        </li>
+        <li>
+          Your conversations with the speaking tutor, which runs on <strong>Google</strong>’s AI (Gemini). The tutor hears
+          what you say during the conversation to answer you.
+        </li>
+        <li>How you use the app (which pages you open and what you do), to improve it. No advertising cookies.</li>
+      </ul>
+      <p>
+        We use all this only to run your course: your plan, your level, your progress, and the emails about your learning
+        (a welcome, a daily reminder at the time you chose, a few messages if you stop practising, and a weekly summary).
+        Every one of those emails has a link to stop them. The legal basis is the contract you accept by creating your
+        account; we don’t sell your data or use it for advertising.
+      </p>
+      <p>
+        The app’s data is stored with <strong>Supabase</strong>, the app is hosted on <strong>Vercel</strong>, and its
+        emails are sent with <strong>Resend</strong>. We keep your account while you use it; ask us to delete it and we
+        delete it with everything in it.
+      </p>
 
       <h2>Unsubscribing or deleting your data</h2>
       <p>

@@ -1995,6 +1995,29 @@ svg {
   margin-bottom: 10px;
 }
 
+/* The app's own button, once the beta is open (NEXT_PUBLIC_APP_URL). */
+.hero-app {
+  display: grid;
+  justify-items: start;
+  gap: 14px;
+}
+
+.hero-app-note {
+  color: var(--muted-dark);
+  font-size: 15px;
+}
+
+.hero-app-note a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+
+.closing-form {
+  width: min(100%, 520px);
+  margin-top: 28px;
+  scroll-margin: 40vh;
+}
+
 /* ---------- Footer ---------- */
 
 .footer {

@@ -281,6 +281,13 @@ export const es = {
     cta: 'Quiero mi lugar',
     forever: 'para siempre',
   },
+  app: {
+    eyebrow: 'Beta gratuita abierta',
+    nav: 'Empieza gratis',
+    cta: 'Empieza a aprender gratis',
+    note: 'Gratis durante la beta. Sin tarjeta.',
+    orList: '¿Prefieres que te avisemos del lanzamiento? Únete a la lista',
+  },
   closing: {
     title: 'Tu inglés, cada semana un poco mejor.',
     body: 'Apúntate hoy y sé de los primeros en probarlo.',

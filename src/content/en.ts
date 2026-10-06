@@ -154,6 +154,13 @@ export const en: Dictionary = {
     cta: 'Save my spot',
     forever: 'forever',
   },
+  app: {
+    eyebrow: 'Free beta now open',
+    nav: 'Start free',
+    cta: 'Start learning free',
+    note: 'Free during the beta. No card needed.',
+    orList: 'Rather hear when we launch? Join the list',
+  },
   closing: {
     title: 'Your English, a little better every week.',
     body: 'Join today and be among the first to try it.',

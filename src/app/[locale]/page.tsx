@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { DEFAULT_LOCALE, LOCALES, getDictionary, isLocale } from '@/content';
 import { EXAM_NAMES, PUBLISHED_EXAMS, examPath } from '@/lib/exams';
-import { CONTACT_EMAIL, SOCIAL_LINKS } from '@/lib/site';
+import { CONTACT_EMAIL, SOCIAL_LINKS, appSignupHref } from '@/lib/site';
 import { SpeakingDemo } from '@/components/SpeakingDemo';
 import { WaitlistForm } from '@/components/WaitlistForm';
 import { ScrollToForm } from '@/components/ScrollToForm';
@@ -48,6 +48,9 @@ export default async function LandingPage({ params }: Props) {
   if (!isLocale(locale)) notFound();
   const t = getDictionary(locale);
   const privacyHref = t.privacyHref;
+  // Once the app is live (NEXT_PUBLIC_APP_URL), the main buttons open it; the waitlist moves to the closing section.
+  const appHref = (placement: string) => appSignupHref(locale, placement);
+  const appLive = appHref('nav') !== null;
 
   return (
     <>
@@ -62,7 +65,13 @@ export default async function LandingPage({ params }: Props) {
             <Link href={t.switcher.href} hrefLang={t.switcher.hrefLang} className="nav-lang" aria-label={t.switcher.name} title={t.switcher.name}>
               {t.switcher.label}
             </Link>
-            <ScrollToForm label={t.nav.cta} className="btn btn-ghost" />
+            {appLive ? (
+              <a href={appHref('nav')!} className="btn btn-ghost">
+                <span>{t.app.nav}</span>
+              </a>
+            ) : (
+              <ScrollToForm label={t.nav.cta} className="btn btn-ghost" />
+            )}
           </div>
         </nav>
 
@@ -70,15 +79,26 @@ export default async function LandingPage({ params }: Props) {
           <div className="hero-copy">
             <p className="eyebrow eyebrow-live enter" style={{ '--e': 0 } as React.CSSProperties}>
               <span className="live-dot" aria-hidden />
-              {t.hero.eyebrow}
+              {appLive ? t.app.eyebrow : t.hero.eyebrow}
             </p>
             <SoundHeadline before={t.hero.headlineBefore} mark={t.hero.headlineMark} after={t.hero.headlineAfter} />
             <p className="hero-sub enter" style={{ '--e': 11 } as React.CSSProperties}>
               {t.hero.sub}
             </p>
-            <div id="lista" className="hero-form enter" style={{ '--e': 12 } as React.CSSProperties}>
-              <WaitlistForm copy={t.form} privacyHref={privacyHref} locale={locale} />
-            </div>
+            {appLive ? (
+              <div className="hero-form hero-app enter" style={{ '--e': 12 } as React.CSSProperties}>
+                <a href={appHref('hero')!} className="btn btn-primary">
+                  <span>{t.app.cta}</span>
+                </a>
+                <p className="hero-app-note">
+                  {t.app.note} <a href="#lista">{t.app.orList}</a>
+                </p>
+              </div>
+            ) : (
+              <div id="lista" className="hero-form enter" style={{ '--e': 12 } as React.CSSProperties}>
+                <WaitlistForm copy={t.form} privacyHref={privacyHref} locale={locale} />
+              </div>
+            )}
           </div>
           <div className="hero-demo enter" style={{ '--e': 8 } as React.CSSProperties}>
             <SpeakingDemo copy={t.demo} />
@@ -172,7 +192,18 @@ export default async function LandingPage({ params }: Props) {
             <Image src="/icon-g.png" alt="" width={72} height={72} className="closing-mark" />
             <h2 id="closing-title">{t.closing.title}</h2>
             <p>{t.closing.body}</p>
-            <ScrollToForm label={t.closing.cta} />
+            {appLive ? (
+              <>
+                <a href={appHref('closing')!} className="btn btn-primary">
+                  <span>{t.app.cta}</span>
+                </a>
+                <div id="lista" className="closing-form">
+                  <WaitlistForm copy={t.form} privacyHref={privacyHref} locale={locale} />
+                </div>
+              </>
+            ) : (
+              <ScrollToForm label={t.closing.cta} />
+            )}
           </div>
         </section>
       </main>
