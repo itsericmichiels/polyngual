@@ -29,7 +29,8 @@ export default async function TermsPageEn({ params }: { params: Promise<{ locale
       <h2>Who we are</h2>
       <p>
         Polyngual is an app for learning English by speaking and for preparing exams such as the TOEFL and the TOEIC, built
-        on Voxeo&rsquo;s technology. For any question about these terms, write to us at{' '}
+        on Voxeo&rsquo;s technology. Polyngual and Voxeo are services of 924 Fund LLC, doing business as Exito Marketing
+        Agency (10055 W Dartmouth Ave, E104, Lakewood, CO 80227, USA). For any question about these terms, write to us at{' '}
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
       </p>
 
@@ -88,6 +89,13 @@ export default async function TermsPageEn({ params }: { params: Promise<{ locale
         We provide the service as it is, especially during the beta. As far as the law allows, we are not liable for
         indirect damage or for decisions you make based on the app (for example, when you book your exam). None of this
         limits the rights that consumer law in your country gives you.
+      </p>
+
+      <h2>Governing law</h2>
+      <p>
+        These terms are governed by the laws of the State of Colorado, USA. If a disagreement comes up, please write to us
+        first so we can try to resolve it. If that is not possible, it will be settled by the competent courts of Colorado,
+        unless the consumer law of your country lets you go to the courts where you live.
       </p>
 
       <h2>Changes</h2>

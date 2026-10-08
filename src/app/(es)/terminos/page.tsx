@@ -22,7 +22,8 @@ export default function TermsPage() {
       <h2>Quiénes somos</h2>
       <p>
         Polyngual es una app para aprender inglés hablando y preparar exámenes como el TOEFL y el TOEIC, desarrollada con la
-        tecnología de Voxeo. Para cualquier duda sobre estos términos, escríbenos a{' '}
+        tecnología de Voxeo. Polyngual y Voxeo son servicios de 924 Fund LLC, que opera como Exito Marketing Agency (10055 W
+        Dartmouth Ave, E104, Lakewood, CO 80227, Estados Unidos). Para cualquier duda sobre estos términos, escríbenos a{' '}
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
       </p>
 
@@ -81,6 +82,13 @@ export default function TermsPage() {
         Ofrecemos el servicio tal como está, especialmente durante la beta. En la medida en que la ley lo permita, no
         respondemos de daños indirectos ni de decisiones que tomes basándote en la app (por ejemplo, la fecha en que
         haces tu examen). Nada de esto limita los derechos que te reconoce la ley de consumo de tu país.
+      </p>
+
+      <h2>Ley aplicable</h2>
+      <p>
+        Estos términos se rigen por las leyes del estado de Colorado (Estados Unidos). Si surge un desacuerdo, escríbenos
+        primero para intentar resolverlo. Si no es posible, lo resolverán los tribunales competentes de Colorado, salvo que la
+        ley de consumo de tu país te permita acudir a los de tu país.
       </p>
 
       <h2>Cambios</h2>
