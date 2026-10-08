@@ -16,6 +16,7 @@ It is a standalone Next.js app, kept separate from the Voxeo repo and Vercel pro
 | `/api/diagnostico?key=WAITLIST_SECRET` | Private setup check: which settings are present, Resend domain status, GoHighLevel access; `&to=` sends a test email |
 | `POST /api/waitlist` | Signup: validates the email, requires consent, saves to Resend, copies to GoHighLevel, sends the confirmation email in the page's language |
 | `POST /api/baja` | Signed unsubscribe link and mail clients' one-click unsubscribe (RFC 8058) |
+| `/examen`, `/examen/*`, `/api/examen/*`, `/examen-static/*` | The TOEFL / TOEIC exam-prep product and its beta (`/examen/beta`). Not in this repo: forwarded to the exam app (repo exitohire-ai) by `rewrites` in `next.config.ts`; `EXAM_APP_ORIGIN` sets where (default `https://exitohire-ai.vercel.app`) |
 
 ## Run locally
 
