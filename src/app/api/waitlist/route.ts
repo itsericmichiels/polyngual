@@ -6,8 +6,12 @@ import { normalizeEmail, readCountry, readTrafficSource } from '@/lib/signup';
 import { oneClickUnsubscribeUrl, unsubscribeUrl } from '@/lib/unsubscribe-token';
 import { siteUrl } from '@/lib/site';
 import { DEFAULT_LOCALE, isLocale } from '@/content';
+import { clientIp, createLimiter } from '@/lib/rate-limit';
 
 export const runtime = 'nodejs';
+
+// 5 signups per IP per 10 minutes is plenty for a family on one connection, and stops a bot loop.
+const limiter = createLimiter(5, 10 * 60 * 1000);
 
 export async function POST(request: NextRequest) {
   const body = (await request.json().catch(() => null)) as Record<string, unknown> | null;
@@ -15,6 +19,12 @@ export async function POST(request: NextRequest) {
 
   // Honeypot: real people never fill this hidden field. Pretend it worked.
   if (typeof body.company === 'string' && body.company.length > 0) return NextResponse.json({ ok: true });
+
+  const ip = clientIp(request.headers);
+  if (ip && !limiter.allow(ip)) {
+    console.warn('[waitlist] rate limited');
+    return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
+  }
 
   const email = normalizeEmail(body.email);
   if (!email) return NextResponse.json({ error: 'invalid_email' }, { status: 422 });

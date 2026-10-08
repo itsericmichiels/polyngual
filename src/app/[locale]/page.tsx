@@ -187,6 +187,32 @@ export default async function LandingPage({ params }: Props) {
           </div>
         </section>
 
+        <section className="home-faq shell" aria-labelledby="faq-title">
+          <div className="section-head" data-reveal>
+            <p className="eyebrow">{t.faq.eyebrow}</p>
+            <h2 id="faq-title">{t.faq.title}</h2>
+          </div>
+          <div className="home-faq-list" data-reveal>
+            {t.faq.items.map((item) => (
+              <details key={item.q}>
+                <summary>{item.q}</summary>
+                <p>{item.a}</p>
+              </details>
+            ))}
+          </div>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                '@context': 'https://schema.org',
+                '@type': 'FAQPage',
+                inLanguage: locale,
+                mainEntity: t.faq.items.map((item) => ({ '@type': 'Question', name: item.q, acceptedAnswer: { '@type': 'Answer', text: item.a } })),
+              }).replace(/</g, '\\u003c'),
+            }}
+          />
+        </section>
+
         <section className="closing" aria-labelledby="closing-title">
           <div className="shell closing-inner" data-reveal>
             <Image src="/icon-g.png" alt="" width={72} height={72} className="closing-mark" />
@@ -214,6 +240,9 @@ export default async function LandingPage({ params }: Props) {
           <ul className="footer-links">
             <li>
               <Link href={privacyHref}>{t.footer.privacy}</Link>
+            </li>
+            <li>
+              <Link href={t.termsHref}>{t.footer.terms}</Link>
             </li>
             <li>
               <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
