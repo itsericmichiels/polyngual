@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from 'react';
 import Link from 'next/link';
-import { track } from '@vercel/analytics';
+import { track } from '@/lib/analytics';
 import type { Dictionary } from '@/content/es';
 
 type Status = 'idle' | 'sending' | 'done' | 'error';

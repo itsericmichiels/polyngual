@@ -53,7 +53,10 @@ export default async function PrivacyPageEn({ params }: { params: Promise<{ loca
         We store the list and send emails with <strong>Resend</strong> (Resend, Inc., United States), which processes the
         data on our behalf. We organise the list in our CRM, <strong>HighLevel</strong> (HighLevel, Inc., United States). The
         website is hosted on <strong>Vercel</strong>, and we measure visits with Vercel Web Analytics, which uses no cookies
-        and does not identify people.
+        and does not identify people. Only if you accept in the cookie notice, we also use <strong>Google Analytics</strong>{' '}
+        and <strong>Google Tag Manager</strong> (Google Ireland Ltd.), which set cookies to measure visits and which buttons
+        are clicked. We do not use them for advertising. You can change your choice at any time with the “Cookies” button in
+        the bottom corner.
       </p>
 
       <h2>How long</h2>

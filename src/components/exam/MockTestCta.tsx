@@ -1,10 +1,11 @@
 'use client';
 
-import { track } from '@vercel/analytics';
+import { track } from '@/lib/analytics';
 import type { ExamId, ExamLocale } from '@/lib/exams';
 
 // Every mock test button on the exam pages. The click is recorded with the exam, the language and where
-// on the page it was, before the browser follows the link.
+// on the page it was, before the browser follows the link: in Vercel Analytics, and in Google Analytics
+// / Tag Manager once the visitor has accepted cookies.
 export function MockTestCta({
   href,
   label,
