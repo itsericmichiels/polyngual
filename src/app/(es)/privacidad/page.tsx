@@ -45,7 +45,10 @@ export default function PrivacyPage() {
         Guardamos la lista y enviamos los correos con <strong>Resend</strong> (Resend, Inc., Estados Unidos), que trata los
         datos por cuenta nuestra. Organizamos la lista en nuestro CRM, <strong>HighLevel</strong> (HighLevel, Inc., Estados
         Unidos). La web está alojada en <strong>Vercel</strong>, y medimos las visitas con Vercel Web
-        Analytics, que no usa cookies ni identifica a personas.
+        Analytics, que no usa cookies ni identifica a personas. Solo si lo aceptas en el aviso de cookies, también
+        usamos <strong>Google Analytics</strong> y <strong>Google Tag Manager</strong> (Google Ireland Ltd.), que ponen
+        cookies para medir visitas y qué botones se pulsan. No los usamos para publicidad. Puedes cambiar tu elección
+        en cualquier momento con el botón «Cookies» de la esquina inferior.
       </p>
 
       <h2>Cuánto tiempo</h2>

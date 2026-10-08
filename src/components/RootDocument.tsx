@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Nunito, Nunito_Sans } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
+import { GoogleTags } from '@/components/GoogleTags';
 import { siteUrl } from '@/lib/site';
 import '@/app/globals.css';
 
@@ -37,6 +38,7 @@ export function RootDocument({ lang, children }: { lang: string; children: React
       <body>
         {children}
         <Analytics />
+        <GoogleTags lang={lang} />
       </body>
     </html>
   );

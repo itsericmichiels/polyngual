@@ -65,7 +65,9 @@ What lands in GoHighLevel: email, country, source ("Polyngual waitlist (instagra
 
 ## Analytics
 
-Vercel Web Analytics, which sets no cookies, so there is no cookie banner. Turn it on in the Vercel project (Analytics tab).
+Vercel Web Analytics, which sets no cookies, always runs. Turn it on in the Vercel project (Analytics tab).
+
+Google Tag Manager and Google Analytics 4 are optional: set `NEXT_PUBLIC_GTM_ID` and/or `NEXT_PUBLIC_GA4_ID` in Vercel and redeploy. They set cookies, so they load only after the visitor accepts the cookie notice (`src/components/GoogleTags.tsx`); a small "Cookies" button reopens it. The `waitlist_signup` and `mock_test_cta` events go to Vercel always and to the GTM/GA4 `dataLayer` after consent (`src/lib/analytics.ts`), ready to mark as conversions.
 Page views work on every plan. The `waitlist_signup` custom event needs a Vercel Pro plan; the source of every signup is stored in Resend either way.
 
 ## Brand independence
