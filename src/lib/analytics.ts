@@ -9,7 +9,10 @@ export const CONSENT_KEY = 'polyngual.consent.v1';
 export const CONSENT_EVENT = 'polyngual:consent';
 export type Consent = 'accepted' | 'declined';
 
-export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID?.trim() || '';
+// Polyngual's Tag Manager container (public: it appears in every page's source). The env variable can
+// override it, e.g. for a test container; set it to "off" to remove Google tags entirely.
+const gtmEnv = process.env.NEXT_PUBLIC_GTM_ID?.trim();
+export const GTM_ID = gtmEnv === 'off' ? '' : gtmEnv || 'GTM-P2QHWHJ6';
 export const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID?.trim() || '';
 export const googleTagsConfigured = () => Boolean(GTM_ID || GA4_ID);
 

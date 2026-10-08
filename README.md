@@ -67,7 +67,7 @@ What lands in GoHighLevel: email, country, source ("Polyngual waitlist (instagra
 
 Vercel Web Analytics, which sets no cookies, always runs. Turn it on in the Vercel project (Analytics tab).
 
-Google Tag Manager and Google Analytics 4 are optional: set `NEXT_PUBLIC_GTM_ID` and/or `NEXT_PUBLIC_GA4_ID` in Vercel and redeploy. They set cookies, so they load only after the visitor accepts the cookie notice (`src/components/GoogleTags.tsx`); a small "Cookies" button reopens it. The `waitlist_signup` and `mock_test_cta` events go to Vercel always and to the GTM/GA4 `dataLayer` after consent (`src/lib/analytics.ts`), ready to mark as conversions.
+Google Tag Manager runs Polyngual's container `GTM-P2QHWHJ6` (built in; `NEXT_PUBLIC_GTM_ID` overrides it, `off` disables it). Google Analytics 4 is configured as a tag inside that container, so `NEXT_PUBLIC_GA4_ID` stays empty unless you want gtag.js directly. They set cookies, so they load only after the visitor accepts the cookie notice (`src/components/GoogleTags.tsx`); a small "Cookies" button reopens it. The `<noscript>` iframe from GTM's install snippet is left out on purpose: it would set cookies for visitors who never saw the notice. The `waitlist_signup` and `mock_test_cta` events go to Vercel always and to the GTM/GA4 `dataLayer` after consent (`src/lib/analytics.ts`), ready to mark as conversions.
 Page views work on every plan. The `waitlist_signup` custom event needs a Vercel Pro plan; the source of every signup is stored in Resend either way.
 
 ## Brand independence
