@@ -12,6 +12,7 @@ export const es = {
   ogLocale: 'es_ES',
   ogImage: '/og.png',
   privacyHref: '/privacidad',
+  termsHref: '/terminos',
   switcher: { label: 'EN', href: '/en', name: 'Read in English', hrefLang: 'en' },
   meta: {
     title: 'Polyngual | Aprende inglés hablando y prepara tu TOEFL o TOEIC',
@@ -275,6 +276,40 @@ export const es = {
       { kind: 'Simulacros', title: 'TOEFL y TOEIC', body: 'Tareas como las del examen real, con corrección inmediata y ejercicios hechos para tus puntos débiles.' },
     ],
   },
+  faq: {
+    eyebrow: 'Preguntas frecuentes',
+    title: 'Lo que suele preguntarse antes de empezar.',
+    items: [
+      {
+        q: '¿Qué es Polyngual?',
+        a: 'Una app para aprender inglés hablando. Escucha cómo hablas, te dice qué corregir palabra por palabra y crea tu práctica (juegos, podcasts, historias y explicaciones) con las palabras que te cuestan.',
+      },
+      {
+        q: '¿Cuánto cuesta?',
+        a: 'Empezamos con una beta gratuita para un grupo pequeño. Cuando abramos los planes de pago, las primeras 200 personas de la lista tendrán 50% de descuento en el plan anual, para siempre.',
+      },
+      {
+        q: '¿Cuándo puedo empezar?',
+        a: 'Abrimos por tandas. Apúntate a la lista y te avisamos por correo en cuanto haya plaza para ti.',
+      },
+      {
+        q: '¿Sirve para preparar el TOEFL o el TOEIC?',
+        a: 'Sí. Tienes simulacros con los tipos de tarea actuales, corrección inmediata y práctica hecha con tus fallos. Polyngual no está afiliado a ETS y no predice tu nota oficial.',
+      },
+      {
+        q: '¿Necesito un nivel mínimo?',
+        a: 'No. Al empezar mides tu nivel y la práctica se adapta a ti, de A1 a C1.',
+      },
+      {
+        q: '¿Qué hacéis con mi voz y mis datos?',
+        a: 'Usamos tu voz solo para puntuar tu pronunciación y no guardamos esas grabaciones. No hay anuncios y no vendemos tus datos. Los detalles están en la política de privacidad.',
+      },
+      {
+        q: '¿En qué idiomas está?',
+        a: 'La web y la app están en español y en inglés. Por ahora enseñamos inglés.',
+      },
+    ],
+  },
   offer: {
     eyebrow: 'Oferta de fundadores',
     body: 'las primeras 200 personas de la lista tendrán 50% de descuento en el plan anual, para siempre.',
@@ -303,6 +338,7 @@ export const es = {
   footer: {
     social: 'Redes sociales',
     privacy: 'Política de privacidad',
+    terms: 'Términos de uso',
     contact: 'Contacto',
     rights: 'Polyngual',
     examPrep: 'Preparación {exam}',

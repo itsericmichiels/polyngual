@@ -284,6 +284,9 @@ export function ExamPage({ t, jsonLd }: { t: ExamPageContent; jsonLd: object }) 
             <li>
               <Link href={locale === 'en' ? '/en/privacy' : '/privacidad'}>{t.footer.privacy}</Link>
             </li>
+            <li>
+              <Link href={locale === 'en' ? '/en/terms' : '/terminos'}>{locale === 'en' ? 'Terms of use' : 'Términos de uso'}</Link>
+            </li>
           </ul>
           <p className="x-footer-disclaimer">{t.footer.disclaimer}</p>
           <p className="footer-fine">

@@ -2262,3 +2262,71 @@ svg {
   outline: 2px solid var(--lagoon);
   outline-offset: 2px;
 }
+
+/* Home FAQ (same look as the exam pages' .x-faq). */
+.home-faq {
+  padding-bottom: clamp(72px, 10vw, 128px);
+}
+.home-faq-list {
+  max-width: 54rem;
+}
+.home-faq details {
+  border-bottom: 1px solid var(--line-light);
+}
+.home-faq summary {
+  position: relative;
+  list-style: none;
+  cursor: pointer;
+  padding: 20px 44px 20px 0;
+  font: 800 1.12rem/1.35 var(--font-display);
+}
+.home-faq summary::-webkit-details-marker {
+  display: none;
+}
+.home-faq summary::after {
+  content: '';
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-right: 2.5px solid var(--cobalt);
+  border-bottom: 2.5px solid var(--cobalt);
+  transform: translateY(-70%) rotate(45deg);
+  transition: transform 200ms var(--ease-out);
+}
+.home-faq details[open] summary::after {
+  transform: translateY(-30%) rotate(-135deg);
+}
+.home-faq summary:focus-visible {
+  outline: 2px solid var(--cobalt);
+  outline-offset: 4px;
+}
+.home-faq details p {
+  margin: 0;
+  padding: 0 0 22px;
+  color: var(--muted-light);
+  max-width: 44em;
+}
+
+/* 404 (app/global-not-found.tsx). */
+.not-found {
+  display: grid;
+  gap: 12px;
+  align-content: center;
+  min-height: 70vh;
+  padding-block: 48px;
+}
+.not-found p {
+  margin: 0;
+  max-width: 36em;
+}
+.not-found h1 {
+  margin: 0;
+}
+.not-found-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+}

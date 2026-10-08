@@ -43,6 +43,7 @@ export const en: Dictionary = {
   ogLocale: 'en_US',
   ogImage: '/og-en.png',
   privacyHref: '/en/privacy',
+  termsHref: '/en/terms',
   switcher: { label: 'ES', href: '/es', name: 'Leer en español', hrefLang: 'es' },
   meta: {
     title: 'Polyngual | Learn English by speaking and get ready for the TOEFL or TOEIC',
@@ -148,6 +149,40 @@ export const en: Dictionary = {
       { kind: 'Practice tests', title: 'TOEFL and TOEIC', body: 'Tasks like the real exam, with instant feedback and exercises built around your weak spots.' },
     ],
   },
+  faq: {
+    eyebrow: 'Questions',
+    title: 'What people usually ask before starting.',
+    items: [
+      {
+        q: 'What is Polyngual?',
+        a: 'An app for learning English by speaking. It listens to how you speak, tells you what to fix word by word, and builds your practice (games, podcasts, stories and explanations) from the words you find hard.',
+      },
+      {
+        q: 'How much does it cost?',
+        a: 'We start with a free beta for a small group. When paid plans open, the first 200 people on the list get 50% off the annual plan, for ever.',
+      },
+      {
+        q: 'When can I start?',
+        a: 'We open in groups. Join the list and we will email you as soon as there is a place for you.',
+      },
+      {
+        q: 'Does it help with the TOEFL or the TOEIC?',
+        a: 'Yes. You get mock tests with the current task types, instant feedback, and practice built from your mistakes. Polyngual is not affiliated with ETS and does not predict your official score.',
+      },
+      {
+        q: 'Do I need a minimum level?',
+        a: 'No. You check your level when you start and the practice adapts to you, from A1 to C1.',
+      },
+      {
+        q: 'What do you do with my voice and my data?',
+        a: 'We use your voice only to score your pronunciation and we do not keep those recordings. There are no ads and we do not sell your data. The details are in the privacy policy.',
+      },
+      {
+        q: 'Which languages is it in?',
+        a: 'The website and the app are in English and Spanish. For now we teach English.',
+      },
+    ],
+  },
   offer: {
     eyebrow: 'Founder offer',
     body: 'the first 200 people on the list get 50% off the annual plan, forever.',
@@ -176,6 +211,7 @@ export const en: Dictionary = {
   footer: {
     social: 'Social media',
     privacy: 'Privacy policy',
+    terms: 'Terms of use',
     contact: 'Contact',
     rights: 'Polyngual',
     examPrep: '{exam} practice',
