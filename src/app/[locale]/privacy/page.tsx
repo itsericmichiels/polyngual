@@ -10,7 +10,7 @@ export const generateStaticParams = () => [{ locale: 'en' }, { locale: 'es' }];
 
 export const metadata: Metadata = {
   title: 'Privacy policy | Polyngual',
-  description: 'What Polyngual keeps from its waitlist and its learning app, why, and how to delete it.',
+  description: 'What Polyngual keeps from its waitlist, its learning app and its TOEFL and TOEIC prep, why, and how to delete it.',
   alternates: { canonical: '/en/privacy', languages: { en: '/en/privacy', es: '/privacidad' } },
 };
 
@@ -24,11 +24,12 @@ export default async function PrivacyPageEn({ params }: { params: Promise<{ loca
         ← Back
       </Link>
       <h1>Privacy policy</h1>
-      <p className="legal-updated">Last updated: 6 October 2026</p>
+      <p className="legal-updated">Last updated: 11 October 2026</p>
 
       <h2>Who collects your data</h2>
       <p>
-        Polyngual is responsible for the data on its waitlist. You can write to us at{' '}
+        Polyngual is a service of 924 Fund LLC, doing business as Exito Marketing Agency (10055 W Dartmouth Ave, E104,
+        Lakewood, CO 80227, USA), which is responsible for your data. Polyngual is powered by Voxeo&rsquo;s technology. You can write to us at{' '}
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> about anything related to your data.
       </p>
 
@@ -92,6 +93,52 @@ export default async function PrivacyPageEn({ params }: { params: Promise<{ loca
         The app’s data is stored with <strong>Supabase</strong>, the app is hosted on <strong>Vercel</strong>, and its
         emails are sent with <strong>Resend</strong>. We keep your account while you use it; ask us to delete it and we
         delete it with everything in it.
+      </p>
+
+      <h2>TOEFL and TOEIC prep (polyngual.app/examen)</h2>
+      <p>When you sign up for the beta or create an account to prepare an exam, we keep:</p>
+      <ul>
+        <li>
+          Your account: your email and a password, or your Google sign-in (from Google we only receive your name, email and
+          profile picture).
+        </li>
+        <li>
+          Your beta signup: the exam (TOEFL or TOEIC), your place or your spot on the waiting list, your native language,
+          the month of your exam if you tell us, the language of the page and the group link you came from.
+        </li>
+        <li>
+          Your practice: your exam date, your answers, your practice tests and scores, the words and areas you miss, your
+          writing and speaking tasks with their score and feedback, and the short explainers we prepare for you.
+        </li>
+        <li>
+          Your voice in speaking tasks. We send the recording to <strong>Microsoft Azure AI Speech</strong> to transcribe
+          and score it, and <strong>we don&rsquo;t keep the recording</strong>. We keep the transcript and the result.
+        </li>
+        <li>
+          What you send us with &ldquo;Something wrong?&rdquo;: your message, the page and the question you were on, the
+          answer you chose and your browser type.
+        </li>
+        <li>
+          If you choose to: your nickname and the tips you share in the community (we review them before they appear), and
+          your real exam result if you tell us, with your permission before we quote it.
+        </li>
+      </ul>
+      <p>
+        We use this only to prepare you for your exam and to improve the product. Writing tasks and speaking transcripts are
+        corrected with an AI model from <strong>OpenAI</strong>, which receives the text, not the audio, and does not use it
+        to train its models. The data is stored with <strong>Supabase</strong>, the site is hosted on <strong>Vercel</strong>{' '}
+        and emails are sent with <strong>Resend</strong>. If payments open after the beta, they are handled by{' '}
+        <strong>Stripe</strong>; we never see your card.
+      </p>
+      <p>
+        We send you the emails your account needs (confirm it, sign in, reset your password), a welcome when you get a beta
+        place, and a few emails around your exam date (before, on the day and to ask how it went), which you can stop with
+        the link in each one. The legal basis is the contract you accept when you sign up; we don&rsquo;t sell your data or
+        use it for advertising.
+      </p>
+      <p>
+        We keep your account while you use it. If your access ends and you don&rsquo;t use Polyngual for 6 months, we email
+        you first and then delete your practice data. You can ask us to delete your account and everything in it at any time.
       </p>
 
       <h2>Unsubscribing or deleting your data</h2>
