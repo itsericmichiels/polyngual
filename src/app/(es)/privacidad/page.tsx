@@ -135,6 +135,15 @@ export default function PrivacyPage() {
         contiene.
       </p>
 
+      <h2>Contenido hecho con inteligencia artificial</h2>
+      <p>
+        Parte del contenido de Polyngual se genera con ayuda de inteligencia artificial y lo revisa nuestro equipo: preguntas
+        y textos de práctica, explicaciones, frases de ejemplo, pódcasts e historias, y las voces de los ejercicios de
+        comprensión auditiva, que son sintéticas, no personas reales. Las correcciones de lo que escribes y dices, y el tutor
+        de conversación, también las produce una IA en tiempo real. Lo indicamos para que siempre sepas cuándo interactúas con
+        una IA, como exige la normativa europea. La IA puede equivocarse: si ves un error, pulsa «¿Algo va mal?».
+      </p>
+
       <h2>Darte de baja o borrar tus datos</h2>
       <p>
         Cada correo que te enviamos incluye un enlace para darte de baja: al usarlo borramos tu contacto por completo. También

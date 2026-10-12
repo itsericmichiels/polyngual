@@ -141,6 +141,15 @@ export default async function PrivacyPageEn({ params }: { params: Promise<{ loca
         you first and then delete your practice data. You can ask us to delete your account and everything in it at any time.
       </p>
 
+      <h2>Content made with artificial intelligence</h2>
+      <p>
+        Part of Polyngual&rsquo;s content is generated with the help of artificial intelligence and reviewed by our team:
+        practice questions and passages, explanations, example sentences, podcasts and stories, and the voices in listening
+        exercises, which are synthetic, not real people. Corrections of your writing and speaking, and the speaking tutor,
+        are also produced by AI in real time. We label it this way so you always know when you are dealing with AI, as
+        European law requires. AI can make mistakes: if you spot one, press &ldquo;Something wrong?&rdquo;.
+      </p>
+
       <h2>Unsubscribing or deleting your data</h2>
       <p>
         Every email we send includes an unsubscribe link: using it deletes your contact completely. You can also write to us
