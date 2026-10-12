@@ -4,11 +4,11 @@ import { CONTACT_EMAIL } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Política de privacidad | Polyngual',
-  description: 'Qué datos guarda Polyngual de su lista de espera y de su app para aprender, para qué y cómo borrarlos.',
+  description: 'Qué datos guarda Polyngual de su lista de espera, su app para aprender y su preparación de TOEFL y TOEIC, para qué y cómo borrarlos.',
   alternates: { canonical: '/privacidad', languages: { es: '/privacidad', en: '/en/privacy' } },
 };
 
-// Plain-language policy for the waitlist only. Review with a lawyer before collecting anything else.
+// Plain-language policy: waitlist, learning app and exam prep (/examen). Keep in sync with /en/privacy.
 export default function PrivacyPage() {
   return (
     <main className="legal shell">
@@ -16,11 +16,12 @@ export default function PrivacyPage() {
         ← Volver
       </Link>
       <h1>Política de privacidad</h1>
-      <p className="legal-updated">Última actualización: 6 de octubre de 2026</p>
+      <p className="legal-updated">Última actualización: 11 de octubre de 2026</p>
 
       <h2>Quién recoge tus datos</h2>
       <p>
-        Polyngual es responsable de los datos de su lista de espera. Puedes escribirnos a{' '}
+        Polyngual es un servicio de 924 Fund LLC, que opera como Exito Marketing Agency (10055 W Dartmouth Ave, E104,
+        Lakewood, CO 80227, Estados Unidos), responsable de tus datos. Polyngual funciona con la tecnología de Voxeo. Puedes escribirnos a{' '}
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> para cualquier cosa relacionada con tus datos.
       </p>
 
@@ -84,6 +85,64 @@ export default function PrivacyPage() {
         Los datos de la app se guardan en <strong>Supabase</strong>, la app está alojada en <strong>Vercel</strong> y sus
         correos se envían con <strong>Resend</strong>. Guardamos tu cuenta mientras la uses; pídenos borrarla y la borramos
         con todo lo que contiene.
+      </p>
+
+      <h2>Preparación de TOEFL y TOEIC (polyngual.app/examen)</h2>
+      <p>Cuando te apuntas a la beta o creas una cuenta para preparar un examen, guardamos:</p>
+      <ul>
+        <li>
+          Tu cuenta: tu correo y una contraseña, o tu acceso con Google (de Google solo recibimos tu nombre, tu correo y tu
+          foto de perfil).
+        </li>
+        <li>
+          Tu inscripción en la beta: el examen (TOEFL o TOEIC), tu plaza o tu puesto en la lista de espera, tu lengua
+          materna, el mes de tu examen si nos lo dices, el idioma de la página y el enlace del grupo desde el que llegaste.
+        </li>
+        <li>
+          Tu práctica: la fecha de tu examen, tus respuestas, tus exámenes de práctica y puntuaciones, las palabras y áreas en
+          las que fallas, tus tareas de escritura y expresión oral con su nota y sus comentarios, y las explicaciones breves
+          que preparamos para ti.
+        </li>
+        <li>
+          Tu voz en las tareas orales. Enviamos la grabación a <strong>Microsoft Azure AI Speech</strong> para transcribirla
+          y puntuarla, y <strong>no guardamos la grabación</strong>. Guardamos la transcripción y el resultado.
+        </li>
+        <li>
+          Lo que nos envías con «¿Algo va mal?»: tu mensaje, la página y la pregunta en la que estabas, la respuesta que
+          elegiste y el tipo de navegador.
+        </li>
+        <li>
+          Si tú quieres: tu apodo y los consejos que compartes en la comunidad (los revisamos antes de publicarlos), y tu
+          resultado real del examen si nos lo cuentas, con tu permiso antes de citarlo.
+        </li>
+      </ul>
+      <p>
+        Usamos estos datos solo para prepararte para tu examen y mejorar el producto. Las tareas escritas y las
+        transcripciones orales se corrigen con un modelo de IA de <strong>OpenAI</strong>, que recibe el texto, no el audio,
+        y no lo usa para entrenar sus modelos. Los datos se guardan en <strong>Supabase</strong>, la web está alojada en{' '}
+        <strong>Vercel</strong> y los correos se envían con <strong>Resend</strong>. Si después de la beta abrimos los pagos,
+        los gestiona <strong>Stripe</strong>; nunca vemos tu tarjeta.
+      </p>
+      <p>
+        Te enviamos los correos que necesita tu cuenta (confirmarla, entrar, cambiar la contraseña), una bienvenida cuando
+        consigues plaza en la beta y algunos correos en torno a la fecha de tu examen (antes, el mismo día y para preguntarte
+        cómo te fue), que puedes dejar de recibir con el enlace de cada uno. La base legal es el contrato que aceptas al
+        apuntarte; no vendemos tus datos ni los usamos para publicidad.
+      </p>
+      <p>
+        Guardamos tu cuenta mientras la uses. Si no usas Polyngual durante 6 meses (y el acceso que tuvieras ha terminado), te
+        avisamos por correo al menos 14 días antes y después borramos tus datos de práctica, lo que publicaste en la comunidad
+        y tus avisos de problemas. Si te apuntas a la lista de espera sin cuenta, borramos ese registro tras 6 meses sin
+        cambios. Puedes pedirnos en cualquier momento que borremos tu cuenta con todo lo que contiene.
+      </p>
+
+      <h2>Contenido hecho con inteligencia artificial</h2>
+      <p>
+        Parte del contenido de Polyngual se genera con ayuda de inteligencia artificial: preguntas
+        y textos de práctica, explicaciones, frases de ejemplo, pódcasts e historias, y las voces de los ejercicios de
+        comprensión auditiva, que son sintéticas, no personas reales. Las correcciones de lo que escribes y dices, y el tutor
+        de conversación, también las produce una IA en tiempo real. Lo indicamos para que siempre sepas cuándo interactúas con
+        una IA, como exige la normativa europea. La IA puede equivocarse: si ves un error, pulsa «¿Algo va mal?».
       </p>
 
       <h2>Darte de baja o borrar tus datos</h2>
