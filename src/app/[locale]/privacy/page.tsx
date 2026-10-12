@@ -143,7 +143,7 @@ export default async function PrivacyPageEn({ params }: { params: Promise<{ loca
 
       <h2>Content made with artificial intelligence</h2>
       <p>
-        Part of Polyngual&rsquo;s content is generated with the help of artificial intelligence and reviewed by our team:
+        Part of Polyngual&rsquo;s content is generated with the help of artificial intelligence:
         practice questions and passages, explanations, example sentences, podcasts and stories, and the voices in listening
         exercises, which are synthetic, not real people. Corrections of your writing and speaking, and the speaking tutor,
         are also produced by AI in real time. We label it this way so you always know when you are dealing with AI, as
