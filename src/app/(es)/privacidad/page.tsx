@@ -130,9 +130,10 @@ export default function PrivacyPage() {
         apuntarte; no vendemos tus datos ni los usamos para publicidad.
       </p>
       <p>
-        Guardamos tu cuenta mientras la uses. Si tu acceso termina y no usas Polyngual durante 6 meses, te avisamos por correo
-        y después borramos tus datos de práctica. Puedes pedirnos en cualquier momento que borremos tu cuenta con todo lo que
-        contiene.
+        Guardamos tu cuenta mientras la uses. Si no usas Polyngual durante 6 meses (y el acceso que tuvieras ha terminado), te
+        avisamos por correo al menos 14 días antes y después borramos tus datos de práctica, lo que publicaste en la comunidad
+        y tus avisos de problemas. Si te apuntas a la lista de espera sin cuenta, borramos ese registro tras 6 meses sin
+        cambios. Puedes pedirnos en cualquier momento que borremos tu cuenta con todo lo que contiene.
       </p>
 
       <h2>Contenido hecho con inteligencia artificial</h2>

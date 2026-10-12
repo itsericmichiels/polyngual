@@ -137,8 +137,10 @@ export default async function PrivacyPageEn({ params }: { params: Promise<{ loca
         use it for advertising.
       </p>
       <p>
-        We keep your account while you use it. If your access ends and you don&rsquo;t use Polyngual for 6 months, we email
-        you first and then delete your practice data. You can ask us to delete your account and everything in it at any time.
+        We keep your account while you use it. If you don&rsquo;t use Polyngual for 6 months (and any access you had has
+        ended), we email you at least 14 days before and then delete your practice data, community posts and reports. If you
+        join the waiting list without an account, we delete that entry after 6 months without changes. You can ask us to
+        delete your account and everything in it at any time.
       </p>
 
       <h2>Content made with artificial intelligence</h2>
