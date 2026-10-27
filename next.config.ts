@@ -16,7 +16,12 @@ const nextConfig: NextConfig = {
   // The exam zone never reaches it: its paths are rewritten before any page is matched.
   experimental: { globalNotFound: true },
   async redirects() {
-    return [{ source: '/', destination: '/es', permanent: false }];
+    return [
+      { source: '/', destination: '/es', permanent: false },
+      // The short address for the TOEFL iBT signup page in the exam app (Eric, 2026-10-27); any
+      // ?g= tag goes along.
+      { source: '/toefl', destination: '/examen/toefl', permanent: false },
+    ];
   },
   async rewrites() {
     return {
