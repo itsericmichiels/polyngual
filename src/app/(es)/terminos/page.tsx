@@ -4,12 +4,12 @@ import { CONTACT_EMAIL } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Términos de uso | Polyngual',
-  description: 'Las condiciones para usar Polyngual, su lista de espera y su beta gratuita: qué ofrecemos, qué esperamos de ti y qué no garantizamos.',
+  description: 'Las condiciones para usar Polyngual, su beta, su prueba gratis y sus planes de pago: qué ofrecemos, qué esperamos de ti y qué no garantizamos.',
   alternates: { canonical: '/terminos', languages: { es: '/terminos', en: '/en/terms' } },
 };
 
-// Plain-language terms for the waitlist and the free beta. Mirrors /en/terms; keep both in sync.
-// Review with a lawyer before charging anyone (legal entity, address and governing law are not stated yet).
+// Plain-language terms: waitlist, beta, trial and the exam prep's paid plans. Mirrors /en/terms; keep both in sync.
+// Published before a lawyer's review (Eric, 2026-10-29); review it.
 export default function TermsPage() {
   return (
     <main className="legal shell">
@@ -17,12 +17,12 @@ export default function TermsPage() {
         ← Volver
       </Link>
       <h1>Términos de uso</h1>
-      <p className="legal-updated">Última actualización: 8 de octubre de 2026</p>
+      <p className="legal-updated">Última actualización: 30 de octubre de 2026</p>
 
       <h2>Quiénes somos</h2>
       <p>
         Polyngual es una app para aprender inglés hablando y preparar exámenes como el TOEFL y el TOEIC, desarrollada con la
-        tecnología de Voxeo. Polyngual y Voxeo son servicios de 924 Fund LLC, que opera como Exito Marketing Agency (10055 W
+        tecnología de Voxeo. Polyngual y Voxeo son servicios de 924 Fund LLC, que opera con los nombres Polyngual y Voxeo (10055 W
         Dartmouth Ave, E104, Lakewood, CO 80227, Estados Unidos). Para cualquier duda sobre estos términos, escríbenos a{' '}
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
       </p>
@@ -38,8 +38,19 @@ export default function TermsPage() {
       <ul>
         <li>Abrimos Polyngual primero como beta gratuita para un número limitado de personas. Cuando se llenan las plazas, te apuntamos a la lista para la siguiente tanda.</li>
         <li>Al ser una beta, puede tener errores, cambiar o dejar de estar disponible un tiempo. Tus comentarios nos ayudan a mejorarla.</li>
-        <li>La beta no tiene coste. Antes de cobrar nada te diremos el precio y las condiciones, y podrás decidir si sigues.</li>
+        <li>La beta no tiene coste. Cuando termina tu plaza sigues con el plan Gratis, sin cobros, salvo que elijas un plan de pago.</li>
         <li>La oferta de fundadores (50% de descuento en el plan anual para las primeras 200 personas de la lista) se aplica cuando abramos los planes de pago, mientras mantengas ese plan.</li>
+      </ul>
+
+      <h2>Planes de pago de la preparación de exámenes</h2>
+      <ul>
+        <li>Al crear tu cuenta tienes 7 días de prueba gratis con acceso completo (incluye un examen completo de práctica), sin tarjeta. Al terminar sigues con el plan Gratis, sin cobros.</li>
+        <li>Los precios se muestran en dólares estadounidenses antes de pagar, y los pagos los gestiona Stripe.</li>
+        <li>El plan Mensual se cobra por adelantado cada mes y se renueva solo hasta que lo canceles desde «Gestionar pago». Al cancelarlo mantienes el acceso hasta el final del mes ya pagado y no se cobra nada más.</li>
+        <li>El plan de 3 meses es un pago único y no se renueva. Incluye la garantía, con sus propias{' '}<a href="/examen/garantia">condiciones</a>.</li>
+        <li>Fuera de la garantía no devolvemos pagos ya hechos, salvo que la ley de tu país te dé ese derecho.</li>
+        <li>Podemos cambiar los precios, pero nunca el de un periodo que ya has pagado, y te avisaremos antes de que un cambio afecte a tu renovación.</li>
+        <li>Tu cuenta es personal: se puede usar en un teléfono, una tableta y un ordenador a la vez. Compartirla con otras personas puede llevar a suspenderla.</li>
       </ul>
 
       <h2>Tu cuenta</h2>
