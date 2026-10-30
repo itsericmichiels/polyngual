@@ -16,11 +16,11 @@ export default function PrivacyPage() {
         ← Volver
       </Link>
       <h1>Política de privacidad</h1>
-      <p className="legal-updated">Última actualización: 11 de octubre de 2026</p>
+      <p className="legal-updated">Última actualización: 30 de octubre de 2026</p>
 
       <h2>Quién recoge tus datos</h2>
       <p>
-        Polyngual es un servicio de 924 Fund LLC, que opera como Exito Marketing Agency (10055 W Dartmouth Ave, E104,
+        Polyngual es un servicio de 924 Fund LLC, que opera con los nombres Polyngual y Voxeo (10055 W Dartmouth Ave, E104,
         Lakewood, CO 80227, Estados Unidos), responsable de tus datos. Polyngual funciona con la tecnología de Voxeo. Puedes escribirnos a{' '}
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> para cualquier cosa relacionada con tus datos.
       </p>
@@ -115,18 +115,31 @@ export default function PrivacyPage() {
           Si tú quieres: tu apodo y los consejos que compartes en la comunidad (los revisamos antes de publicarlos), y tu
           resultado real del examen si nos lo cuentas, con tu permiso antes de citarlo.
         </li>
+        <li>
+          Tu plan: si es Gratis, la prueba de 7 días, una plaza beta o un plan de pago, y hasta cuándo. Si pagas, el
+          identificador de cliente de Stripe, el plan, el importe y las fechas; nunca vemos ni guardamos tu tarjeta.
+        </li>
+        <li>
+          Tus dispositivos: para que la cuenta sea personal, se puede usar en un teléfono, una tableta y un ordenador a la
+          vez. Guardamos un identificador aleatorio de cada uno, su tipo, el navegador y cuándo se usó por última vez.
+        </li>
+        <li>
+          La garantía del plan de 3 meses: la nota que quieres conseguir y, si la reclamas, tu resultado oficial y el informe
+          de notas que subes, que solo revisamos nosotros para decidir la reclamación.
+        </li>
       </ul>
       <p>
         Usamos estos datos solo para prepararte para tu examen y mejorar el producto. Las tareas escritas y las
         transcripciones orales se corrigen con un modelo de IA de <strong>OpenAI</strong>, que recibe el texto, no el audio,
         y no lo usa para entrenar sus modelos. Los datos se guardan en <strong>Supabase</strong>, la web está alojada en{' '}
-        <strong>Vercel</strong> y los correos se envían con <strong>Resend</strong>. Si después de la beta abrimos los pagos,
-        los gestiona <strong>Stripe</strong>; nunca vemos tu tarjeta.
+        <strong>Vercel</strong>, los correos se envían con <strong>Resend</strong> y los pagos los gestiona{' '}
+        <strong>Stripe</strong> (Stripe, Inc., Estados Unidos); nunca vemos tu tarjeta.
       </p>
       <p>
         Te enviamos los correos que necesita tu cuenta (confirmarla, entrar, cambiar la contraseña), una bienvenida cuando
-        consigues plaza en la beta y algunos correos en torno a la fecha de tu examen (antes, el mismo día y para preguntarte
-        cómo te fue), que puedes dejar de recibir con el enlace de cada uno. La base legal es el contrato que aceptas al
+        consigues plaza en la beta, un resumen semanal de tu estudio, un aviso antes de que termine tu prueba gratis o tu
+        plaza beta, y algunos correos en torno a la fecha de tu examen (antes, el mismo día y para preguntarte cómo te fue),
+        que puedes dejar de recibir con el enlace de cada uno. La base legal es el contrato que aceptas al
         apuntarte; no vendemos tus datos ni los usamos para publicidad.
       </p>
       <p>
@@ -134,6 +147,14 @@ export default function PrivacyPage() {
         avisamos por correo al menos 14 días antes y después borramos tus datos de práctica, lo que publicaste en la comunidad
         y tus avisos de problemas. Si te apuntas a la lista de espera sin cuenta, borramos ese registro tras 6 meses sin
         cambios. Puedes pedirnos en cualquier momento que borremos tu cuenta con todo lo que contiene.
+      </p>
+
+      <h2>Dónde se guardan tus datos</h2>
+      <p>
+        Polyngual es un servicio para personas de América Latina operado desde Estados Unidos. Tus datos se guardan y se
+        procesan fuera de tu país: en Estados Unidos (Vercel, Resend, Stripe, OpenAI y Microsoft Azure) y en la Unión Europea
+        (Irlanda), donde está la base de datos de Supabase. Solo trabajamos con proveedores que tratan los datos por cuenta
+        nuestra, con medidas de seguridad como el cifrado de las conexiones, y solo para darte el servicio.
       </p>
 
       <h2>Contenido hecho con inteligencia artificial</h2>

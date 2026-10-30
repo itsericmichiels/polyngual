@@ -10,7 +10,7 @@ export const generateStaticParams = () => [{ locale: 'en' }, { locale: 'es' }];
 
 export const metadata: Metadata = {
   title: 'Terms of use | Polyngual',
-  description: 'The terms for using Polyngual, its waitlist and its free beta: what we offer, what we expect from you and what we do not promise.',
+  description: 'The terms for using Polyngual, its beta, its free trial and its paid plans: what we offer, what we expect from you and what we do not promise.',
   alternates: { canonical: '/en/terms', languages: { en: '/en/terms', es: '/terminos' } },
 };
 
@@ -24,13 +24,13 @@ export default async function TermsPageEn({ params }: { params: Promise<{ locale
         ← Back
       </Link>
       <h1>Terms of use</h1>
-      <p className="legal-updated">Last updated: 8 October 2026</p>
+      <p className="legal-updated">Last updated: 30 October 2026</p>
 
       <h2>Who we are</h2>
       <p>
         Polyngual is an app for learning English by speaking and for preparing exams such as the TOEFL and the TOEIC, built
-        on Voxeo&rsquo;s technology. Polyngual and Voxeo are services of 924 Fund LLC, doing business as Exito Marketing
-        Agency (10055 W Dartmouth Ave, E104, Lakewood, CO 80227, USA). For any question about these terms, write to us at{' '}
+        on Voxeo&rsquo;s technology. Polyngual and Voxeo are services of 924 Fund LLC, doing business as Polyngual and
+        Voxeo (10055 W Dartmouth Ave, E104, Lakewood, CO 80227, USA). For any question about these terms, write to us at{' '}
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
       </p>
 
@@ -45,8 +45,19 @@ export default async function TermsPageEn({ params }: { params: Promise<{ locale
       <ul>
         <li>We are opening Polyngual first as a free beta for a limited number of people. When the places are full, we add you to the list for the next group.</li>
         <li>Because it is a beta, it may have bugs, change, or be unavailable for a while. Your feedback helps us improve it.</li>
-        <li>The beta is free. Before we charge for anything we will tell you the price and the conditions, and you can decide whether to continue.</li>
+        <li>The beta is free. When your place ends you stay on the free plan, with no charges, unless you choose a paid plan.</li>
         <li>The founder offer (50% off the annual plan for the first 200 people on the list) applies when paid plans open, for as long as you keep that plan.</li>
+      </ul>
+
+      <h2>Exam prep paid plans</h2>
+      <ul>
+        <li>When you create your account you get a 7-day free trial with full access (including one full practice test), with no card. After it you stay on the free plan, with no charges.</li>
+        <li>Prices are shown in US dollars before you pay, and payments are handled by Stripe.</li>
+        <li>The Monthly plan is charged in advance each month and renews automatically until you cancel it from &ldquo;Manage payment&rdquo;. If you cancel, you keep access until the end of the month already paid and nothing more is charged.</li>
+        <li>The 3-month plan is a single payment and does not renew. It includes the guarantee, under its own{' '}<a href="/examen/garantia?lang=en">terms</a>.</li>
+        <li>Outside the guarantee, we do not refund payments already made, unless the law of your country gives you that right.</li>
+        <li>We may change prices, but never for a period you have already paid, and we will tell you before a change affects your renewal.</li>
+        <li>Your account is personal: it can be used on one phone, one tablet and one computer at a time. Sharing it with other people may lead to its suspension.</li>
       </ul>
 
       <h2>Your account</h2>

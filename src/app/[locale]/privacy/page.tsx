@@ -24,11 +24,11 @@ export default async function PrivacyPageEn({ params }: { params: Promise<{ loca
         ← Back
       </Link>
       <h1>Privacy policy</h1>
-      <p className="legal-updated">Last updated: 11 October 2026</p>
+      <p className="legal-updated">Last updated: 30 October 2026</p>
 
       <h2>Who collects your data</h2>
       <p>
-        Polyngual is a service of 924 Fund LLC, doing business as Exito Marketing Agency (10055 W Dartmouth Ave, E104,
+        Polyngual is a service of 924 Fund LLC, doing business as Polyngual and Voxeo (10055 W Dartmouth Ave, E104,
         Lakewood, CO 80227, USA), which is responsible for your data. Polyngual is powered by Voxeo&rsquo;s technology. You can write to us at{' '}
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> about anything related to your data.
       </p>
@@ -122,18 +122,30 @@ export default async function PrivacyPageEn({ params }: { params: Promise<{ loca
           If you choose to: your nickname and the tips you share in the community (we review them before they appear), and
           your real exam result if you tell us, with your permission before we quote it.
         </li>
+        <li>
+          Your plan: whether you are on Free, the 7-day trial, a beta place or a paid plan, and until when. If you pay, your
+          Stripe customer ID, the plan, the amount and the dates; we never see or store your card.
+        </li>
+        <li>
+          Your devices: to keep the account personal, it can be used on one phone, one tablet and one computer at a time. We
+          keep a random ID for each, its type, the browser and when it was last used.
+        </li>
+        <li>
+          The 3-month plan&rsquo;s guarantee: the score you want to reach and, if you make a claim, your official result and
+          the score report you upload, which only we review to decide the claim.
+        </li>
       </ul>
       <p>
         We use this only to prepare you for your exam and to improve the product. Writing tasks and speaking transcripts are
         corrected with an AI model from <strong>OpenAI</strong>, which receives the text, not the audio, and does not use it
         to train its models. The data is stored with <strong>Supabase</strong>, the site is hosted on <strong>Vercel</strong>{' '}
-        and emails are sent with <strong>Resend</strong>. If payments open after the beta, they are handled by{' '}
-        <strong>Stripe</strong>; we never see your card.
+        emails are sent with <strong>Resend</strong> and payments are handled by <strong>Stripe</strong> (Stripe, Inc.,
+        United States); we never see your card.
       </p>
       <p>
         We send you the emails your account needs (confirm it, sign in, reset your password), a welcome when you get a beta
-        place, and a few emails around your exam date (before, on the day and to ask how it went), which you can stop with
-        the link in each one. The legal basis is the contract you accept when you sign up; we don&rsquo;t sell your data or
+        place, a weekly study summary, a notice before your free trial or beta place ends, and a few emails around your
+        exam date (before, on the day and to ask how it went), which you can stop with the link in each one. The legal basis is the contract you accept when you sign up; we don&rsquo;t sell your data or
         use it for advertising.
       </p>
       <p>
@@ -141,6 +153,14 @@ export default async function PrivacyPageEn({ params }: { params: Promise<{ loca
         ended), we email you at least 14 days before and then delete your practice data, community posts and reports. If you
         join the waiting list without an account, we delete that entry after 6 months without changes. You can ask us to
         delete your account and everything in it at any time.
+      </p>
+
+      <h2>Where your data is kept</h2>
+      <p>
+        Polyngual is a service for people in Latin America, run from the United States. Your data is stored and processed
+        outside your country: in the United States (Vercel, Resend, Stripe, OpenAI and Microsoft Azure) and in the European
+        Union (Ireland), where the Supabase database is. We only work with providers that process data on our behalf, with
+        security measures such as encrypted connections, and only to provide the service.
       </p>
 
       <h2>Content made with artificial intelligence</h2>
