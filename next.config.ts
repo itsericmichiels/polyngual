@@ -21,6 +21,10 @@ const nextConfig: NextConfig = {
       // The short address for the TOEFL iBT signup page in the exam app (Eric, 2026-10-27); any
       // ?g= tag goes along.
       { source: '/toefl', destination: '/examen/toefl', permanent: false },
+      // The short address for the TOEFL ITP practice tests (Eric, 2026-11-03): the exam app opens
+      // them for learners with an ITP place and shows everyone else the ITP signup page
+      // (/examen/itp/beta); any ?g= tag goes along.
+      { source: '/itp', destination: '/examen/itp', permanent: false },
     ];
   },
   async rewrites() {
