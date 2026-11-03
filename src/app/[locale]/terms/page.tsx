@@ -51,7 +51,7 @@ export default async function TermsPageEn({ params }: { params: Promise<{ locale
 
       <h2>Exam prep paid plans</h2>
       <ul>
-        <li>When you create your account you get a 7-day free trial with full access (including one full practice test), with no card. After it you stay on the free plan, with no charges.</li>
+        <li>When you create your account you get a 7-day free trial, with no card, starting with one full practice test. The trial does not include voice conversation missions or making new explainers, and AI scoring of Writing and Speaking has the same daily limit as the free plan. After it you stay on the free plan, with no charges.</li>
         <li>Prices are shown in US dollars before you pay, and payments are handled by Stripe.</li>
         <li>The Monthly plan is charged in advance each month and renews automatically until you cancel it from &ldquo;Manage payment&rdquo;. If you cancel, you keep access until the end of the month already paid and nothing more is charged.</li>
         <li>The 3-month plan is a single payment and does not renew. It includes the guarantee, under its own{' '}<a href="/examen/garantia?lang=en">terms</a>.</li>

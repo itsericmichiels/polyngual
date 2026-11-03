@@ -44,7 +44,7 @@ export default function TermsPage() {
 
       <h2>Planes de pago de la preparación de exámenes</h2>
       <ul>
-        <li>Al crear tu cuenta tienes 7 días de prueba gratis con acceso completo (incluye un examen completo de práctica), sin tarjeta. Al terminar sigues con el plan Gratis, sin cobros.</li>
+        <li>Al crear tu cuenta tienes 7 días de prueba gratis, sin tarjeta, que empiezan con un examen completo de práctica. La prueba no incluye las misiones de conversación por voz ni la creación de explicaciones nuevas, y la corrección con IA de Writing y Speaking tiene el mismo límite diario que el plan Gratis. Al terminar sigues con el plan Gratis, sin cobros.</li>
         <li>Los precios se muestran en dólares estadounidenses antes de pagar, y los pagos los gestiona Stripe.</li>
         <li>El plan Mensual se cobra por adelantado cada mes y se renueva solo hasta que lo canceles desde «Gestionar pago». Al cancelarlo mantienes el acceso hasta el final del mes ya pagado y no se cobra nada más.</li>
         <li>El plan de 3 meses es un pago único y no se renueva. Incluye la garantía, con sus propias{' '}<a href="/examen/garantia">condiciones</a>.</li>
