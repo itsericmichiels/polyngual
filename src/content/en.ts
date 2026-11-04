@@ -1,4 +1,4 @@
-import { es, type Dictionary, type StudioFormat } from './es';
+import { es, type Dictionary, type PathItem, type StudioFormat } from './es';
 
 // English page copy for /en. Same shape as es.ts. The sample episodes and game sentences are
 // English content in both versions, so they are reused from es.ts with only their labels translated.
@@ -46,32 +46,70 @@ export const en: Dictionary = {
   termsHref: '/en/terms',
   switcher: { label: 'ES', href: '/es', name: 'Leer en español', hrefLang: 'es' },
   meta: {
-    title: 'Polyngual | Learn English by speaking and get ready for the TOEFL or TOEIC',
+    title: 'Polyngual | Learn English and Spanish by speaking',
     description:
-      'Polyngual listens to how you speak, tells you exactly what to fix, and gets you ready for the TOEFL, the TOEIC and real life. No ads. At your own pace.',
+      'Polyngual listens to how you speak and tells you exactly what to fix. Get ready for the TOEFL or TOEIC, speak English at work with confidence, or learn the Spanish you need to live in Spain.',
   },
-  nav: { cta: 'Join the waitlist' },
+  nav: { cta: 'Find your course' },
   hero: {
-    eyebrow: 'Waitlist now open',
-    headlineBefore: 'Speak English ',
-    headlineMark: 'for real',
-    headlineAfter: ', and see how much you improve every week.',
-    sub: 'Polyngual listens to how you speak, tells you exactly what to fix, and gets you ready for real life. No ads. At your own pace.',
+    eyebrow: 'English and Spanish, spoken from day one',
+    headlineBefore: 'Learn a language ',
+    headlineMark: 'by speaking',
+    headlineAfter: ', with a plan built for your goal.',
+    sub: 'Polyngual listens to how you speak, tells you exactly what to fix and builds your practice around what you need: an exam, your job or your life in Spain. No ads. At your own pace.',
   },
-  form: {
-    label: 'Your email',
-    placeholder: 'Your email',
-    button: 'Save my spot',
-    sending: 'Saving your spot…',
-    consentBefore: 'I agree to receive emails from Polyngual and accept the ',
-    consentLink: 'privacy policy',
-    consentAfter: '.',
-    note: 'We open in a few weeks. You’ll hear before anyone else. No spam.',
-    success: 'Done! Check your inbox, we just wrote to you.',
-    errors: {
-      email: 'Check your email, something looks missing.',
-      consent: 'Tick the box so we can write to you.',
-      server: 'We couldn’t save it. Please try again in a moment.',
+  paths: {
+    label: 'What are you learning for?',
+    eyebrow: 'Choose your course',
+    title: 'One way of learning, three goals.',
+    sub: 'Every course listens to you speak and builds your practice from your mistakes. What changes is the goal.',
+    items: [
+      {
+        id: 'test',
+        kicker: 'Polyngual Test',
+        door: { title: 'An English exam', detail: 'TOEFL · TOEIC' },
+        title: 'Get the score you need on the TOEFL or TOEIC.',
+        body: 'Full practice tests with the current task types, scored as you go.',
+        points: [
+          'Start with a full practice test to see where you stand',
+          'Instant feedback on your speaking and writing',
+          'A study plan built from the questions you miss',
+        ],
+        cta: 'Start exam prep',
+        note: 'Free to start.',
+      },
+      {
+        id: 'business',
+        kicker: 'Polyngual Business',
+        door: { title: 'English for work', detail: 'B1 to C2' },
+        title: 'Speak English at work with confidence.',
+        body: 'For professionals who already work in English and want to sound clear and sure of themselves with their boss, clients and team.',
+        points: [
+          'Rehearse your own presentations with a tutor and get a written debrief',
+          'News from your industry, followed by a conversation about it',
+          'A coach who knows your role, with messages and live calls',
+        ],
+        cta: 'Request access',
+        note: 'By invitation while we open the first groups.',
+      },
+      {
+        id: 'spanish',
+        kicker: 'Polyngual Spanish',
+        door: { title: 'Spanish for life in Spain', detail: 'From A1' },
+        title: 'Learn the Spanish you need in Spain.',
+        body: 'For people who live in Spain or are moving here, starting from zero.',
+        points: [
+          'A complete A1 course in the Spanish spoken in Spain',
+          'Everyday scenes with a tutor who talks with you: the pharmacy, the market, the town hall',
+          'Local news from the Costa del Sol, written at your level',
+        ],
+        cta: 'Start Spanish free',
+        note: 'Free during the beta. In the app, choose Spanish.',
+      },
+    ] satisfies PathItem[] as PathItem[],
+    businessEmail: {
+      subject: 'Polyngual Business: access request',
+      body: 'Hi,\n\nI would like to try Polyngual Business.\n\nMy role:\nMy company and its industry:\nWhat I use English for at work:\n',
     },
   },
   demo: {
@@ -96,11 +134,11 @@ export const en: Dictionary = {
       },
       {
         title: 'Know your real level.',
-        body: 'Measure your English when you start and watch it rise, with results you can share on LinkedIn.',
+        body: 'Measure your level when you start and watch it rise, with results you can share on LinkedIn.',
       },
       {
-        title: 'Walk into your exam ready.',
-        body: 'TOEFL and TOEIC practice tests with instant feedback and exercises built around your weak spots.',
+        title: 'Practice built from your mistakes.',
+        body: 'What you get wrong today becomes tomorrow’s exercises, whether you’re preparing for an exam, a meeting or a visit to the doctor.',
       },
     ],
   },
@@ -155,15 +193,15 @@ export const en: Dictionary = {
     items: [
       {
         q: 'What is Polyngual?',
-        a: 'An app for learning English by speaking. It listens to how you speak, tells you what to fix word by word, and builds your practice (games, podcasts, stories and explanations) from the words you find hard.',
+        a: 'A language app that teaches by listening to you speak. It has three courses: exam prep for the TOEFL and TOEIC, English for work (Business), and Spanish for people living in Spain. In each one it tells you what to fix, word by word, and builds your practice from the words and mistakes you find hard.',
       },
       {
         q: 'How much does it cost?',
-        a: 'We start with a free beta for a small group. When paid plans open, the first 200 people on the list get 50% off the annual plan, for ever.',
+        a: 'You can start exam prep and the Spanish course for free. If you later want a paid plan, you’ll see its price in the app before you pay anything. Business is by invitation while we open the first groups.',
       },
       {
         q: 'When can I start?',
-        a: 'We open in groups. Join the list and we will email you as soon as there is a place for you.',
+        a: 'Today. Choose your course and you’ll be practising in a few minutes. For Business, request access and we’ll write to you.',
       },
       {
         q: 'Does it help with the TOEFL or the TOEIC?',
@@ -171,7 +209,7 @@ export const en: Dictionary = {
       },
       {
         q: 'Do I need a minimum level?',
-        a: 'No. You check your level when you start and the practice adapts to you, from A1 to C1.',
+        a: 'It depends on the course. Spanish starts from zero (A1). Business is for people who already work in English (B1 to C2). Exam prep starts with a full practice test that shows where you stand.',
       },
       {
         q: 'What do you do with my voice and my data?',
@@ -179,27 +217,13 @@ export const en: Dictionary = {
       },
       {
         q: 'Which languages is it in?',
-        a: 'The website and the app are in English and Spanish. For now we teach English.',
+        a: 'We teach English (exam prep and Business) and the Spanish spoken in Spain. The website and the app are in English and Spanish.',
       },
     ],
   },
-  offer: {
-    eyebrow: 'Founder offer',
-    body: 'the first 200 people on the list get 50% off the annual plan, forever.',
-    cta: 'Save my spot',
-    forever: 'forever',
-  },
-  app: {
-    eyebrow: 'Free beta now open',
-    nav: 'Start free',
-    cta: 'Start learning free',
-    note: 'Free during the beta. No card needed.',
-    orList: 'Rather hear when we launch? Join the list',
-  },
   closing: {
-    title: 'Your English, a little better every week.',
-    body: 'Join today and be among the first to try it.',
-    cta: 'Save my spot',
+    title: 'A little better every week.',
+    body: 'Choose where you want to start.',
   },
   visuals: {
     wordsLabel: 'Words to work on',

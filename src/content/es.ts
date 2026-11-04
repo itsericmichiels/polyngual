@@ -1,10 +1,22 @@
-// Spanish page copy. Headline, benefits, offer and form text are final copy from the brief.
-// en.ts has the same shape; every visible string on the landing page comes from one of these files.
+// Spanish page copy. The home page is Polyngual's front door: who we are, then a way into each of the three products
+// (exam prep, Business, Spanish). en.ts has the same shape; every visible string on the home page comes from one of these files.
 
 export type Highlight = { text: string; mark?: boolean };
 export type ScriptLine = { who: string; parts: Highlight[] };
 export type StudioSample = { title: string; meta: string; lines: ScriptLine[]; words: string[] };
 export type StudioFormat = { id: string; label: string; prompt: string; options: { label: string; sample: StudioSample }[] };
+export type PathItem = {
+  id: 'test' | 'business' | 'spanish';
+  /** The product's name, above the card's title. */
+  kicker: string;
+  /** The short version, in the hero's list and the closing section. */
+  door: { title: string; detail: string };
+  title: string;
+  body: string;
+  points: string[];
+  cta: string;
+  note: string;
+};
 
 export const es = {
   locale: 'es',
@@ -15,33 +27,72 @@ export const es = {
   termsHref: '/terminos',
   switcher: { label: 'EN', href: '/en', name: 'Read in English', hrefLang: 'en' },
   meta: {
-    title: 'Polyngual | Aprende inglés hablando y prepara tu TOEFL o TOEIC',
+    title: 'Polyngual | Aprende inglés y español hablando',
     description:
-      'Polyngual escucha cómo hablas, te dice exactamente qué corregir y te prepara para el TOEFL, el TOEIC y la vida real. Sin anuncios. A tu ritmo.',
+      'Polyngual escucha cómo hablas y te dice exactamente qué corregir. Prepara el TOEFL o el TOEIC, habla inglés en el trabajo con seguridad o aprende el español que necesitas para vivir en España.',
   },
-  nav: { cta: 'Únete a la lista' },
+  nav: { cta: 'Elige tu curso' },
   hero: {
-    eyebrow: 'Lista de espera abierta',
-    headlineBefore: 'Habla inglés ',
-    headlineMark: 'de verdad',
-    headlineAfter: ', y comprueba cuánto mejoras cada semana.',
-    // TOEFL and TOEIC are covered further down (benefit 3 and the content library), not in the hero.
-    sub: 'Polyngual escucha cómo hablas, te dice exactamente qué corregir y te prepara para la vida real. Sin anuncios. A tu ritmo.',
+    eyebrow: 'Inglés y español, hablando desde el primer día',
+    headlineBefore: 'Aprende un idioma ',
+    headlineMark: 'hablando',
+    headlineAfter: ', con un plan hecho para tu objetivo.',
+    sub: 'Polyngual escucha cómo hablas, te dice exactamente qué corregir y organiza tu práctica según lo que necesitas: un examen, tu trabajo o tu vida en España. Sin anuncios. A tu ritmo.',
   },
-  form: {
-    label: 'Tu correo',
-    placeholder: 'Tu correo',
-    button: 'Quiero mi lugar',
-    sending: 'Guardando tu lugar…',
-    consentBefore: 'Acepto recibir correos de Polyngual y la ',
-    consentLink: 'política de privacidad',
-    consentAfter: '.',
-    note: 'Abrimos en unas semanas. Te avisamos antes que a nadie. Sin spam.',
-    success: '¡Listo! Revisa tu correo, te acabamos de escribir.',
-    errors: {
-      email: 'Revisa tu correo, parece que falta algo.',
-      consent: 'Marca la casilla para poder escribirte.',
-      server: 'No hemos podido guardarlo. Inténtalo de nuevo en un momento.',
+  // The three products. Each one's button target is decided in lib/site.ts (pathHref); the order here is the order on the page.
+  paths: {
+    label: '¿Para qué estás aprendiendo?',
+    eyebrow: 'Elige tu curso',
+    title: 'Una forma de aprender, tres objetivos.',
+    sub: 'Todos los cursos te escuchan hablar y crean tu práctica a partir de tus fallos. Lo que cambia es el objetivo.',
+    items: [
+      {
+        id: 'test',
+        kicker: 'Polyngual Test',
+        door: { title: 'Un examen de inglés', detail: 'TOEFL · TOEIC' },
+        title: 'Saca la nota que necesitas en el TOEFL o el TOEIC.',
+        body: 'Simulacros completos con los tipos de tarea actuales y corrección al momento.',
+        points: [
+          'Empiezas con un simulacro completo para saber dónde estás',
+          'Corrección inmediata de tu speaking y tu writing',
+          'Un plan de estudio hecho con las preguntas que fallas',
+        ],
+        cta: 'Prepara tu examen',
+        note: 'Empezar es gratis.',
+      },
+      {
+        id: 'business',
+        kicker: 'Polyngual Business',
+        door: { title: 'Inglés para el trabajo', detail: 'De B1 a C2' },
+        title: 'Habla inglés en el trabajo con seguridad.',
+        body: 'Para profesionales que ya trabajan en inglés y quieren sonar claros y seguros con su jefe, sus clientes y su equipo.',
+        points: [
+          'Ensaya tus propias presentaciones con un tutor y recibe un informe por escrito',
+          'Noticias de tu sector, seguidas de una conversación sobre ellas',
+          'Un coach que conoce tu puesto, con mensajes y llamadas en directo',
+        ],
+        cta: 'Solicitar acceso',
+        note: 'Por invitación mientras abrimos los primeros grupos.',
+      },
+      {
+        id: 'spanish',
+        kicker: 'Polyngual Spanish',
+        door: { title: 'Español para vivir en España', detail: 'Desde A1' },
+        title: 'Aprende el español que necesitas en España.',
+        body: 'Para quien vive en España o va a mudarse, empezando desde cero.',
+        points: [
+          'Un curso A1 completo en el español de España',
+          'Situaciones del día a día con un tutor que habla contigo: la farmacia, el mercado, el ayuntamiento',
+          'Noticias de la Costa del Sol escritas para tu nivel',
+        ],
+        cta: 'Empieza español gratis',
+        note: 'Gratis durante la beta. En la app, elige español.',
+      },
+    ] satisfies PathItem[] as PathItem[],
+    // The Business request is an email until Business has a sign-up of its own.
+    businessEmail: {
+      subject: 'Polyngual Business: solicitud de acceso',
+      body: 'Hola,\n\nMe gustaría probar Polyngual Business.\n\nMi puesto:\nMi empresa y su sector:\nPara qué uso el inglés en el trabajo:\n',
     },
   },
   demo: {
@@ -81,11 +132,11 @@ export const es = {
       },
       {
         title: 'Conoce tu nivel real.',
-        body: 'Mide tu inglés al empezar y mira cómo sube, con resultados que puedes compartir en LinkedIn.',
+        body: 'Mide tu nivel al empezar y mira cómo sube, con resultados que puedes compartir en LinkedIn.',
       },
       {
-        title: 'Llega listo a tu examen.',
-        body: 'Simulacros de TOEFL y TOEIC con corrección inmediata y ejercicios hechos para tus puntos débiles.',
+        title: 'Práctica hecha con tus fallos.',
+        body: 'Lo que fallas hoy se convierte en los ejercicios de mañana, tanto si preparas un examen como una reunión o una visita al médico.',
       },
     ],
   },
@@ -282,15 +333,15 @@ export const es = {
     items: [
       {
         q: '¿Qué es Polyngual?',
-        a: 'Una app para aprender inglés hablando. Escucha cómo hablas, te dice qué corregir palabra por palabra y crea tu práctica (juegos, podcasts, historias y explicaciones) con las palabras que te cuestan.',
+        a: 'Una app de idiomas que enseña escuchándote hablar. Tiene tres cursos: preparación del TOEFL y el TOEIC, inglés para el trabajo (Business) y español para quien vive en España. En cada uno te dice qué corregir palabra por palabra y crea tu práctica con las palabras y los fallos que te cuestan.',
       },
       {
         q: '¿Cuánto cuesta?',
-        a: 'Empezamos con una beta gratuita para un grupo pequeño. Cuando abramos los planes de pago, las primeras 200 personas de la lista tendrán 50% de descuento en el plan anual, para siempre.',
+        a: 'Puedes empezar gratis la preparación de exámenes y el curso de español. Si más adelante quieres un plan de pago, verás el precio en la app antes de pagar nada. Business es por invitación mientras abrimos los primeros grupos.',
       },
       {
         q: '¿Cuándo puedo empezar?',
-        a: 'Abrimos por tandas. Apúntate a la lista y te avisamos por correo en cuanto haya plaza para ti.',
+        a: 'Hoy mismo. Elige tu curso y en unos minutos estarás practicando. Para Business, solicita acceso y te escribimos.',
       },
       {
         q: '¿Sirve para preparar el TOEFL o el TOEIC?',
@@ -298,7 +349,7 @@ export const es = {
       },
       {
         q: '¿Necesito un nivel mínimo?',
-        a: 'No. Al empezar mides tu nivel y la práctica se adapta a ti, de A1 a C1.',
+        a: 'Depende del curso. Español empieza desde cero (A1). Business es para quien ya trabaja en inglés (de B1 a C2). La preparación de exámenes empieza con un simulacro completo que te dice dónde estás.',
       },
       {
         q: '¿Qué hacéis con mi voz y mis datos?',
@@ -306,27 +357,13 @@ export const es = {
       },
       {
         q: '¿En qué idiomas está?',
-        a: 'La web y la app están en español y en inglés. Por ahora enseñamos inglés.',
+        a: 'Enseñamos inglés (exámenes y Business) y el español de España. La web y la app están en español y en inglés.',
       },
     ],
   },
-  offer: {
-    eyebrow: 'Oferta de fundadores',
-    body: 'las primeras 200 personas de la lista tendrán 50% de descuento en el plan anual, para siempre.',
-    cta: 'Quiero mi lugar',
-    forever: 'para siempre',
-  },
-  app: {
-    eyebrow: 'Beta gratuita abierta',
-    nav: 'Empieza gratis',
-    cta: 'Empieza a aprender gratis',
-    note: 'Gratis durante la beta. Sin tarjeta.',
-    orList: '¿Prefieres que te avisemos del lanzamiento? Únete a la lista',
-  },
   closing: {
-    title: 'Tu inglés, cada semana un poco mejor.',
-    body: 'Apúntate hoy y sé de los primeros en probarlo.',
-    cta: 'Quiero mi lugar',
+    title: 'Cada semana, un poco mejor.',
+    body: 'Elige por dónde quieres empezar.',
   },
   visuals: {
     wordsLabel: 'Palabras para trabajar',

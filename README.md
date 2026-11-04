@@ -1,6 +1,9 @@
-# Polyngual: waitlist site
+# Polyngual: the website
 
-The "coming soon" waitlist page for Polyngual, the consumer language brand built on Voxeo's technology.
+polyngual.app, the front door of Polyngual, the consumer language brand built on Voxeo's technology. The home page
+presents the brand and sends each visitor to one of the three products: **Polyngual Test** (TOEFL / TOEIC prep at
+`/examen`), **Polyngual Business** (English for work, by invitation: an email for now) and **Polyngual Spanish** (the
+learning app, learn.polyngual.app). Where each button goes is `pathHref` in `src/lib/site.ts`.
 It is a standalone Next.js app, kept separate from the Voxeo repo and Vercel project (see the brief).
 
 ## Routes
@@ -8,13 +11,13 @@ It is a standalone Next.js app, kept separate from the Voxeo repo and Vercel pro
 | Route | What it is |
 |---|---|
 | `/` | Redirects to `/es` |
-| `/es` | Landing page in Spanish (default, `x-default` in hreflang) |
-| `/en` | Landing page in English. Copy lives in `src/content/en.ts`, same shape as `es.ts`; a new language is a new dictionary plus an entry in `src/content/index.ts` |
+| `/es` | Home page in Spanish (default, `x-default` in hreflang) |
+| `/en` | Home page in English. Copy lives in `src/content/en.ts`, same shape as `es.ts`; a new language is a new dictionary plus an entry in `src/content/index.ts` |
 | `/toefl-practice`, `/toeic-practice`, `/ielts-practice`, `/cambridge-practice` and `/es/preparacion-{toefl,toeic,ielts,cambridge}` | Standalone exam landing pages (not in the navigation; linked from footers and the sitemap, with hreflang between each pair). Registry in `src/lib/exams.ts`, copy in `src/content/exams/` |
 | `/privacidad`, `/en/privacy` | Privacy policy (Spanish path fixed by the brief; `/es/privacy` redirects to it) |
 | `/baja` | Unsubscribe and delete my data (linked from every email; `?l=en` shows it in English) |
 | `/api/diagnostico?key=WAITLIST_SECRET` | Private setup check: which settings are present, Resend domain status, GoHighLevel access; `&to=` sends a test email |
-| `POST /api/waitlist` | Signup: validates the email, requires consent, saves to Resend, copies to GoHighLevel, sends the confirmation email in the page's language |
+| `POST /api/waitlist` | The old waitlist signup (no page shows the form any more): validates the email, requires consent, saves to Resend, copies to GoHighLevel, sends the confirmation email in the page's language |
 | `POST /api/baja` | Signed unsubscribe link and mail clients' one-click unsubscribe (RFC 8058) |
 | `/toefl`, `/itp` | Short addresses for the exam app's TOEFL iBT signup page (`/examen/toefl`) and TOEFL ITP practice tests (`/examen/itp`, which shows the ITP signup page to anyone without an ITP place); a `?g=` tag goes along |
 | `/examen`, `/examen/*`, `/api/examen/*`, `/examen-static/*` | The TOEFL / TOEIC exam-prep product and its beta (`/examen/beta`). Not in this repo: forwarded to the exam app (repo exitohire-ai) by `rewrites` in `next.config.ts`; `EXAM_APP_ORIGIN` sets where (default `https://exitohire-ai.vercel.app`) |
@@ -61,7 +64,7 @@ What lands in GoHighLevel: email, country, source ("Polyngual waitlist (instagra
 ## Exam landing pages
 
 - Each page is one content file per language in `src/content/exams/` rendered by `src/components/exam/ExamPage.tsx`. English pages live under `src/app/(en)` (their own `lang="en"` layout); Spanish ones are `src/app/[locale]/[slug]`.
-- Every "Take the free mock test" button goes to `NEXT_PUBLIC_MOCK_TEST_URL` with `?exam=`, `lang=` and UTM parameters (plus `variant=` from the IELTS and Cambridge pickers). Unset, it goes to the waitlist form in the page's language (`/en#lista` or `/es#lista`), which stores the same parameters in the signup's landing URL.
+- Every "Take the free mock test" button goes to `NEXT_PUBLIC_MOCK_TEST_URL` with `?exam=`, `lang=` and UTM parameters (plus `variant=` from the IELTS and Cambridge pickers). Production sets it to `https://polyngual.app/examen/beta`; unset, it goes to `/examen/beta` on this site's own address.
 - Each click sends the `mock_test_cta` event (`exam`, `lang`, `placement`, `variant`) to Vercel Analytics.
 - A placeholder for real learner proof is marked in `ExamPage.tsx`; it renders only outside production. Do not fill it with invented testimonials or figures.
 
@@ -69,8 +72,8 @@ What lands in GoHighLevel: email, country, source ("Polyngual waitlist (instagra
 
 Vercel Web Analytics, which sets no cookies, always runs. Turn it on in the Vercel project (Analytics tab).
 
-Google Tag Manager runs Polyngual's container `GTM-P2QHWHJ6` (built in; `NEXT_PUBLIC_GTM_ID` overrides it, `off` disables it). Google Analytics 4 is configured as a tag inside that container, so `NEXT_PUBLIC_GA4_ID` stays empty unless you want gtag.js directly. They set cookies, so they load only after the visitor accepts the cookie notice (`src/components/GoogleTags.tsx`); a small "Cookies" button reopens it. The `<noscript>` iframe from GTM's install snippet is left out on purpose: it would set cookies for visitors who never saw the notice. The `waitlist_signup` and `mock_test_cta` events go to Vercel always and to the GTM/GA4 `dataLayer` after consent (`src/lib/analytics.ts`), ready to mark as conversions.
-Page views work on every plan. The `waitlist_signup` custom event needs a Vercel Pro plan; the source of every signup is stored in Resend either way.
+Google Tag Manager runs Polyngual's container `GTM-P2QHWHJ6` (built in; `NEXT_PUBLIC_GTM_ID` overrides it, `off` disables it). Google Analytics 4 is configured as a tag inside that container, so `NEXT_PUBLIC_GA4_ID` stays empty unless you want gtag.js directly. They set cookies, so they load only after the visitor accepts the cookie notice (`src/components/GoogleTags.tsx`); a small "Cookies" button reopens it. The `<noscript>` iframe from GTM's install snippet is left out on purpose: it would set cookies for visitors who never saw the notice. The `path_click` (home page: which product and which button), `mock_test_cta` and `waitlist_signup` events go to Vercel always and to the GTM/GA4 `dataLayer` after consent (`src/lib/analytics.ts`), ready to mark as conversions.
+Page views work on every plan. Custom events need a Vercel Pro plan; the source of every signup is stored in Resend either way.
 
 ## Brand independence
 

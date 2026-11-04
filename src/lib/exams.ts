@@ -30,12 +30,11 @@ export const examAlternates = (exam: ExamId) => ({
 });
 
 // Where "Take the free mock test" goes. The exam and language travel as query parameters so signup can
-// open that exam's mock test and attribute the signup to this page. Until the Polyngual app is live
-// (NEXT_PUBLIC_MOCK_TEST_URL unset) the button lands on the waitlist form in the page's language, whose
-// saved landing URL keeps the same parameters.
+// open that exam's mock test and attribute the signup to this page. Production sets NEXT_PUBLIC_MOCK_TEST_URL
+// (https://polyngual.app/examen/beta); unset, the button goes to the same page on this site's own address.
 export function mockTestHref(exam: ExamId, locale: ExamLocale) {
   const target = process.env.NEXT_PUBLIC_MOCK_TEST_URL;
-  const url = new URL(target || `/${locale}#lista`, 'https://polyngual.invalid');
+  const url = new URL(target || '/examen/beta', 'https://polyngual.invalid');
   url.searchParams.set('exam', exam);
   url.searchParams.set('lang', locale);
   url.searchParams.set('utm_source', 'polyngual');

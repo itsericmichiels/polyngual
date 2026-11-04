@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { DEFAULT_LOCALE, LOCALES, getDictionary, isLocale } from '@/content';
 import { EXAM_NAMES, PUBLISHED_EXAMS, examPath } from '@/lib/exams';
-import { CONTACT_EMAIL, SOCIAL_LINKS, appSignupHref } from '@/lib/site';
+import { CONTACT_EMAIL, SOCIAL_LINKS, pathHref, siteUrl } from '@/lib/site';
+import type { Dictionary } from '@/content/es';
 import { SpeakingDemo } from '@/components/SpeakingDemo';
-import { WaitlistForm } from '@/components/WaitlistForm';
-import { ScrollToForm } from '@/components/ScrollToForm';
+import { PathLink } from '@/components/PathLink';
 import { ContentStudio } from '@/components/ContentStudio';
 import { RevealObserver } from '@/components/RevealObserver';
 import { BenefitVisual } from '@/components/BenefitVisual';
@@ -43,14 +43,42 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+function Arrow() {
+  return (
+    <svg className="door-arrow" viewBox="0 0 20 20" aria-hidden>
+      <path d="M4 10h11M10.5 5.5 15 10l-4.5 4.5" />
+    </svg>
+  );
+}
+
+/** The short list of the three products: in the hero, and again at the end of the page. */
+function Doors({ t, locale, placement }: { t: Dictionary; locale: string; placement: string }) {
+  return (
+    <ul className="doors">
+      {t.paths.items.map((item) => (
+        <li key={item.id}>
+          <PathLink href={pathHref(item.id, locale, placement, t.paths.businessEmail)} path={item.id} placement={placement} locale={locale} className={`door door-${item.id}`}>
+            <span className="door-dot" aria-hidden />
+            <span className="door-text">
+              <span className="door-title">{item.door.title}</span>
+              <span className="door-detail">{item.door.detail}</span>
+            </span>
+            <Arrow />
+          </PathLink>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+// Polyngual's front door. The brand first, then a way into each product: exam prep (polyngual.app/examen),
+// Business (by invitation) and Spanish (the learning app). The waitlist and the founder offer are gone from here:
+// the products are open, and the offer stays in the terms for the people who signed up for it.
 export default async function LandingPage({ params }: Props) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const t = getDictionary(locale);
   const privacyHref = t.privacyHref;
-  // Once the app is live (NEXT_PUBLIC_APP_URL), the main buttons open it; the waitlist moves to the closing section.
-  const appHref = (placement: string) => appSignupHref(locale, placement);
-  const appLive = appHref('nav') !== null;
 
   return (
     <>
@@ -65,40 +93,27 @@ export default async function LandingPage({ params }: Props) {
             <Link href={t.switcher.href} hrefLang={t.switcher.hrefLang} className="nav-lang" aria-label={t.switcher.name} title={t.switcher.name}>
               {t.switcher.label}
             </Link>
-            {appLive ? (
-              <a href={appHref('nav')!} className="btn btn-ghost">
-                <span>{t.app.nav}</span>
-              </a>
-            ) : (
-              <ScrollToForm label={t.nav.cta} className="btn btn-ghost" />
-            )}
+            <a href="#cursos" className="btn btn-ghost">
+              <span>{t.nav.cta}</span>
+            </a>
           </div>
         </nav>
 
         <div className="hero-grid shell">
           <div className="hero-copy">
-            <p className="eyebrow eyebrow-live enter" style={{ '--e': 0 } as React.CSSProperties}>
-              <span className="live-dot" aria-hidden />
-              {appLive ? t.app.eyebrow : t.hero.eyebrow}
+            <p className="eyebrow enter" style={{ '--e': 0 } as React.CSSProperties}>
+              {t.hero.eyebrow}
             </p>
             <SoundHeadline before={t.hero.headlineBefore} mark={t.hero.headlineMark} after={t.hero.headlineAfter} />
             <p className="hero-sub enter" style={{ '--e': 11 } as React.CSSProperties}>
               {t.hero.sub}
             </p>
-            {appLive ? (
-              <div className="hero-form hero-app enter" style={{ '--e': 12 } as React.CSSProperties}>
-                <a href={appHref('hero')!} className="btn btn-primary">
-                  <span>{t.app.cta}</span>
-                </a>
-                <p className="hero-app-note">
-                  {t.app.note} <a href="#lista">{t.app.orList}</a>
-                </p>
-              </div>
-            ) : (
-              <div id="lista" className="hero-form enter" style={{ '--e': 12 } as React.CSSProperties}>
-                <WaitlistForm copy={t.form} privacyHref={privacyHref} locale={locale} />
-              </div>
-            )}
+            <nav className="hero-doors enter" style={{ '--e': 12 } as React.CSSProperties} aria-labelledby="doors-label">
+              <p id="doors-label" className="doors-label">
+                {t.paths.label}
+              </p>
+              <Doors t={t} locale={locale} placement="hero" />
+            </nav>
           </div>
           <div className="hero-demo enter" style={{ '--e': 8 } as React.CSSProperties}>
             <SpeakingDemo copy={t.demo} />
@@ -111,6 +126,37 @@ export default async function LandingPage({ params }: Props) {
       </header>
 
       <main>
+        <section id="cursos" className="paths shell" aria-labelledby="paths-title">
+          <div className="section-head" data-reveal>
+            <p className="eyebrow">{t.paths.eyebrow}</p>
+            <h2 id="paths-title">{t.paths.title}</h2>
+            <p className="section-sub section-sub-light">{t.paths.sub}</p>
+          </div>
+          <div className="path-list">
+            {t.paths.items.map((item, i) => (
+              <article key={item.id} id={item.id} className={`path path-${item.id}`} data-reveal style={{ '--r': i } as React.CSSProperties}>
+                <p className="path-kicker">
+                  <span className="door-dot" aria-hidden />
+                  {item.kicker}
+                </p>
+                <h3>{item.title}</h3>
+                <p className="path-body">{item.body}</p>
+                <ul className="path-points">
+                  {item.points.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
+                <div className="path-action">
+                  <PathLink href={pathHref(item.id, locale, 'paths', t.paths.businessEmail)} path={item.id} placement="paths" locale={locale} className="btn btn-dark">
+                    <span>{item.cta}</span>
+                  </PathLink>
+                  <p className="path-note">{item.note}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <section className="benefits shell" aria-labelledby="benefits-title">
           <div className="section-head" data-reveal>
             <p className="eyebrow">{t.benefits.eyebrow}</p>
@@ -172,21 +218,6 @@ export default async function LandingPage({ params }: Props) {
           </div>
         </section>
 
-        <section className="offer shell" aria-labelledby="offer-title">
-          <div className="offer-card" data-reveal>
-            <div className="offer-figure" aria-hidden>
-              <span className="offer-pct">50%</span>
-              <span className="offer-forever">{t.offer.forever}</span>
-            </div>
-            <div className="offer-copy">
-              <p id="offer-title">
-                <strong>{t.offer.eyebrow}:</strong> {t.offer.body}
-              </p>
-              <ScrollToForm label={t.offer.cta} className="btn btn-dark" />
-            </div>
-          </div>
-        </section>
-
         <section className="home-faq shell" aria-labelledby="faq-title">
           <div className="section-head" data-reveal>
             <p className="eyebrow">{t.faq.eyebrow}</p>
@@ -211,6 +242,20 @@ export default async function LandingPage({ params }: Props) {
               }).replace(/</g, '\\u003c'),
             }}
           />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                '@context': 'https://schema.org',
+                '@type': 'Organization',
+                name: 'Polyngual',
+                url: siteUrl(),
+                logo: `${siteUrl()}/icon-g.png`,
+                email: CONTACT_EMAIL,
+                sameAs: SOCIAL_LINKS.map((link) => link.href),
+              }).replace(/</g, '\\u003c'),
+            }}
+          />
         </section>
 
         <section className="closing" aria-labelledby="closing-title">
@@ -218,18 +263,9 @@ export default async function LandingPage({ params }: Props) {
             <Image src="/icon-g.png" alt="" width={72} height={72} className="closing-mark" />
             <h2 id="closing-title">{t.closing.title}</h2>
             <p>{t.closing.body}</p>
-            {appLive ? (
-              <>
-                <a href={appHref('closing')!} className="btn btn-primary">
-                  <span>{t.app.cta}</span>
-                </a>
-                <div id="lista" className="closing-form">
-                  <WaitlistForm copy={t.form} privacyHref={privacyHref} locale={locale} />
-                </div>
-              </>
-            ) : (
-              <ScrollToForm label={t.closing.cta} />
-            )}
+            <div className="closing-doors">
+              <Doors t={t} locale={locale} placement="closing" />
+            </div>
           </div>
         </section>
       </main>
