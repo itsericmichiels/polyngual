@@ -27,7 +27,7 @@ export const de: SpanishPageContent = {
       },
       {
         title: '90 Tage bis zum Alltagsspanisch',
-        body: 'Fang im Januar an, und im April kommst du auf dem Markt, beim Arzt und mit deinen Nachbarn zurecht. Wenn nicht, verlängern wir dein Abo kostenlos.',
+        body: 'Fang im Januar an, und im April kommst du auf dem Markt, beim Arzt und mit deinen Nachbarn zurecht. Bestehst du nach 90 Tagen unseren Test nicht, sind die nächsten 90 Tage kostenlos.',
       },
       {
         title: 'Auf Spanisch ist alles leichter',
@@ -98,7 +98,7 @@ export const de: SpanishPageContent = {
   },
   guarantee: {
     title: 'Unsere 90-Tage-Garantie',
-    body: 'In 90 Tagen kommst du auf dem Markt, beim Arzt und mit deinen Nachbarn auf Spanisch zurecht, oder wir verlängern dein Abo kostenlos, bis es klappt.',
+    body: 'In 90 Tagen kommst du auf dem Markt, beim Arzt und mit deinen Nachbarn auf Spanisch zurecht. Nach 90 Tagen mit einem bezahlten Abo machst du unseren Test: Bestehst du ihn nicht, sind die nächsten 90 Tage kostenlos.',
   },
   faq: {
     title: 'Fragen',

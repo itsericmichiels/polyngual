@@ -27,7 +27,7 @@ export const da: SpanishPageContent = {
       },
       {
         title: '90 dage til hverdagsspansk',
-        body: 'Start i januar, og i april klarer du markedet, lægen og naboerne. Hvis ikke, forlænger vi dit abonnement gratis.',
+        body: 'Start i januar, og i april klarer du markedet, lægen og naboerne. Består du ikke vores test efter 90 dage, er de næste 90 dage gratis.',
       },
       {
         title: 'Alt er lettere på spansk',
@@ -98,7 +98,7 @@ export const da: SpanishPageContent = {
   },
   guarantee: {
     title: 'Vores 90-dages garanti',
-    body: 'Om 90 dage klarer du markedet, lægen og naboerne på spansk, ellers forlænger vi dit abonnement gratis, til du gør.',
+    body: 'Om 90 dage klarer du markedet, lægen og naboerne på spansk. Efter 90 dage med et betalt abonnement tager du vores test: Består du den ikke, er de næste 90 dage gratis.',
   },
   faq: {
     title: 'Spørgsmål',

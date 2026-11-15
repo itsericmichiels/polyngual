@@ -27,7 +27,7 @@ export const sv: SpanishPageContent = {
       },
       {
         title: '90 dagar till vardagsspanska',
-        body: 'Börja i januari, så klarar du marknaden, läkaren och grannarna i april. Annars förlänger vi ditt abonnemang gratis.',
+        body: 'Börja i januari, så klarar du marknaden, läkaren och grannarna i april. Klarar du inte vårt test efter 90 dagar, är de följande 90 dagarna gratis.',
       },
       {
         title: 'Allt är lättare på spanska',
@@ -98,7 +98,7 @@ export const sv: SpanishPageContent = {
   },
   guarantee: {
     title: 'Vår 90-dagarsgaranti',
-    body: 'Om 90 dagar klarar du marknaden, läkaren och grannarna på spanska, annars förlänger vi ditt abonnemang gratis tills du gör det.',
+    body: 'Om 90 dagar klarar du marknaden, läkaren och grannarna på spanska. Efter 90 dagar med ett betalt abonnemang gör du vårt test: klarar du det inte, är de följande 90 dagarna gratis.',
   },
   appLanguageNote: 'Appen finns i dag på engelska, tyska och danska. Svenska är på väg.',
   faq: {

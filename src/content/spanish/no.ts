@@ -27,7 +27,7 @@ export const no: SpanishPageContent = {
       },
       {
         title: '90 dager til hverdagsspansk',
-        body: 'Start i januar, så klarer du markedet, legen og naboene i april. Hvis ikke, forlenger vi abonnementet ditt gratis.',
+        body: 'Start i januar, så klarer du markedet, legen og naboene i april. Består du ikke testen vår etter 90 dager, er de neste 90 dagene gratis.',
       },
       {
         title: 'Alt er lettere på spansk',
@@ -98,7 +98,7 @@ export const no: SpanishPageContent = {
   },
   guarantee: {
     title: 'Vår 90-dagersgaranti',
-    body: 'Om 90 dager klarer du markedet, legen og naboene på spansk, ellers forlenger vi abonnementet ditt gratis til du gjør det.',
+    body: 'Om 90 dager klarer du markedet, legen og naboene på spansk. Etter 90 dager med et betalt abonnement tar du testen vår: består du den ikke, er de neste 90 dagene gratis.',
   },
   appLanguageNote: 'Appen finnes i dag på engelsk, tysk og dansk. Norsk kommer.',
   faq: {

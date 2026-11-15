@@ -27,7 +27,7 @@ export const nl: SpanishPageContent = {
       },
       {
         title: '90 dagen naar alledaags Spaans',
-        body: 'Begin in januari en in april red je je op de markt, bij de dokter en met je buren. Zo niet, dan verlengen we je abonnement gratis.',
+        body: 'Begin in januari en in april red je je op de markt, bij de dokter en met je buren. Haal je onze test na 90 dagen niet, dan zijn de volgende 90 dagen gratis.',
       },
       {
         title: 'In het Spaans gaat alles makkelijker',
@@ -98,7 +98,7 @@ export const nl: SpanishPageContent = {
   },
   guarantee: {
     title: 'Onze 90-dagengarantie',
-    body: 'Binnen 90 dagen red je je in het Spaans op de markt, bij de dokter en met je buren, of we verlengen je abonnement gratis tot het lukt.',
+    body: 'Binnen 90 dagen red je je in het Spaans op de markt, bij de dokter en met je buren. Na 90 dagen met een betaald abonnement doe je onze test: haal je hem niet, dan zijn de volgende 90 dagen gratis.',
   },
   appLanguageNote: 'De app is nu beschikbaar in het Engels, Duits en Deens. Nederlands komt eraan.',
   faq: {

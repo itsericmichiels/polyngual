@@ -27,7 +27,7 @@ export const en: SpanishPageContent = {
       },
       {
         title: '90 days to everyday Spanish',
-        body: 'Begin in January and by April you handle the market, the doctor and your neighbours. If not, we extend your plan for free.',
+        body: 'Begin in January and by April you handle the market, the doctor and your neighbours. If you don’t pass our test after 90 days, the next 90 are free.',
       },
       {
         title: 'Everything is easier in Spanish',
@@ -116,7 +116,7 @@ export const en: SpanishPageContent = {
   },
   guarantee: {
     title: 'Our 90-day guarantee',
-    body: 'In 90 days you’ll handle the market, the doctor and your neighbours in Spanish, or we extend your plan for free until you do.',
+    body: 'In 90 days you’ll handle the market, the doctor and your neighbours in Spanish. After 90 days on a paid plan, take our test: if you don’t pass, your next 90 days are free.',
   },
   faq: {
     title: 'Questions',
