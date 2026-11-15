@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import { LOCALES } from '@/content';
 import { PUBLISHED_EXAMS, examAlternates, examPath } from '@/lib/exams';
 import { siteUrl } from '@/lib/site';
+import { SPANISH_LANGS, spanishAlternates, spanishPath } from '@/lib/spanish';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteUrl();
@@ -24,5 +25,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
         alternates: { languages: absolute(examAlternates(exam)) },
       })),
     ),
+    // Polyngual Spanish (Eric, 2026-11-15): one page per visitor language.
+    ...SPANISH_LANGS.map((lang) => ({
+      url: `${base}${spanishPath(lang)}`,
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+      alternates: { languages: absolute(spanishAlternates()) },
+    })),
   ];
 }

@@ -1,0 +1,488 @@
+/* Polyngual Spanish landing page (/spanish, /spanish/<lang>). Brand tokens from globals.css; warm Marigold accents
+   for the coast, Lagoon for action. Motion is CSS only, through [data-reveal] in globals.css. */
+
+.s-page {
+  --s-section: clamp(72px, 9vw, 120px);
+  --sun: #ffc857;
+  --sun-soft: #fbf3e3;
+}
+
+.s-section {
+  padding-top: var(--s-section);
+}
+
+.s-head {
+  display: grid;
+  gap: 14px;
+  max-width: 46rem;
+  margin-bottom: clamp(28px, 4vw, 52px);
+}
+
+.s-head h2,
+.s-h2,
+.s-news-copy h2,
+.s-final h2 {
+  font-size: clamp(1.9rem, 1.3rem + 2.2vw, 3rem);
+  max-width: 22ch;
+  margin: 0;
+}
+
+.s-head p:not(.eyebrow),
+.s-news-copy p {
+  color: var(--muted-light);
+  font-size: 1.12rem;
+  max-width: 38em;
+  margin: 0;
+}
+
+/* ---------- Hero ---------- */
+
+.s-hero {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse 70% 60% at 85% 0%, rgba(255, 200, 87, 0.28), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 0% 100%, rgba(44, 200, 189, 0.18), transparent 60%),
+    var(--midnight);
+  color: var(--paper);
+  padding-bottom: clamp(56px, 8vw, 104px);
+  overflow: hidden;
+}
+
+.s-nav-cta {
+  min-height: 42px;
+}
+
+.s-hero-inner {
+  display: grid;
+  gap: 22px;
+  padding-top: clamp(24px, 6vw, 72px);
+}
+
+.s-eyebrow-dark {
+  color: var(--sun);
+}
+
+.s-hero-title {
+  font-size: clamp(2.4rem, 1.4rem + 4vw, 4.8rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  max-width: 15ch;
+  margin: 0;
+}
+
+.s-hero-sub {
+  max-width: 36em;
+  font-size: clamp(1.06rem, 1rem + 0.3vw, 1.22rem);
+  color: var(--muted-dark);
+  margin: 0;
+}
+
+.s-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 22px;
+  margin-top: 6px;
+}
+
+.s-hero-note {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(251, 248, 243, 0.6);
+}
+
+.s-hero-guarantee {
+  display: grid;
+  gap: 4px;
+  max-width: 34rem;
+  margin-top: 14px;
+  padding: 16px 20px;
+  border-left: 3px solid var(--sun);
+  background: rgba(251, 248, 243, 0.06);
+  border-radius: 0 14px 14px 0;
+  font-size: 0.98rem;
+  color: var(--muted-dark);
+}
+
+.s-hero-guarantee strong {
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+
+/* ---------- 2027 ---------- */
+
+.s-year {
+  background: var(--sun-soft);
+  padding-bottom: var(--s-section);
+}
+
+.s-year-points,
+.s-steps,
+.s-features {
+  display: grid;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 760px) {
+  .s-year-points,
+  .s-steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .s-features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1040px) {
+  .s-features {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.s-year-points li,
+.s-features li,
+.s-steps li {
+  padding: 24px;
+  border-radius: var(--radius);
+  background: #fff;
+  box-shadow: 0 1px 0 var(--line-light), 0 12px 32px -24px rgba(2, 25, 64, 0.35);
+}
+
+.s-year-points h3,
+.s-features h3,
+.s-steps h3 {
+  font-size: 1.22rem;
+  margin: 0 0 8px;
+}
+
+.s-year-points p,
+.s-features p,
+.s-steps p {
+  margin: 0;
+  color: var(--muted-light);
+}
+
+.s-year-num,
+.s-steps-num {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  margin-bottom: 14px;
+  border-radius: 999px;
+  background: var(--midnight);
+  color: var(--sun);
+  font: 900 16px/1 var(--font-display);
+}
+
+.s-steps-num {
+  background: var(--lagoon-100);
+  color: var(--lagoon-700);
+}
+
+/* ---------- News ---------- */
+
+.s-news {
+  display: grid;
+  gap: 32px;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .s-news {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.s-news-copy {
+  display: grid;
+  gap: 14px;
+}
+
+.s-news-card {
+  margin: 0;
+  padding: 26px;
+  border-radius: var(--radius);
+  background: var(--midnight);
+  color: var(--paper);
+}
+
+.s-news-card figcaption {
+  font: 800 12px/1 var(--font-display);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sun);
+}
+
+.s-news-headline {
+  margin: 14px 0 18px;
+  font: 800 clamp(1.25rem, 1rem + 1vw, 1.6rem) / 1.3 var(--font-display);
+}
+
+.s-news-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  font-size: 0.92rem;
+  color: var(--muted-dark);
+}
+
+.s-known,
+.s-fresh {
+  padding: 0 0.2em;
+  border-radius: 0.3em;
+  color: inherit;
+}
+
+.s-known {
+  background: rgba(44, 200, 189, 0.3);
+}
+
+.s-fresh {
+  background: rgba(255, 200, 87, 0.45);
+}
+
+/* ---------- Plans ---------- */
+
+.s-plans {
+  display: grid;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 900px) {
+  .s-plans {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: start;
+  }
+}
+
+.s-plan {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 26px;
+  border-radius: var(--radius);
+  background: #fff;
+  box-shadow: inset 0 0 0 1.5px var(--line-light);
+}
+
+.s-plan-featured {
+  box-shadow: inset 0 0 0 2.5px var(--lagoon), 0 24px 48px -28px rgba(44, 200, 189, 0.6);
+}
+
+@media (min-width: 900px) {
+  .s-plan-featured {
+    transform: translateY(-12px);
+  }
+}
+
+.s-plan-badge {
+  align-self: flex-start;
+  margin: 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--lagoon-100);
+  color: var(--lagoon-700);
+  font: 800 12px/1 var(--font-display);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.s-plan h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.s-plan-tagline {
+  margin: 0;
+  color: var(--muted-light);
+}
+
+.s-plan-price {
+  margin: 4px 0 0;
+}
+
+.s-plan-price strong {
+  font: 900 2.6rem/1 var(--font-display);
+}
+
+.s-plan-price span {
+  color: var(--muted-light);
+}
+
+.s-plan-longer {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 12px 0;
+  list-style: none;
+  border-top: 1px solid var(--line-light);
+  border-bottom: 1px solid var(--line-light);
+  font-size: 0.95rem;
+}
+
+.s-plan-longer li {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 0 10px;
+  align-items: baseline;
+}
+
+.s-plan-longer small {
+  color: var(--muted-light);
+}
+
+.s-billed {
+  grid-column: 1 / -1;
+  font-size: 0.82rem;
+}
+
+.s-save {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--sun-soft);
+  color: #8a5a00;
+  font: 800 12px/1.4 var(--font-display);
+}
+
+.s-plan-perks {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.s-plan-perks li {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.s-check {
+  flex: none;
+  margin-top: 4px;
+  color: var(--lagoon-700);
+}
+
+.s-plan-cta {
+  margin-top: 8px;
+  width: 100%;
+}
+
+.s-guarantee {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  margin-top: 28px;
+  padding: 24px;
+  border-radius: var(--radius);
+  background: var(--sun-soft);
+  color: var(--midnight);
+}
+
+.s-guarantee svg {
+  flex: none;
+  color: #b07a00;
+}
+
+.s-guarantee h3 {
+  margin: 0 0 6px;
+  font-size: 1.25rem;
+}
+
+.s-guarantee p {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.s-fine {
+  margin: 16px 0 0;
+  font-size: 0.92rem;
+  color: var(--muted-light);
+}
+
+/* ---------- FAQ ---------- */
+
+.s-faq-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 24px;
+  max-width: 52rem;
+}
+
+.s-faq details {
+  padding: 18px 22px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1.5px var(--line-light);
+}
+
+.s-faq summary {
+  cursor: pointer;
+  font: 800 1.05rem/1.4 var(--font-display);
+}
+
+.s-faq details p {
+  margin: 10px 0 0;
+  color: var(--muted-light);
+}
+
+/* ---------- Final ---------- */
+
+.s-final {
+  position: relative;
+  isolation: isolate;
+  margin-top: var(--s-section);
+  padding: clamp(64px, 9vw, 112px) 0;
+  background: var(--midnight);
+  color: var(--paper);
+  overflow: hidden;
+  text-align: center;
+}
+
+.s-final-inner {
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+}
+
+.s-final h2 {
+  margin-inline: auto;
+}
+
+.s-final p {
+  margin: 0;
+  color: var(--muted-dark);
+  font-size: 1.12rem;
+}
+
+/* ---------- Footer ---------- */
+
+.s-footer-inner {
+  display: grid;
+  gap: 20px;
+  padding-top: 36px;
+  padding-bottom: 40px;
+  border-top: 1.5px solid var(--line-dark);
+}
+
+.s-footer-brand {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+}
+
+.s-footer a[aria-current='page'] {
+  color: var(--paper);
+  font-weight: 700;
+}
