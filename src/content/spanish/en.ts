@@ -90,8 +90,8 @@ export const en: SpanishPageContent = {
     intro: 'Every plan starts with a free week. Pay monthly, or save by choosing a longer plan.',
     recommended: 'Recommended',
     perMonth: 'a month',
-    durations: { 1: 'Monthly', 3: '3 months', 6: '6 months', 12: '12 months' },
-    billed: (total, months) => (months === 12 ? `${total} a year` : `${total} every ${months} months`),
+    durations: { 1: 'Monthly', 3: '3 months', 6: '6 months' },
+    billed: (total, months) => `${total} every ${months} months`,
     save: (percent) => `save ${percent}%`,
     tiers: {
       essential: {

@@ -72,8 +72,8 @@ export const de: SpanishPageContent = {
     intro: 'Jedes Abo beginnt mit einer kostenlosen Woche. Zahl monatlich oder spar mit einem längeren Abo.',
     recommended: 'Empfohlen',
     perMonth: 'pro Monat',
-    durations: { 1: 'Monatlich', 3: '3 Monate', 6: '6 Monate', 12: '12 Monate' },
-    billed: (total, months) => (months === 12 ? `${total} pro Jahr` : `${total} alle ${months} Monate`),
+    durations: { 1: 'Monatlich', 3: '3 Monate', 6: '6 Monate' },
+    billed: (total, months) => `${total} alle ${months} Monate`,
     save: (percent) => `${percent} % sparen`,
     tiers: {
       essential: {

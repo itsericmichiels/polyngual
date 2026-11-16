@@ -2,11 +2,12 @@ import { strict as assert } from 'node:assert';
 import { test } from 'node:test';
 import { euro, monthsOf, perMonthCents, savingPercent, spanishAlternates, spanishPath, spanishSignupHref } from './spanish.ts';
 
-test('prices match the app: Essential from €50, Tutor Intensive from €100, couples €80', () => {
-  assert.deepEqual(monthsOf('essential').map((m) => perMonthCents('essential', m)), [5000, 4500, 4250, 3750]);
-  assert.deepEqual(monthsOf('intensive').map((m) => perMonthCents('intensive', m)), [10000, 9000, 8500, 7500]);
-  assert.deepEqual(monthsOf('intensive').map((m) => savingPercent('intensive', m)), [0, 10, 15, 25]);
-  assert.deepEqual(monthsOf('couple'), [1, 12]);
+test('prices match the app: Essential from €50, Tutor Intensive from €100, Couples from €80, no 12 months', () => {
+  assert.deepEqual(monthsOf('essential').map((m) => perMonthCents('essential', m)), [5000, 4500, 4250]);
+  assert.deepEqual(monthsOf('intensive').map((m) => perMonthCents('intensive', m)), [10000, 9000, 8500]);
+  assert.deepEqual(monthsOf('couple').map((m) => perMonthCents('couple', m)), [8000, 7200, 6800]);
+  assert.deepEqual(monthsOf('couple').map((m) => savingPercent('couple', m)), [0, 10, 15]);
+  assert.deepEqual(monthsOf('intensive').map((m) => savingPercent('intensive', m)), [0, 10, 15]);
 });
 
 test('formats euros per language', () => {

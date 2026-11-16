@@ -72,8 +72,8 @@ export const da: SpanishPageContent = {
     intro: 'Alle abonnementer starter med en gratis uge. Betal månedligt, eller spar med et længere abonnement.',
     recommended: 'Anbefalet',
     perMonth: 'om måneden',
-    durations: { 1: 'Månedligt', 3: '3 måneder', 6: '6 måneder', 12: '12 måneder' },
-    billed: (total, months) => (months === 12 ? `${total} om året` : `${total} hver ${months}. måned`),
+    durations: { 1: 'Månedligt', 3: '3 måneder', 6: '6 måneder' },
+    billed: (total, months) => `${total} hver ${months}. måned`,
     save: (percent) => `spar ${percent} %`,
     tiers: {
       essential: {

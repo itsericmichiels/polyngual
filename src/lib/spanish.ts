@@ -1,5 +1,6 @@
 // Polyngual Spanish (Spain): the landing page's languages, prices and app links.
-// Prices mirror the app's plans (repo exitohire-ai, apps/web/src/lib/polyngual/billing.ts, Eric 2026-11-15):
+// Prices mirror the app's plans (repo exitohire-ai, apps/web/src/lib/polyngual/billing.ts, Eric 2026-11-16: no
+// 12-month plans, Couples for 3 and 6 months too):
 // change both together.
 
 import { appUrl } from './site.ts';
@@ -28,14 +29,14 @@ export function spanishAlternates(): Record<string, string> {
   };
 }
 
-export type Months = 1 | 3 | 6 | 12;
+export type Months = 1 | 3 | 6;
 export type Tier = 'essential' | 'intensive' | 'couple';
 
 /** Euro cents, VAT included, by tier and length. */
 export const PRICES: Record<Tier, Partial<Record<Months, number>>> = {
-  essential: { 1: 5000, 3: 13500, 6: 25500, 12: 45000 },
-  intensive: { 1: 10000, 3: 27000, 6: 51000, 12: 90000 },
-  couple: { 1: 8000, 12: 72000 },
+  essential: { 1: 5000, 3: 13500, 6: 25500 },
+  intensive: { 1: 10000, 3: 27000, 6: 51000 },
+  couple: { 1: 8000, 3: 21600, 6: 40800 },
 };
 
 export const monthsOf = (tier: Tier) => (Object.keys(PRICES[tier]).map(Number) as Months[]).sort((a, b) => a - b);

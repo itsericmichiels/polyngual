@@ -72,8 +72,8 @@ export const sv: SpanishPageContent = {
     intro: 'Alla abonnemang börjar med en gratisvecka. Betala månadsvis eller spara med ett längre abonnemang.',
     recommended: 'Rekommenderas',
     perMonth: 'i månaden',
-    durations: { 1: 'Månadsvis', 3: '3 månader', 6: '6 månader', 12: '12 månader' },
-    billed: (total, months) => (months === 12 ? `${total} om året` : `${total} var ${months}:e månad`),
+    durations: { 1: 'Månadsvis', 3: '3 månader', 6: '6 månader' },
+    billed: (total, months) => `${total} var ${months}:e månad`,
     save: (percent) => `spara ${percent} %`,
     tiers: {
       essential: {

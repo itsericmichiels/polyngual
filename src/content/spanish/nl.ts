@@ -72,8 +72,8 @@ export const nl: SpanishPageContent = {
     intro: 'Elk abonnement begint met een gratis week. Betaal per maand of bespaar met een langer abonnement.',
     recommended: 'Aanbevolen',
     perMonth: 'per maand',
-    durations: { 1: 'Per maand', 3: '3 maanden', 6: '6 maanden', 12: '12 maanden' },
-    billed: (total, months) => (months === 12 ? `${total} per jaar` : `${total} per ${months} maanden`),
+    durations: { 1: 'Per maand', 3: '3 maanden', 6: '6 maanden' },
+    billed: (total, months) => `${total} per ${months} maanden`,
     save: (percent) => `${percent}% korting`,
     tiers: {
       essential: {
