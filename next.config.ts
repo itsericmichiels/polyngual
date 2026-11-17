@@ -32,6 +32,7 @@ const nextConfig: NextConfig = {
       { source: '/spansk', destination: '/spanish/da', permanent: false },
       { source: '/spanska', destination: '/spanish/sv', permanent: false },
       { source: '/spaans', destination: '/spanish/nl', permanent: false },
+      { source: '/espanja', destination: '/spanish/fi', permanent: false },
     ];
   },
   async rewrites() {

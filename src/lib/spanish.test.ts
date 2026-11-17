@@ -16,12 +16,14 @@ test('formats euros per language', () => {
   assert.equal(euro(4250, 'en'), '€42.50');
   assert.match(euro(5000, 'de'), /^50\s€$/);
   assert.match(euro(10000, 'sv'), /^100\s€$/);
+  assert.match(euro(4250, 'fi'), /^42,50\s€$/);
 });
 
 test('paths, hreflang and app links', () => {
   assert.equal(spanishPath('en'), '/spanish');
   assert.equal(spanishPath('da'), '/spanish/da');
   assert.equal(spanishAlternates().nb, '/spanish/no');
+  assert.equal(spanishAlternates().fi, '/spanish/fi');
   const de = new URL(spanishSignupHref('de', 'hero'));
   assert.equal(de.searchParams.get('lang'), 'de');
   assert.equal(de.searchParams.get('course'), 'es');
