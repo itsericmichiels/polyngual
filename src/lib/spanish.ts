@@ -60,9 +60,9 @@ export function euro(cents: number, lang: SpanishLang): string {
   }).format(cents / 100);
 }
 
-// The app speaks English, Spanish, German and Danish; Swedish, Norwegian, Dutch and Finnish visitors start in English
-// (Swedish and Finnish are being added to the app).
-const APP_LANG: Record<SpanishLang, 'en' | 'de' | 'da'> = { en: 'en', de: 'de', da: 'da', sv: 'en', no: 'en', nl: 'en', fi: 'en' };
+// The app speaks English, Spanish, German, Danish, Swedish and Finnish (the last two since 2026-11-17); Norwegian and
+// Dutch visitors start in English.
+const APP_LANG: Record<SpanishLang, 'en' | 'de' | 'da' | 'sv' | 'fi'> = { en: 'en', de: 'de', da: 'da', sv: 'sv', no: 'en', nl: 'en', fi: 'fi' };
 
 /** The app's sign-up, in the visitor's language where the app has it, tagged with where the click came from. */
 export function spanishSignupHref(lang: SpanishLang, placement: string): string {

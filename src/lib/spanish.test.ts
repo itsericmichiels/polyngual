@@ -27,5 +27,7 @@ test('paths, hreflang and app links', () => {
   const de = new URL(spanishSignupHref('de', 'hero'));
   assert.equal(de.searchParams.get('lang'), 'de');
   assert.equal(de.searchParams.get('course'), 'es');
-  assert.equal(new URL(spanishSignupHref('sv', 'hero')).searchParams.get('lang'), 'en');
+  assert.equal(new URL(spanishSignupHref('sv', 'hero')).searchParams.get('lang'), 'sv');
+  assert.equal(new URL(spanishSignupHref('fi', 'hero')).searchParams.get('lang'), 'fi');
+  assert.equal(new URL(spanishSignupHref('nl', 'hero')).searchParams.get('lang'), 'en');
 });
