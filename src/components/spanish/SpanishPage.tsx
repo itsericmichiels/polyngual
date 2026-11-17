@@ -4,6 +4,7 @@ import type { SpanishPageContent } from '@/content/spanish/types';
 import { CONTACT_EMAIL, SOCIAL_LINKS } from '@/lib/site';
 import { SPANISH_LANGS, SPANISH_LANG_NAMES, euro, monthsOf, perMonthCents, PRICES, savingPercent, spanishPath, spanishSignupHref, type Tier } from '@/lib/spanish';
 import { RevealObserver } from '@/components/RevealObserver';
+import { spanishDisplay, spanishText } from '@/lib/spanish-fonts';
 import { SpanishCta } from './SpanishCta';
 import '@/app/spanish.css';
 
@@ -101,7 +102,7 @@ export function SpanishPage({ t }: { t: SpanishPageContent }) {
   const href = (placement: string) => spanishSignupHref(lang, placement);
 
   return (
-    <div className="s-page">
+    <div className={`s-page ${spanishDisplay.variable} ${spanishText.variable}`}>
       <RevealObserver />
 
       <header className="s-top shell">
@@ -113,7 +114,10 @@ export function SpanishPage({ t }: { t: SpanishPageContent }) {
 
       <main>
         <section className="s-hero shell" aria-labelledby="hero-title">
-          <p className="s-eyebrow s-hero-eyebrow">{t.hero.eyebrow}</p>
+          {/* The flag stands in for the eyebrow line (Eric, 2026-11-17); its words stay for screen readers. */}
+          <p className="s-hero-flag">
+            <span className="sr-only">{t.hero.eyebrow}</span>
+          </p>
           <h1 id="hero-title" className="s-hero-title" aria-label={t.hero.title}>
             <span aria-hidden>
               <RisingTitle text={t.hero.title} />

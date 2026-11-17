@@ -24,6 +24,7 @@
 
   background: var(--paper);
   color: var(--ink);
+  font-family: var(--font-s-text), var(--font-body);
   font-feature-settings: 'kern', 'liga';
 }
 
@@ -31,7 +32,7 @@
 .s-page::before {
   content: '';
   display: block;
-  height: 8px;
+  height: 10px;
   background: var(--flag);
   animation: s-draw 1100ms var(--ease-in-out) both;
 }
@@ -50,33 +51,40 @@
   interpolate-size: allow-keywords;
 }
 
+/* Headings in Fraunces (soft, optical sizes on), the smaller ones in Inter so cards stay crisp. */
 .s-page h1,
-.s-page h2,
+.s-page h2 {
+  font-family: var(--font-s-display), Georgia, serif;
+  font-weight: 560;
+  font-variation-settings: 'SOFT' 50;
+  color: var(--ink);
+}
+
 .s-page h3 {
-  font-family: var(--font-body);
-  font-weight: 700;
+  font-family: var(--font-s-text), var(--font-body);
+  font-weight: 600;
   color: var(--ink);
 }
 
 .s-page h2 {
-  font-size: clamp(2rem, 1.35rem + 2.3vw, 3.25rem);
+  font-size: clamp(2.1rem, 1.4rem + 2.4vw, 3.4rem);
   line-height: 1.06;
-  letter-spacing: -0.032em;
+  letter-spacing: -0.022em;
   max-width: 20ch;
 }
 
 .s-page h3 {
-  font-size: 1.12rem;
-  line-height: 1.3;
-  letter-spacing: -0.012em;
+  font-size: 1.08rem;
+  line-height: 1.35;
+  letter-spacing: -0.011em;
 }
 
 /* The dot flows with the text, so an eyebrow that wraps (a long language, a phone) keeps it beside the first word. */
 .s-eyebrow {
   display: block;
   margin: 0;
-  font: 700 12.5px/1.5 var(--font-body);
-  letter-spacing: 0.16em;
+  font: 600 12px/1.5 var(--font-s-text), var(--font-body);
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-2);
 }
@@ -84,13 +92,13 @@
 .s-eyebrow::before {
   content: '';
   display: inline-block;
-  width: 15px;
-  height: 10px;
+  width: 18px;
+  height: 12px;
   margin-right: 10px;
-  border-radius: 2px;
+  border-radius: 2.5px;
   background: var(--flag);
-  box-shadow: inset 0 0 0 0.5px rgba(2, 25, 64, 0.12);
-  vertical-align: -0.05em;
+  box-shadow: inset 0 0 0 0.5px rgba(2, 25, 64, 0.12), 0 2px 6px -2px rgba(198, 11, 30, 0.45);
+  vertical-align: -0.12em;
 }
 
 @media (max-width: 480px) {
@@ -114,8 +122,8 @@
   --fg: var(--paper);
   min-height: 50px;
   padding: 0 24px;
-  font: 700 15.5px/1 var(--font-body);
-  letter-spacing: 0;
+  font: 600 15.5px/1 var(--font-s-text), var(--font-body);
+  letter-spacing: -0.005em;
   box-shadow: none;
 }
 
@@ -129,7 +137,7 @@
   --fg: var(--ink);
   min-height: 40px;
   padding: 0 16px;
-  font: 700 14.5px/1 var(--font-body);
+  font: 600 14.5px/1 var(--font-s-text), var(--font-body);
   box-shadow: inset 0 0 0 1px var(--hair-strong);
 }
 
@@ -175,9 +183,9 @@
 }
 
 .s-hero-title {
-  font-size: clamp(2.6rem, 1.3rem + 5.4vw, 5.6rem);
-  line-height: 1;
-  letter-spacing: -0.045em;
+  font-size: clamp(2.7rem, 1.3rem + 5.6vw, 5.9rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
   max-width: 14ch;
 }
 
@@ -238,8 +246,49 @@
   }
 }
 
-.s-hero-eyebrow {
-  animation: s-fade 500ms var(--ease-out) both;
+/* The hero's Spanish flag (civil flag: red, yellow, red in 1:2:1, 3:2 overall). It unfurls from the left on
+   arrival, then one silky sheen passes across it; the title starts as it finishes opening. */
+.s-hero-flag {
+  position: relative;
+  width: 66px;
+  height: 44px;
+  margin: 0 0 6px;
+  border-radius: 7px;
+  overflow: hidden;
+  background: var(--flag);
+  box-shadow:
+    inset 0 0 0 0.5px rgba(2, 25, 64, 0.14),
+    0 14px 30px -14px rgba(198, 11, 30, 0.55),
+    0 4px 10px -6px rgba(2, 25, 64, 0.25);
+  clip-path: inset(0 0 0 0 round 7px);
+  animation: s-unfurl 760ms var(--ease-in-out) both;
+}
+
+.s-hero-flag::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.42) 48%, transparent 66%);
+  transform: translateX(-110%);
+  animation: s-sheen 900ms var(--ease-in-out) 620ms both;
+}
+
+@keyframes s-unfurl {
+  from {
+    clip-path: inset(0 100% 0 0 round 7px);
+  }
+  to {
+    clip-path: inset(0 0 0 0 round 7px);
+  }
+}
+
+@keyframes s-sheen {
+  from {
+    transform: translateX(-110%);
+  }
+  to {
+    transform: translateX(110%);
+  }
 }
 
 /* Each word sits in a mask; the padding keeps descenders (p, g) inside it. */
@@ -253,7 +302,7 @@
 
 .s-word > span {
   display: inline-block;
-  animation: s-word-rise 860ms var(--ease-out) calc(80ms + var(--wd, 0ms)) both;
+  animation: s-word-rise 860ms var(--ease-out) calc(220ms + var(--wd, 0ms)) both;
 }
 
 @keyframes s-word-rise {
@@ -264,16 +313,16 @@
 
 .s-hero-sub {
   --rise: 10px;
-  animation: s-rise 680ms var(--ease-out) 440ms both;
+  animation: s-rise 680ms var(--ease-out) 580ms both;
 }
 
 .s-hero-actions {
   --rise: 8px;
-  animation: s-rise 640ms var(--ease-out) 540ms both;
+  animation: s-rise 640ms var(--ease-out) 680ms both;
 }
 
 .s-hero-guarantee {
-  animation: s-fade 700ms var(--ease-out) 660ms both;
+  animation: s-fade 700ms var(--ease-out) 800ms both;
 }
 
 .s-arrow {
@@ -384,7 +433,7 @@
 }
 
 .s-num {
-  font: 700 13px/1 var(--font-body);
+  font: 600 13px/1 var(--font-s-text), var(--font-body);
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.06em;
   color: var(--accent);
@@ -461,7 +510,7 @@
 }
 
 .s-news-card figcaption {
-  font: 700 12px/1 var(--font-body);
+  font: 600 12px/1 var(--font-s-text), var(--font-body);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: rgba(251, 248, 243, 0.55);
@@ -469,8 +518,9 @@
 
 .s-news-headline {
   margin: 18px 0 22px;
-  font: 700 clamp(1.3rem, 1.05rem + 1vw, 1.75rem) / 1.35 var(--font-body);
-  letter-spacing: -0.015em;
+  font: 500 clamp(1.4rem, 1.1rem + 1.1vw, 1.9rem) / 1.32 var(--font-s-display), Georgia, serif;
+  font-variation-settings: 'SOFT' 50;
+  letter-spacing: -0.01em;
 }
 
 .s-news-legend {
@@ -584,7 +634,7 @@
   border-radius: 999px;
   box-shadow: inset 0 0 0 1px rgba(255, 196, 0, 0.55);
   color: var(--es-yellow);
-  font: 700 11px/1 var(--font-body);
+  font: 600 11px/1 var(--font-s-text), var(--font-body);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -610,8 +660,9 @@
 }
 
 .s-plan-price strong {
-  font: 700 2.9rem/1 var(--font-body);
-  letter-spacing: -0.04em;
+  font: 560 3.1rem/1 var(--font-s-display), Georgia, serif;
+  font-variation-settings: 'SOFT' 50;
+  letter-spacing: -0.03em;
   font-variant-numeric: tabular-nums;
 }
 
@@ -801,7 +852,7 @@
   padding: 22px 0;
   cursor: pointer;
   list-style: none;
-  font: 700 1.06rem/1.4 var(--font-body);
+  font: 600 1.06rem/1.4 var(--font-s-text), var(--font-body);
   letter-spacing: -0.01em;
   transition: color 160ms ease;
 }
