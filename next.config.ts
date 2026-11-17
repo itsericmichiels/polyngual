@@ -25,6 +25,13 @@ const nextConfig: NextConfig = {
       // them for learners with an ITP place and shows everyone else the ITP signup page
       // (/examen/itp/beta); any ?g= tag goes along.
       { source: '/itp', destination: '/examen/itp', permanent: false },
+      // Polyngual Spanish (Eric, 2026-11-15): English lives at /spanish itself; short aliases for social bios.
+      { source: '/spanish/en', destination: '/spanish', permanent: true },
+      { source: '/espanol', destination: '/spanish', permanent: false },
+      { source: '/spanisch', destination: '/spanish/de', permanent: false },
+      { source: '/spansk', destination: '/spanish/da', permanent: false },
+      { source: '/spanska', destination: '/spanish/sv', permanent: false },
+      { source: '/spaans', destination: '/spanish/nl', permanent: false },
     ];
   },
   async rewrites() {

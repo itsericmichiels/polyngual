@@ -1,0 +1,1018 @@
+/* Polyngual Spanish landing page (/spanish, /spanish/<lang>). Premium and minimal (Eric, 2026-11-17, after Emil
+   Kowalski's design-engineering notes): paper and ink, hairlines instead of boxes, Nunito Sans at 700 for headings,
+   one dark object (the news card) and one dark plan (Tutor Intensive). The Spanish flag is the accent (Eric, same
+   day): a thin flag band across the top, a small flag before each eyebrow, red for the numbers and the shield,
+   yellow for the savings and the new word. Checks stay ink: red ticks read as errors.
+   Motion: one entrance for the hero (title leads, the rest follows with shrinking gaps), one entrance per section
+   (opacity and 12px, no blur, no per-item stagger), press feedback on every button, hover only where a pointer can
+   hover. Brand tokens and easings come from globals.css. */
+
+.s-page {
+  --ink: var(--midnight);
+  --ink-2: rgba(2, 25, 64, 0.64);
+  --ink-3: rgba(2, 25, 64, 0.46);
+  --hair: rgba(2, 25, 64, 0.1);
+  --hair-strong: rgba(2, 25, 64, 0.18);
+  --surface: #ffffff;
+  /* The Spanish flag: red, yellow, red in 1:2:1. */
+  --es-red: #c60b1e;
+  --es-yellow: #ffc400;
+  --flag: linear-gradient(to bottom, var(--es-red) 0 25%, var(--es-yellow) 25% 75%, var(--es-red) 75% 100%);
+  --accent: var(--es-red);
+  --s-section: clamp(88px, 11vw, 152px);
+  --s-radius: 20px;
+
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-s-text), var(--font-body);
+  font-feature-settings: 'kern', 'liga';
+}
+
+/* A thin flag band across the very top of the page, drawn in from the left on arrival. */
+.s-page::before {
+  content: '';
+  display: block;
+  height: 10px;
+  background: var(--flag);
+  animation: s-draw 1100ms var(--ease-in-out) both;
+}
+
+@keyframes s-draw {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Smooth answers in the FAQ, where the browser can animate to height: auto. */
+.s-page {
+  interpolate-size: allow-keywords;
+}
+
+/* Headings in Fraunces (soft, optical sizes on), the smaller ones in Inter so cards stay crisp. */
+.s-page h1,
+.s-page h2 {
+  font-family: var(--font-s-display), Georgia, serif;
+  font-weight: 560;
+  font-variation-settings: 'SOFT' 50;
+  color: var(--ink);
+}
+
+.s-page h3 {
+  font-family: var(--font-s-text), var(--font-body);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.s-page h2 {
+  font-size: clamp(2.1rem, 1.4rem + 2.4vw, 3.4rem);
+  line-height: 1.06;
+  letter-spacing: -0.022em;
+  max-width: 20ch;
+}
+
+.s-page h3 {
+  font-size: 1.08rem;
+  line-height: 1.35;
+  letter-spacing: -0.011em;
+}
+
+/* The dot flows with the text, so an eyebrow that wraps (a long language, a phone) keeps it beside the first word. */
+.s-eyebrow {
+  display: block;
+  margin: 0;
+  font: 600 12px/1.5 var(--font-s-text), var(--font-body);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.s-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 12px;
+  margin-right: 10px;
+  border-radius: 2.5px;
+  background: var(--flag);
+  box-shadow: inset 0 0 0 0.5px rgba(2, 25, 64, 0.12), 0 2px 6px -2px rgba(198, 11, 30, 0.45);
+  vertical-align: -0.12em;
+}
+
+@media (max-width: 480px) {
+  .s-eyebrow {
+    letter-spacing: 0.12em;
+  }
+}
+
+.s-lede {
+  max-width: 36em;
+  font-size: clamp(1.06rem, 1rem + 0.25vw, 1.18rem);
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+/* ---------- Buttons ---------- */
+
+/* Ink by default; the shared .btn gives the press (scale 0.97, 160ms ease-out). */
+.s-page .s-btn {
+  --bg: var(--ink);
+  --fg: var(--paper);
+  min-height: 50px;
+  padding: 0 24px;
+  font: 600 15.5px/1 var(--font-s-text), var(--font-body);
+  letter-spacing: -0.005em;
+  box-shadow: none;
+}
+
+.s-page .s-btn-light {
+  --bg: var(--paper);
+  --fg: var(--ink);
+}
+
+.s-page .s-btn-quiet {
+  --bg: transparent;
+  --fg: var(--ink);
+  min-height: 40px;
+  padding: 0 16px;
+  font: 600 14.5px/1 var(--font-s-text), var(--font-body);
+  box-shadow: inset 0 0 0 1px var(--hair-strong);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .s-page .s-btn:hover {
+    --bg: var(--midnight-800);
+  }
+  .s-page .s-btn-light:hover {
+    --bg: #ffffff;
+  }
+  .s-page .s-btn-quiet:hover {
+    --bg: rgba(2, 25, 64, 0.04);
+    box-shadow: inset 0 0 0 1px rgba(2, 25, 64, 0.32);
+  }
+}
+
+/* ---------- Top bar ---------- */
+
+.s-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.s-logo img {
+  width: auto;
+  height: 26px;
+}
+
+/* ---------- Hero ---------- */
+
+/* Centred: one column of type with room on both sides reads calmer than a left column beside an empty half. */
+.s-hero {
+  display: grid;
+  justify-items: center;
+  gap: 24px;
+  padding-top: clamp(56px, 11vw, 136px);
+  padding-bottom: clamp(24px, 4vw, 48px);
+  text-align: center;
+}
+
+.s-hero-title {
+  font-size: clamp(2.7rem, 1.3rem + 5.6vw, 5.9rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  max-width: 14ch;
+}
+
+.s-hero-sub {
+  max-width: 34em;
+}
+
+.s-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px 20px;
+  margin-top: 8px;
+}
+
+.s-hero-note {
+  font-size: 0.95rem;
+  color: var(--ink-3);
+}
+
+.s-hero-guarantee {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 40rem;
+  margin-top: clamp(24px, 4vw, 40px);
+  padding-top: 20px;
+  border-top: 1px solid var(--hair);
+  font-size: 0.95rem;
+  color: var(--ink-2);
+  text-align: left;
+}
+
+.s-hero-guarantee strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.s-shield {
+  flex: none;
+  color: var(--accent);
+}
+
+/* The hero's one entrance, played once on load. The title leads: its words rise out of their own masks in one wave
+   (delays from SpanishPage.tsx); the line, the button and the guarantee follow with shrinking gaps, overlapping the
+   end of the title; the eyebrow and the guarantee only fade. Reduced motion: fades only (bottom of this file). */
+@keyframes s-rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--rise, 12px));
+  }
+}
+
+@keyframes s-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+/* The hero's Spanish flag (civil flag: red, yellow, red in 1:2:1, 3:2 overall). It unfurls from the left on
+   arrival, then one silky sheen passes across it; the title starts as it finishes opening. */
+.s-hero-flag {
+  position: relative;
+  width: 66px;
+  height: 44px;
+  margin: 0 0 6px;
+  border-radius: 7px;
+  overflow: hidden;
+  background: var(--flag);
+  box-shadow:
+    inset 0 0 0 0.5px rgba(2, 25, 64, 0.14),
+    0 14px 30px -14px rgba(198, 11, 30, 0.55),
+    0 4px 10px -6px rgba(2, 25, 64, 0.25);
+  clip-path: inset(0 0 0 0 round 7px);
+  animation: s-unfurl 760ms var(--ease-in-out) both;
+}
+
+.s-hero-flag::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.42) 48%, transparent 66%);
+  transform: translateX(-110%);
+  animation: s-sheen 900ms var(--ease-in-out) 620ms both;
+}
+
+@keyframes s-unfurl {
+  from {
+    clip-path: inset(0 100% 0 0 round 7px);
+  }
+  to {
+    clip-path: inset(0 0 0 0 round 7px);
+  }
+}
+
+@keyframes s-sheen {
+  from {
+    transform: translateX(-110%);
+  }
+  to {
+    transform: translateX(110%);
+  }
+}
+
+/* Each word sits in a mask; the padding keeps descenders (p, g) inside it. */
+.s-word {
+  display: inline-block;
+  overflow: clip;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+  vertical-align: top;
+}
+
+.s-word > span {
+  display: inline-block;
+  animation: s-word-rise 860ms var(--ease-out) calc(220ms + var(--wd, 0ms)) both;
+}
+
+@keyframes s-word-rise {
+  from {
+    transform: translateY(120%);
+  }
+}
+
+.s-hero-sub {
+  --rise: 10px;
+  animation: s-rise 680ms var(--ease-out) 580ms both;
+}
+
+.s-hero-actions {
+  --rise: 8px;
+  animation: s-rise 640ms var(--ease-out) 680ms both;
+}
+
+.s-hero-guarantee {
+  animation: s-fade 700ms var(--ease-out) 800ms both;
+}
+
+.s-arrow {
+  flex: none;
+  margin-right: -4px;
+  transition: transform 200ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .s-page .s-btn:hover .s-arrow {
+    transform: translateX(3px);
+  }
+}
+
+/* ---------- Sections ---------- */
+
+.s-section {
+  padding-top: var(--s-section);
+}
+
+.s-head {
+  display: grid;
+  justify-items: start;
+  gap: 16px;
+  margin-bottom: clamp(36px, 5vw, 64px);
+}
+
+/* One entrance per section block, quieter than the site-wide reveal: no blur, no per-item stagger. Only the way in
+   animates: hiding (when the reveal script starts) is instant, so nothing fades out before it fades in. The same
+   holds for every reveal below: their transitions sit on the [data-in] state. */
+.s-page [data-reveal] {
+  transition: none;
+}
+
+.s-page [data-reveal][data-in] {
+  transition:
+    opacity 600ms var(--ease-out),
+    transform 600ms var(--ease-out);
+}
+
+[data-reveal-on] .s-page [data-reveal]:not([data-in]) {
+  opacity: 0;
+  transform: translateY(12px);
+  filter: none;
+}
+
+/* ---------- Numbered points (2027, how it works) ---------- */
+
+.s-points {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.s-points li {
+  --d: 0ms;
+  position: relative;
+  display: grid;
+  gap: 10px;
+  padding: 24px 0 28px;
+}
+
+/* The points enter as one group: each hairline draws from the left, then its words rise; the columns start
+   0, 90 and 150ms apart. The list itself does not move. */
+.s-points li::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: var(--hair-strong);
+  /* An explicit end state: a clip-path cannot animate to or from none. */
+  clip-path: inset(0 0 0 0);
+}
+
+.s-points[data-in] li::before {
+  transition: clip-path 800ms var(--ease-in-out) var(--d);
+}
+
+.s-points[data-in] li > * {
+  transition:
+    opacity 600ms var(--ease-out),
+    transform 600ms var(--ease-out);
+  transition-delay: calc(var(--d) + 180ms);
+}
+
+.s-points li:nth-child(2) {
+  --d: 90ms;
+}
+
+.s-points li:nth-child(3) {
+  --d: 150ms;
+}
+
+[data-reveal-on] .s-page .s-points[data-reveal]:not([data-in]) {
+  opacity: 1;
+  transform: none;
+}
+
+[data-reveal-on] .s-points:not([data-in]) li::before {
+  clip-path: inset(0 100% 0 0);
+}
+
+[data-reveal-on] .s-points:not([data-in]) li > * {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.s-num {
+  font: 600 13px/1 var(--font-s-text), var(--font-body);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
+
+.s-points p,
+.s-features p {
+  color: var(--ink-2);
+  line-height: 1.6;
+}
+
+@media (min-width: 760px) {
+  .s-points {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0 clamp(24px, 4vw, 56px);
+  }
+}
+
+/* ---------- Features ---------- */
+
+.s-features {
+  display: grid;
+  gap: 0 clamp(24px, 4vw, 56px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.s-features li {
+  display: grid;
+  gap: 8px;
+  padding: 24px 0 28px;
+  border-top: 1px solid var(--hair);
+}
+
+@media (min-width: 680px) {
+  .s-features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1040px) {
+  .s-features {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ---------- News ---------- */
+
+.s-news {
+  display: grid;
+  gap: 40px;
+  align-items: center;
+}
+
+@media (min-width: 920px) {
+  .s-news {
+    grid-template-columns: 1fr 1.05fr;
+    gap: 72px;
+  }
+}
+
+.s-news-copy {
+  display: grid;
+  gap: 16px;
+}
+
+.s-news-card {
+  margin: 0;
+  padding: clamp(24px, 4vw, 40px);
+  border-radius: var(--s-radius);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.s-news-card figcaption {
+  font: 600 12px/1 var(--font-s-text), var(--font-body);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(251, 248, 243, 0.55);
+}
+
+.s-news-headline {
+  margin: 18px 0 22px;
+  font: 500 clamp(1.4rem, 1.1rem + 1.1vw, 1.9rem) / 1.32 var(--font-s-display), Georgia, serif;
+  font-variation-settings: 'SOFT' 50;
+  letter-spacing: -0.01em;
+}
+
+.s-news-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line-dark);
+  font-size: 0.9rem;
+  color: rgba(251, 248, 243, 0.62);
+}
+
+.s-known,
+.s-fresh {
+  padding: 0.02em 0.22em;
+  border-radius: 0.3em;
+  color: inherit;
+}
+
+/* The news card explains the product: once it is in view, a highlighter passes over the word the learner knows,
+   then over the new one, and the legend appears after. */
+.s-news-headline mark {
+  position: relative;
+  z-index: 0;
+  background: none;
+}
+
+.s-news-headline mark::before {
+  content: '';
+  position: absolute;
+  inset: 0.06em 0;
+  z-index: -1;
+  border-radius: 0.3em;
+  clip-path: inset(0 0 0 0);
+}
+
+.s-news-card[data-in] .s-news-headline mark::before {
+  transition: clip-path 700ms var(--ease-in-out) var(--md, 450ms);
+}
+
+.s-news-headline .s-known::before {
+  background: rgba(44, 200, 189, 0.3);
+}
+
+.s-news-headline .s-fresh::before {
+  --md: 1050ms;
+  background: rgba(255, 196, 0, 0.55);
+}
+
+.s-news-card[data-in] .s-news-legend {
+  transition: opacity 500ms var(--ease-out) 1500ms;
+}
+
+[data-reveal-on] .s-news-card:not([data-in]) .s-news-headline mark::before {
+  clip-path: inset(0 100% 0 0);
+}
+
+[data-reveal-on] .s-news-card:not([data-in]) .s-news-legend {
+  opacity: 0;
+}
+
+.s-known {
+  background: rgba(44, 200, 189, 0.26);
+}
+
+.s-fresh {
+  background: rgba(255, 196, 0, 0.5);
+}
+
+/* ---------- Plans ---------- */
+
+.s-plans {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 960px) {
+  .s-plans {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: stretch;
+  }
+}
+
+.s-plan {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 28px;
+  border-radius: var(--s-radius);
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--hair);
+}
+
+.s-plan-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.s-plan h3 {
+  font-size: 1.2rem;
+}
+
+.s-plan-badge {
+  margin: 0;
+  padding: 5px 10px;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px rgba(255, 196, 0, 0.55);
+  color: var(--es-yellow);
+  font: 600 11px/1 var(--font-s-text), var(--font-body);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.s-plan-tagline {
+  color: var(--ink-2);
+  font-size: 0.97rem;
+}
+
+/* Side by side, the prices line up: every tagline takes two lines' room. */
+@media (min-width: 960px) {
+  .s-plan-tagline {
+    min-height: 3.2em;
+  }
+}
+
+.s-plan-price {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.s-plan-price strong {
+  font: 560 3.1rem/1 var(--font-s-display), Georgia, serif;
+  font-variation-settings: 'SOFT' 50;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.s-plan-price span {
+  color: var(--ink-3);
+  font-size: 0.95rem;
+}
+
+.s-plan-longer {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--hair);
+}
+
+.s-plan-longer li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 12px;
+  align-items: baseline;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--hair);
+  font-size: 0.95rem;
+}
+
+.s-plan-length {
+  font-weight: 700;
+}
+
+.s-plan-monthly {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.s-plan-monthly small {
+  color: var(--ink-3);
+  font-size: 0.85em;
+}
+
+.s-save {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: end;
+  margin-top: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(255, 196, 0, 0.22);
+  color: #6b4a00;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.s-billed {
+  grid-column: 1;
+  grid-row: 2;
+  color: var(--ink-3);
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.s-plan-perks {
+  display: grid;
+  gap: 10px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.97rem;
+}
+
+.s-plan-perks li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.s-check {
+  flex: none;
+  margin-top: 4px;
+  color: var(--ink-2);
+}
+
+.s-plan-cta {
+  width: 100%;
+  margin-top: auto;
+}
+
+/* Tutor Intensive: the one dark plan. */
+.s-plan-featured {
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: none;
+}
+
+.s-plan-featured h3 {
+  color: var(--paper);
+}
+
+.s-plan-featured .s-plan-tagline,
+.s-plan-featured .s-plan-price span,
+.s-plan-featured .s-plan-monthly small,
+.s-plan-featured .s-billed {
+  color: rgba(251, 248, 243, 0.62);
+}
+
+.s-plan-featured .s-plan-longer,
+.s-plan-featured .s-plan-longer li {
+  border-color: var(--line-dark);
+}
+
+.s-plan-featured .s-save {
+  background: rgba(255, 196, 0, 0.16);
+  color: var(--es-yellow);
+}
+
+.s-plan-featured .s-check {
+  color: var(--es-yellow);
+}
+
+/* The dark plan carries the flag along its top edge. */
+.s-plan-featured {
+  position: relative;
+  overflow: hidden;
+}
+
+.s-plan-featured::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 6px;
+  background: var(--flag);
+  clip-path: inset(0 0 0 0);
+}
+
+.s-plans[data-in] .s-plan-featured::before {
+  transition: clip-path 900ms var(--ease-in-out) 250ms;
+}
+
+[data-reveal-on] .s-plans:not([data-in]) .s-plan-featured::before {
+  clip-path: inset(0 100% 0 0);
+}
+
+/* ---------- Guarantee and fine print ---------- */
+
+.s-guarantee {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-top: 40px;
+  padding: 24px 0;
+  border-top: 1px solid var(--hair-strong);
+  border-bottom: 1px solid var(--hair-strong);
+}
+
+.s-guarantee h3 {
+  margin-bottom: 6px;
+}
+
+.s-guarantee p {
+  max-width: 44em;
+  color: var(--ink-2);
+}
+
+.s-fine {
+  margin-top: 16px;
+  font-size: 0.88rem;
+  color: var(--ink-3);
+}
+
+/* ---------- FAQ ---------- */
+
+.s-faq-list {
+  max-width: 52rem;
+  border-top: 1px solid var(--hair-strong);
+}
+
+.s-faq details {
+  border-bottom: 1px solid var(--hair-strong);
+}
+
+.s-faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 22px 0;
+  cursor: pointer;
+  list-style: none;
+  font: 600 1.06rem/1.4 var(--font-s-text), var(--font-body);
+  letter-spacing: -0.01em;
+  transition: color 160ms ease;
+}
+
+.s-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.s-plus {
+  position: relative;
+  flex: none;
+  width: 14px;
+  height: 14px;
+  transition: transform 200ms var(--ease-out);
+}
+
+.s-plus::before,
+.s-plus::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 14px;
+  height: 1.5px;
+  margin-top: -0.75px;
+  border-radius: 1px;
+  background: currentColor;
+}
+
+.s-plus::after {
+  transform: rotate(90deg);
+}
+
+.s-faq details[open] .s-plus {
+  transform: rotate(45deg);
+}
+
+.s-faq details p {
+  max-width: 44em;
+  padding-bottom: 24px;
+  color: var(--ink-2);
+}
+
+/* The answer's height animates where the browser supports it (::details-content and interpolate-size); elsewhere it
+   opens at once, as before. Opening is read, so 300ms; the plus turns with it. */
+.s-faq details::details-content {
+  block-size: 0;
+  overflow-y: clip;
+  transition:
+    block-size 300ms var(--ease-out),
+    content-visibility 300ms allow-discrete;
+}
+
+.s-faq details[open]::details-content {
+  block-size: auto;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .s-faq summary:hover {
+    color: var(--accent);
+  }
+}
+
+/* ---------- Final call ---------- */
+
+.s-final {
+  padding-top: var(--s-section);
+  padding-bottom: var(--s-section);
+}
+
+.s-final-inner {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  text-align: center;
+}
+
+.s-final-inner::before {
+  content: '';
+  width: 36px;
+  height: 24px;
+  margin-bottom: 6px;
+  border-radius: 4px;
+  background: var(--flag);
+  box-shadow: inset 0 0 0 0.5px rgba(2, 25, 64, 0.12);
+}
+
+.s-final h2 {
+  margin-inline: auto;
+  max-width: 16ch;
+}
+
+.s-final .s-lede {
+  margin-bottom: 8px;
+}
+
+/* ---------- Footer ---------- */
+
+.s-footer {
+  display: grid;
+  gap: 18px;
+  padding-top: 32px;
+  padding-bottom: 40px;
+  border-top: 1px solid var(--hair);
+  font-size: 0.9rem;
+  color: var(--ink-2);
+}
+
+.s-footer-brand {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+}
+
+.s-footer-logo {
+  width: auto;
+  height: 20px;
+}
+
+.s-footer ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.s-footer a {
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.s-footer a[aria-current='page'] {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .s-footer a:hover {
+    color: var(--ink);
+  }
+}
+
+.s-footer-fine {
+  color: var(--ink-3);
+  font-size: 0.82rem;
+}
+
+/* ---------- Reduced motion ---------- */
+
+/* Fewer and gentler, not none: the hero fades in without moving, the highlights and lines appear in place.
+   globals.css already cuts every other transition to an instant. */
+@media (prefers-reduced-motion: reduce) {
+  .s-word > span,
+  .s-hero-sub,
+  .s-hero-actions {
+    animation-name: s-fade !important;
+    animation-duration: 400ms !important;
+    animation-delay: 0ms !important;
+  }
+}
