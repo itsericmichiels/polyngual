@@ -1,6 +1,6 @@
 // Polyngual Spanish (Spain): the landing page's languages, prices and app links.
 // Prices mirror the app's plans (repo exitohire-ai, apps/web/src/lib/polyngual/billing.ts, Eric 2026-11-16: no
-// 12-month plans, Couples for 3 and 6 months too):
+// 12-month plans, Couples for 3 and 6 months too; prices as Eric set them in Stripe, 2026-11-17):
 // change both together.
 
 import { appUrl } from './site.ts';
@@ -35,13 +35,16 @@ export type Tier = 'essential' | 'intensive' | 'couple';
 /** Euro cents, VAT included, by tier and length. */
 export const PRICES: Record<Tier, Partial<Record<Months, number>>> = {
   essential: { 1: 5000, 3: 13500, 6: 25500 },
-  intensive: { 1: 10000, 3: 27000, 6: 51000 },
-  couple: { 1: 8000, 3: 21600, 6: 40800 },
+  intensive: { 1: 10000, 3: 27000, 6: 49000 },
+  couple: { 1: 8000, 3: 21000, 6: 39900 },
 };
 
 export const monthsOf = (tier: Tier) => (Object.keys(PRICES[tier]).map(Number) as Months[]).sort((a, b) => a - b);
 export const perMonthCents = (tier: Tier, months: Months) => Math.round((PRICES[tier][months] ?? 0) / months);
-export const savingPercent = (tier: Tier, months: Months) => Math.round((1 - perMonthCents(tier, months) / (PRICES[tier][1] ?? 1)) * 100);
+/** The saving against the monthly price over as many months, in whole percent, rounded down so it is never
+ *  overstated (€210 instead of 3 × €80 is 12.5%, shown as 12%). */
+export const savingPercent = (tier: Tier, months: Months) =>
+  Math.floor((1 - (PRICES[tier][months] ?? 0) / ((PRICES[tier][1] ?? 1) * months)) * 100 + 1e-9);
 
 const NUMBER_LOCALE: Record<SpanishLang, string> = { en: 'en-IE', de: 'de-DE', da: 'da-DK', sv: 'sv-SE', no: 'nb-NO', nl: 'nl-NL' };
 
