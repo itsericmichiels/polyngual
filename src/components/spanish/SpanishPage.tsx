@@ -10,12 +10,35 @@ import '@/app/spanish.css';
 // Polyngual Spanish's landing page (polyngual.app/spanish and /spanish/<lang>), for Northern Europeans who live on
 // the Costa del Sol (Eric, 2026-11-15). A premium, minimal design (Eric, 2026-11-17, after Emil Kowalski's
 // design-engineering notes): paper and ink, hairlines instead of boxes, one dark object (the news card) and one dark
-// plan (Tutor Intensive), one entrance for the hero and one per section. Server-rendered; the only client code is
-// the tracked CTA and the reveals.
+// plan (Tutor Intensive), the Spanish flag as the accent, one entrance for the hero and one per section, and a news
+// card that shows how the highlights work (spanish.css has the motion). Server-rendered; the only client code is the
+// tracked CTA and the reveals.
 
 const TIERS: Tier[] = ['essential', 'intensive', 'couple'];
 
 const pad = (n: number) => String(n).padStart(2, '0');
+
+/** The hero title, word by word, each word rising out of its own mask. The delays shrink as the line goes on
+ *  (an ease-out over 300ms), so the words arrive as one wave rather than a metronome. */
+function RisingTitle({ text }: { text: string }) {
+  const words = text.split(/\s+/).filter(Boolean);
+  const last = Math.max(words.length - 1, 1);
+  return (
+    <>
+      {words.map((word, i) => {
+        const delay = Math.round(300 * (1 - (1 - i / last) ** 2));
+        return (
+          <span key={`${word}-${i}`}>
+            <span className="s-word">
+              <span style={{ '--wd': `${delay}ms` } as React.CSSProperties}>{word}</span>
+            </span>
+            {i < words.length - 1 ? ' ' : null}
+          </span>
+        );
+      })}
+    </>
+  );
+}
 
 function Check() {
   return (
@@ -91,12 +114,14 @@ export function SpanishPage({ t }: { t: SpanishPageContent }) {
       <main>
         <section className="s-hero shell" aria-labelledby="hero-title">
           <p className="s-eyebrow s-hero-eyebrow">{t.hero.eyebrow}</p>
-          <h1 id="hero-title" className="s-hero-title">
-            {t.hero.title}
+          <h1 id="hero-title" className="s-hero-title" aria-label={t.hero.title}>
+            <span aria-hidden>
+              <RisingTitle text={t.hero.title} />
+            </span>
           </h1>
           <p className="s-lede s-hero-sub">{t.hero.sub}</p>
           <div className="s-hero-actions">
-            <SpanishCta href={href('hero')} label={t.hero.cta} lang={lang} placement="hero" className="btn s-btn" />
+            <SpanishCta href={href('hero')} label={t.hero.cta} lang={lang} placement="hero" className="btn s-btn" arrow />
             <p className="s-hero-note">{t.hero.note}</p>
           </div>
           <aside className="s-hero-guarantee" aria-label={t.guarantee.title}>
@@ -246,7 +271,7 @@ export function SpanishPage({ t }: { t: SpanishPageContent }) {
           <div className="s-final-inner" data-reveal>
             <h2 id="final-title">{t.final.title}</h2>
             <p className="s-lede">{t.final.sub}</p>
-            <SpanishCta href={href('final')} label={t.final.cta} lang={lang} placement="final" className="btn s-btn" />
+            <SpanishCta href={href('final')} label={t.final.cta} lang={lang} placement="final" className="btn s-btn" arrow />
           </div>
         </section>
       </main>

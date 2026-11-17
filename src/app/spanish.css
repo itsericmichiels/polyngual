@@ -1,6 +1,8 @@
 /* Polyngual Spanish landing page (/spanish, /spanish/<lang>). Premium and minimal (Eric, 2026-11-17, after Emil
    Kowalski's design-engineering notes): paper and ink, hairlines instead of boxes, Nunito Sans at 700 for headings,
-   lagoon as the only accent, one dark object (the news card) and one dark plan (Tutor Intensive).
+   one dark object (the news card) and one dark plan (Tutor Intensive). The Spanish flag is the accent (Eric, same
+   day): a thin flag band across the top, a small flag before each eyebrow, red for the numbers and the shield,
+   yellow for the savings and the new word. Checks stay ink: red ticks read as errors.
    Motion: one entrance for the hero (title leads, the rest follows with shrinking gaps), one entrance per section
    (opacity and 12px, no blur, no per-item stagger), press feedback on every button, hover only where a pointer can
    hover. Brand tokens and easings come from globals.css. */
@@ -12,13 +14,40 @@
   --hair: rgba(2, 25, 64, 0.1);
   --hair-strong: rgba(2, 25, 64, 0.18);
   --surface: #ffffff;
-  --accent: var(--lagoon-700);
+  /* The Spanish flag: red, yellow, red in 1:2:1. */
+  --es-red: #c60b1e;
+  --es-yellow: #ffc400;
+  --flag: linear-gradient(to bottom, var(--es-red) 0 25%, var(--es-yellow) 25% 75%, var(--es-red) 75% 100%);
+  --accent: var(--es-red);
   --s-section: clamp(88px, 11vw, 152px);
   --s-radius: 20px;
 
   background: var(--paper);
   color: var(--ink);
   font-feature-settings: 'kern', 'liga';
+}
+
+/* A thin flag band across the very top of the page, drawn in from the left on arrival. */
+.s-page::before {
+  content: '';
+  display: block;
+  height: 8px;
+  background: var(--flag);
+  animation: s-draw 1100ms var(--ease-in-out) both;
+}
+
+@keyframes s-draw {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Smooth answers in the FAQ, where the browser can animate to height: auto. */
+.s-page {
+  interpolate-size: allow-keywords;
 }
 
 .s-page h1,
@@ -55,12 +84,13 @@
 .s-eyebrow::before {
   content: '';
   display: inline-block;
-  width: 6px;
-  height: 6px;
+  width: 15px;
+  height: 10px;
   margin-right: 10px;
-  border-radius: 999px;
-  background: var(--lagoon);
-  vertical-align: 0.14em;
+  border-radius: 2px;
+  background: var(--flag);
+  box-shadow: inset 0 0 0 0.5px rgba(2, 25, 64, 0.12);
+  vertical-align: -0.05em;
 }
 
 @media (max-width: 480px) {
@@ -192,8 +222,9 @@
   color: var(--accent);
 }
 
-/* The hero's one entrance, played once on load. The title leads and travels furthest; the line, the button and the
-   guarantee follow with shrinking gaps; the eyebrow only fades. Reduced motion: globals.css cuts it to an instant. */
+/* The hero's one entrance, played once on load. The title leads: its words rise out of their own masks in one wave
+   (delays from SpanishPage.tsx); the line, the button and the guarantee follow with shrinking gaps, overlapping the
+   end of the title; the eyebrow and the guarantee only fade. Reduced motion: fades only (bottom of this file). */
 @keyframes s-rise {
   from {
     opacity: 0;
@@ -211,23 +242,50 @@
   animation: s-fade 500ms var(--ease-out) both;
 }
 
-.s-hero-title {
-  --rise: 18px;
-  animation: s-rise 720ms var(--ease-out) 60ms both;
+/* Each word sits in a mask; the padding keeps descenders (p, g) inside it. */
+.s-word {
+  display: inline-block;
+  overflow: clip;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+  vertical-align: top;
+}
+
+.s-word > span {
+  display: inline-block;
+  animation: s-word-rise 860ms var(--ease-out) calc(80ms + var(--wd, 0ms)) both;
+}
+
+@keyframes s-word-rise {
+  from {
+    transform: translateY(120%);
+  }
 }
 
 .s-hero-sub {
   --rise: 10px;
-  animation: s-rise 640ms var(--ease-out) 190ms both;
+  animation: s-rise 680ms var(--ease-out) 440ms both;
 }
 
 .s-hero-actions {
   --rise: 8px;
-  animation: s-rise 600ms var(--ease-out) 290ms both;
+  animation: s-rise 640ms var(--ease-out) 540ms both;
 }
 
 .s-hero-guarantee {
-  animation: s-fade 600ms var(--ease-out) 380ms both;
+  animation: s-fade 700ms var(--ease-out) 660ms both;
+}
+
+.s-arrow {
+  flex: none;
+  margin-right: -4px;
+  transition: transform 200ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .s-page .s-btn:hover .s-arrow {
+    transform: translateX(3px);
+  }
 }
 
 /* ---------- Sections ---------- */
@@ -243,12 +301,17 @@
   margin-bottom: clamp(36px, 5vw, 64px);
 }
 
-/* One entrance per section block, quieter than the site-wide reveal: no blur, no per-item stagger. */
+/* One entrance per section block, quieter than the site-wide reveal: no blur, no per-item stagger. Only the way in
+   animates: hiding (when the reveal script starts) is instant, so nothing fades out before it fades in. The same
+   holds for every reveal below: their transitions sit on the [data-in] state. */
 .s-page [data-reveal] {
+  transition: none;
+}
+
+.s-page [data-reveal][data-in] {
   transition:
     opacity 600ms var(--ease-out),
     transform 600ms var(--ease-out);
-  transition-delay: 0ms;
 }
 
 [data-reveal-on] .s-page [data-reveal]:not([data-in]) {
@@ -268,10 +331,56 @@
 }
 
 .s-points li {
+  --d: 0ms;
+  position: relative;
   display: grid;
   gap: 10px;
   padding: 24px 0 28px;
-  border-top: 1px solid var(--hair-strong);
+}
+
+/* The points enter as one group: each hairline draws from the left, then its words rise; the columns start
+   0, 90 and 150ms apart. The list itself does not move. */
+.s-points li::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: var(--hair-strong);
+  /* An explicit end state: a clip-path cannot animate to or from none. */
+  clip-path: inset(0 0 0 0);
+}
+
+.s-points[data-in] li::before {
+  transition: clip-path 800ms var(--ease-in-out) var(--d);
+}
+
+.s-points[data-in] li > * {
+  transition:
+    opacity 600ms var(--ease-out),
+    transform 600ms var(--ease-out);
+  transition-delay: calc(var(--d) + 180ms);
+}
+
+.s-points li:nth-child(2) {
+  --d: 90ms;
+}
+
+.s-points li:nth-child(3) {
+  --d: 150ms;
+}
+
+[data-reveal-on] .s-page .s-points[data-reveal]:not([data-in]) {
+  opacity: 1;
+  transform: none;
+}
+
+[data-reveal-on] .s-points:not([data-in]) li::before {
+  clip-path: inset(0 100% 0 0);
+}
+
+[data-reveal-on] .s-points:not([data-in]) li > * {
+  opacity: 0;
+  transform: translateY(8px);
 }
 
 .s-num {
@@ -381,12 +490,54 @@
   color: inherit;
 }
 
+/* The news card explains the product: once it is in view, a highlighter passes over the word the learner knows,
+   then over the new one, and the legend appears after. */
+.s-news-headline mark {
+  position: relative;
+  z-index: 0;
+  background: none;
+}
+
+.s-news-headline mark::before {
+  content: '';
+  position: absolute;
+  inset: 0.06em 0;
+  z-index: -1;
+  border-radius: 0.3em;
+  clip-path: inset(0 0 0 0);
+}
+
+.s-news-card[data-in] .s-news-headline mark::before {
+  transition: clip-path 700ms var(--ease-in-out) var(--md, 450ms);
+}
+
+.s-news-headline .s-known::before {
+  background: rgba(44, 200, 189, 0.3);
+}
+
+.s-news-headline .s-fresh::before {
+  --md: 1050ms;
+  background: rgba(255, 196, 0, 0.55);
+}
+
+.s-news-card[data-in] .s-news-legend {
+  transition: opacity 500ms var(--ease-out) 1500ms;
+}
+
+[data-reveal-on] .s-news-card:not([data-in]) .s-news-headline mark::before {
+  clip-path: inset(0 100% 0 0);
+}
+
+[data-reveal-on] .s-news-card:not([data-in]) .s-news-legend {
+  opacity: 0;
+}
+
 .s-known {
   background: rgba(44, 200, 189, 0.26);
 }
 
 .s-fresh {
-  background: rgba(255, 200, 87, 0.4);
+  background: rgba(255, 196, 0, 0.5);
 }
 
 /* ---------- Plans ---------- */
@@ -431,8 +582,8 @@
   margin: 0;
   padding: 5px 10px;
   border-radius: 999px;
-  box-shadow: inset 0 0 0 1px rgba(44, 200, 189, 0.5);
-  color: var(--lagoon);
+  box-shadow: inset 0 0 0 1px rgba(255, 196, 0, 0.55);
+  color: var(--es-yellow);
   font: 700 11px/1 var(--font-body);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -505,9 +656,14 @@
   grid-column: 2;
   grid-row: 2;
   justify-self: end;
-  color: var(--accent);
-  font-size: 0.82rem;
+  margin-top: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(255, 196, 0, 0.22);
+  color: #6b4a00;
+  font-size: 0.78rem;
   font-weight: 700;
+  line-height: 1.5;
 }
 
 .s-billed {
@@ -536,7 +692,7 @@
 .s-check {
   flex: none;
   margin-top: 4px;
-  color: var(--accent);
+  color: var(--ink-2);
 }
 
 .s-plan-cta {
@@ -567,9 +723,36 @@
   border-color: var(--line-dark);
 }
 
-.s-plan-featured .s-save,
+.s-plan-featured .s-save {
+  background: rgba(255, 196, 0, 0.16);
+  color: var(--es-yellow);
+}
+
 .s-plan-featured .s-check {
-  color: var(--lagoon);
+  color: var(--es-yellow);
+}
+
+/* The dark plan carries the flag along its top edge. */
+.s-plan-featured {
+  position: relative;
+  overflow: hidden;
+}
+
+.s-plan-featured::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 6px;
+  background: var(--flag);
+  clip-path: inset(0 0 0 0);
+}
+
+.s-plans[data-in] .s-plan-featured::before {
+  transition: clip-path 900ms var(--ease-in-out) 250ms;
+}
+
+[data-reveal-on] .s-plans:not([data-in]) .s-plan-featured::before {
+  clip-path: inset(0 100% 0 0);
 }
 
 /* ---------- Guarantee and fine print ---------- */
@@ -662,6 +845,20 @@
   color: var(--ink-2);
 }
 
+/* The answer's height animates where the browser supports it (::details-content and interpolate-size); elsewhere it
+   opens at once, as before. Opening is read, so 300ms; the plus turns with it. */
+.s-faq details::details-content {
+  block-size: 0;
+  overflow-y: clip;
+  transition:
+    block-size 300ms var(--ease-out),
+    content-visibility 300ms allow-discrete;
+}
+
+.s-faq details[open]::details-content {
+  block-size: auto;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .s-faq summary:hover {
     color: var(--accent);
@@ -680,6 +877,16 @@
   justify-items: center;
   gap: 18px;
   text-align: center;
+}
+
+.s-final-inner::before {
+  content: '';
+  width: 36px;
+  height: 24px;
+  margin-bottom: 6px;
+  border-radius: 4px;
+  background: var(--flag);
+  box-shadow: inset 0 0 0 0.5px rgba(2, 25, 64, 0.12);
 }
 
 .s-final h2 {
@@ -743,4 +950,18 @@
 .s-footer-fine {
   color: var(--ink-3);
   font-size: 0.82rem;
+}
+
+/* ---------- Reduced motion ---------- */
+
+/* Fewer and gentler, not none: the hero fades in without moving, the highlights and lines appear in place.
+   globals.css already cuts every other transition to an instant. */
+@media (prefers-reduced-motion: reduce) {
+  .s-word > span,
+  .s-hero-sub,
+  .s-hero-actions {
+    animation-name: s-fade !important;
+    animation-duration: 400ms !important;
+    animation-delay: 0ms !important;
+  }
 }
