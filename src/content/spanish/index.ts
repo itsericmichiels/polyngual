@@ -6,7 +6,8 @@ import { da } from './da';
 import { sv } from './sv';
 import { no } from './no';
 import { nl } from './nl';
+import { fi } from './fi';
 
-const CONTENT: Record<SpanishLang, SpanishPageContent> = { en, de, da, sv, no, nl };
+const CONTENT: Record<SpanishLang, SpanishPageContent> = { en, de, da, sv, no, nl, fi };
 
 export const getSpanishContent = (lang: SpanishLang) => CONTENT[lang];

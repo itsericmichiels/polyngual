@@ -5,7 +5,7 @@
 
 import { appUrl } from './site.ts';
 
-export const SPANISH_LANGS = ['en', 'de', 'da', 'sv', 'no', 'nl'] as const;
+export const SPANISH_LANGS = ['en', 'de', 'da', 'sv', 'no', 'nl', 'fi'] as const;
 export type SpanishLang = (typeof SPANISH_LANGS)[number];
 
 export const SPANISH_LANG_NAMES: Record<SpanishLang, string> = {
@@ -15,6 +15,7 @@ export const SPANISH_LANG_NAMES: Record<SpanishLang, string> = {
   sv: 'Svenska',
   no: 'Norsk',
   nl: 'Nederlands',
+  fi: 'Suomi',
 };
 
 /** The page's path: /spanish in English, /spanish/<lang> for the others. */
@@ -46,7 +47,7 @@ export const perMonthCents = (tier: Tier, months: Months) => Math.round((PRICES[
 export const savingPercent = (tier: Tier, months: Months) =>
   Math.floor((1 - (PRICES[tier][months] ?? 0) / ((PRICES[tier][1] ?? 1) * months)) * 100 + 1e-9);
 
-const NUMBER_LOCALE: Record<SpanishLang, string> = { en: 'en-IE', de: 'de-DE', da: 'da-DK', sv: 'sv-SE', no: 'nb-NO', nl: 'nl-NL' };
+const NUMBER_LOCALE: Record<SpanishLang, string> = { en: 'en-IE', de: 'de-DE', da: 'da-DK', sv: 'sv-SE', no: 'nb-NO', nl: 'nl-NL', fi: 'fi-FI' };
 
 /** "€42.50" / "42,50 €"; whole euros without decimals. */
 export function euro(cents: number, lang: SpanishLang): string {
@@ -59,8 +60,9 @@ export function euro(cents: number, lang: SpanishLang): string {
   }).format(cents / 100);
 }
 
-// The app speaks English, Spanish, German and Danish; Swedish, Norwegian and Dutch visitors start in English.
-const APP_LANG: Record<SpanishLang, 'en' | 'de' | 'da'> = { en: 'en', de: 'de', da: 'da', sv: 'en', no: 'en', nl: 'en' };
+// The app speaks English, Spanish, German and Danish; Swedish, Norwegian, Dutch and Finnish visitors start in English
+// (Swedish and Finnish are being added to the app).
+const APP_LANG: Record<SpanishLang, 'en' | 'de' | 'da'> = { en: 'en', de: 'de', da: 'da', sv: 'en', no: 'en', nl: 'en', fi: 'en' };
 
 /** The app's sign-up, in the visitor's language where the app has it, tagged with where the click came from. */
 export function spanishSignupHref(lang: SpanishLang, placement: string): string {
