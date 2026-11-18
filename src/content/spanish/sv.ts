@@ -100,7 +100,6 @@ export const sv: SpanishPageContent = {
     title: 'Vår 90-dagarsgaranti',
     body: 'Om 90 dagar klarar du marknaden, läkaren och grannarna på spanska. Efter 90 dagar med ett betalt abonnemang gör du vårt test: klarar du det inte, är de följande 90 dagarna gratis.',
   },
-  appLanguageNote: 'Appen finns i dag på engelska, tyska och danska. Svenska är på väg.',
   faq: {
     title: 'Frågor',
     items: [

@@ -120,7 +120,6 @@ export const fi: SpanishPageContent = {
     title: '90 päivän takuumme',
     body: '90 päivässä pärjäät espanjaksi torilla, lääkärissä ja naapureiden kanssa. Kun olet ollut maksullisella tilauksella 90 päivää, tee testimme: jos et läpäise sitä, seuraavat 90 päivää ovat ilmaisia.',
   },
-  appLanguageNote: 'Sovellus on tällä hetkellä englanniksi, saksaksi ja tanskaksi. Suomi on tulossa.',
   faq: {
     title: 'Kysymyksiä',
     items: [
