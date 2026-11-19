@@ -10,6 +10,10 @@ const examOrigin = (process.env.EXAM_APP_ORIGIN ?? 'https://exitohire-ai.vercel.
 
 const EXAM_ZONE = ['/examen', '/examen/:path*', '/api/examen/:path*', '/examen-static/:path*'];
 
+// The learning app (learn.polyngual.app), where the influencer program lives: its links, its application page and the
+// influencers' dashboard (repo exitohire-ai, docs/polyngual/partners.md). Same variable as the site's sign-up buttons.
+const learnOrigin = (process.env.NEXT_PUBLIC_APP_URL?.trim() || 'https://learn.polyngual.app').replace(/\/+$/, '');
+
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   // app/global-not-found.tsx: one 404 page for every unmatched URL across both root layouts.
@@ -33,6 +37,14 @@ const nextConfig: NextConfig = {
       { source: '/spanska', destination: '/spanish/sv', permanent: false },
       { source: '/spaans', destination: '/spanish/nl', permanent: false },
       { source: '/espanja', destination: '/spanish/fi', permanent: false },
+      // Polyngual's influencer program (Eric, 2026-11-19): short polyngual.app addresses for the pages in the learning
+      // app. /r/<code> is an influencer's link: the app counts the visit, remembers the influencer on every
+      // polyngual.app site (a .polyngual.app cookie) and opens the sign-up page. /partners is where influencers apply,
+      // /socios the same in Spanish, and /partners/dashboard where partners sign in. Any query string goes along.
+      { source: '/r/:code', destination: `${learnOrigin}/r/:code`, permanent: false },
+      { source: '/partners', destination: `${learnOrigin}/socios/unirse`, permanent: false },
+      { source: '/partners/dashboard', destination: `${learnOrigin}/socios`, permanent: false },
+      { source: '/socios', destination: `${learnOrigin}/socios/unirse?lang=es`, permanent: false },
     ];
   },
   async rewrites() {
