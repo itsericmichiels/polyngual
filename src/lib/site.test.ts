@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { appSignupHref } from './site.ts';
+import { appSignupHref, siteUrl } from './site.ts';
 
 test('keeps the waitlist while the app URL is unset', () => {
   delete process.env.NEXT_PUBLIC_APP_URL;
@@ -14,4 +14,9 @@ test('sends the main buttons to the app with the language and the button that wa
   assert.equal(href.searchParams.get('lang'), 'es');
   assert.equal(href.searchParams.get('utm_campaign'), 'hero-es');
   delete process.env.NEXT_PUBLIC_APP_URL;
+});
+
+test('points at www, the address the site answers on, unless told otherwise', () => {
+  delete process.env.NEXT_PUBLIC_SITE_URL;
+  assert.equal(siteUrl(), 'https://www.polyngual.app');
 });

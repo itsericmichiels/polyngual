@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { SpanishPageContent } from '@/content/spanish/types';
-import { CONTACT_EMAIL, SOCIAL_LINKS } from '@/lib/site';
+import { CONTACT_EMAIL, SOCIAL_LINKS, SPANISH_YOUTUBE } from '@/lib/site';
 import { SPANISH_LANGS, SPANISH_LANG_NAMES, euro, monthsOf, perMonthCents, PRICES, savingPercent, spanishPath, spanishSignupHref, type Tier } from '@/lib/spanish';
 import { RevealObserver } from '@/components/RevealObserver';
 import { spanishDisplay, spanishText } from '@/lib/spanish-fonts';
@@ -305,7 +305,7 @@ export function SpanishPage({ t }: { t: SpanishPageContent }) {
           </li>
           {SOCIAL_LINKS.map((social) => (
             <li key={social.label}>
-              <a href={social.href} rel="noopener">
+              <a href={social.label === 'YouTube' ? SPANISH_YOUTUBE : social.href} rel="noopener">
                 {social.label}
               </a>
             </li>
