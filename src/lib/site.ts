@@ -10,7 +10,6 @@ export const SOCIAL_LINKS = [
   // @polyngual does not exist; the channels are @PolyngualApp and, for the Spanish course, @PolyngualSpanish (2026-11-19).
   { label: 'YouTube', href: 'https://www.youtube.com/@PolyngualApp' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/company/polyngual' },
-  { label: 'X', href: 'https://x.com/polyngual' },
 ] as const;
 
 /** The Spanish course's own channel, which the Spanish page links instead of the main one. */
