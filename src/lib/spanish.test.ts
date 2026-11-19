@@ -1,6 +1,7 @@
 import { strict as assert } from 'node:assert';
+import { existsSync } from 'node:fs';
 import { test } from 'node:test';
-import { euro, monthsOf, perMonthCents, savingPercent, spanishAlternates, spanishPath, spanishSignupHref } from './spanish.ts';
+import { euro, monthsOf, perMonthCents, savingPercent, SPANISH_LANGS, spanishAlternates, spanishPath, spanishSignupHref } from './spanish.ts';
 
 test('prices match the app: Essential from €50, Tutor Intensive from €100, Couples from €80, no 12 months', () => {
   assert.deepEqual(monthsOf('essential').map((m) => perMonthCents('essential', m)), [5000, 4500, 4250]);
@@ -30,4 +31,8 @@ test('paths, hreflang and app links', () => {
   assert.equal(new URL(spanishSignupHref('sv', 'hero')).searchParams.get('lang'), 'sv');
   assert.equal(new URL(spanishSignupHref('fi', 'hero')).searchParams.get('lang'), 'fi');
   assert.equal(new URL(spanishSignupHref('nl', 'hero')).searchParams.get('lang'), 'en');
+});
+
+test('every language has its share card', () => {
+  for (const lang of SPANISH_LANGS) assert.ok(existsSync(new URL(`../../public/og-spanish-${lang}.png`, import.meta.url)), lang);
 });

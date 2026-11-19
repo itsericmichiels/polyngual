@@ -25,7 +25,63 @@ const COPY = {
     privacyHref: '/en/privacy',
     reopen: 'Cookies',
   },
+  // The Spanish page's other languages (Eric, 2026-11-19): the notice was English on every one of them. The privacy
+  // policy is in English and Spanish only, so they link the English one.
+  de: {
+    text: 'Dürfen wir Cookies von Google Analytics verwenden, um zu sehen, wie die Website genutzt wird? Wir messen nur Besuche, keine Werbung.',
+    accept: 'Akzeptieren',
+    decline: 'Ablehnen',
+    privacy: 'Datenschutz',
+    privacyHref: '/en/privacy',
+    reopen: 'Cookies',
+  },
+  da: {
+    text: 'Må vi bruge cookies fra Google Analytics til at se, hvordan siden bliver brugt? Vi måler kun besøg, ingen reklamer.',
+    accept: 'Accepter',
+    decline: 'Afvis',
+    privacy: 'Privatliv',
+    privacyHref: '/en/privacy',
+    reopen: 'Cookies',
+  },
+  sv: {
+    text: 'Får vi använda cookies från Google Analytics för att se hur webbplatsen används? Vi mäter bara besök, ingen reklam.',
+    accept: 'Godkänn',
+    decline: 'Avböj',
+    privacy: 'Integritet',
+    privacyHref: '/en/privacy',
+    reopen: 'Cookies',
+  },
+  nb: {
+    text: 'Kan vi bruke informasjonskapsler fra Google Analytics for å se hvordan nettstedet brukes? Vi måler bare besøk, ingen reklame.',
+    accept: 'Godta',
+    decline: 'Avslå',
+    privacy: 'Personvern',
+    privacyHref: '/en/privacy',
+    reopen: 'Cookies',
+  },
+  nl: {
+    text: 'Mogen we cookies van Google Analytics gebruiken om te zien hoe de site wordt gebruikt? We meten alleen bezoeken, geen advertenties.',
+    accept: 'Accepteren',
+    decline: 'Weigeren',
+    privacy: 'Privacy',
+    privacyHref: '/en/privacy',
+    reopen: 'Cookies',
+  },
+  fi: {
+    text: 'Saammeko käyttää Google Analyticsin evästeitä nähdäksemme, miten sivustoa käytetään? Mittaamme vain käyntejä, emme näytä mainoksia.',
+    accept: 'Hyväksy',
+    decline: 'Hylkää',
+    privacy: 'Tietosuoja',
+    privacyHref: '/en/privacy',
+    reopen: 'Evästeet',
+  },
 } as const;
+
+type NoticeLang = keyof typeof COPY;
+const noticeLang = (lang: string): NoticeLang => {
+  const base = lang.toLowerCase().split('-')[0];
+  return base in COPY ? (base as NoticeLang) : 'en';
+};
 
 export function GoogleTags({ lang }: { lang: string }) {
   const [consent, setConsent] = useState<Consent | null>(null);
@@ -43,7 +99,7 @@ export function GoogleTags({ lang }: { lang: string }) {
   }, []);
 
   if (!googleTagsConfigured() || !ready) return null;
-  const t = lang.startsWith('es') ? COPY.es : COPY.en;
+  const t = COPY[noticeLang(lang)];
   const choose = (value: Consent) => {
     writeConsent(value);
     setOpen(false);
