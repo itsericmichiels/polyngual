@@ -79,7 +79,7 @@ export const de: SpanishPageContent = {
       essential: {
         name: 'Essential',
         tagline: 'Der ganze Kurs, der Sprach-Tutor und die Lokalnachrichten.',
-        perks: ['Der komplette Spanischkurs', 'KI-Sprach-Tutor, 3 Gespräche am Tag', 'Jeden Morgen die Nachrichten aus deinem Ort', 'Geschichten, Wortschatz und deine Fortschrittskarte'],
+        perks: ['Der komplette Spanischkurs', 'Sprach-Tutor: bis zu 15 Minuten am Tag', 'Jeden Morgen die Nachrichten aus deinem Ort', 'Geschichten, Wortschatz und deine Fortschrittskarte'],
       },
       intensive: {
         name: 'Tutor Intensiv',

@@ -79,7 +79,7 @@ export const nl: SpanishPageContent = {
       essential: {
         name: 'Essential',
         tagline: 'De hele cursus, de spraaktutor en het lokale nieuws.',
-        perks: ['De volledige cursus Spaans', 'AI-spraaktutor, 3 gesprekken per dag', 'Elke ochtend het nieuws uit je dorp', 'Verhalen, woordenschat en je voortgangskaart'],
+        perks: ['De volledige cursus Spaans', 'Spraaktutor: tot 15 minuten per dag', 'Elke ochtend het nieuws uit je dorp', 'Verhalen, woordenschat en je voortgangskaart'],
       },
       intensive: {
         name: 'Tutor Intensief',

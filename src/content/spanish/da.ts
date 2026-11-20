@@ -79,7 +79,7 @@ export const da: SpanishPageContent = {
       essential: {
         name: 'Essential',
         tagline: 'Hele kurset, stemmetutoren og de lokale nyheder.',
-        perks: ['Hele spanskkurset', 'AI-stemmetutor, 3 samtaler om dagen', 'Nyhederne fra din by hver morgen', 'Historier, ordforråd og dit fremskridtskort'],
+        perks: ['Hele spanskkurset', 'Stemmetutor: op til 15 minutter om dagen', 'Nyhederne fra din by hver morgen', 'Historier, ordforråd og dit fremskridtskort'],
       },
       intensive: {
         name: 'Tutor Intensiv',
