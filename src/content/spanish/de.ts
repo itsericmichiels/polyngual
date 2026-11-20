@@ -84,7 +84,7 @@ export const de: SpanishPageContent = {
       intensive: {
         name: 'Tutor Intensiv',
         tagline: 'Für alle, die schnell Spanisch sprechen wollen.',
-        perks: ['Alles aus Essential', 'KI-Sprach-Tutor ohne Limit (faire Nutzung)', 'Ein persönlicher Lernplan mit Check-ins deines Coaches', 'Bevorzugter Support: Antwort am selben Tag'],
+        perks: ['Alles aus Essential', 'Sprach- oder Video-Tutor: bis zu 30 Minuten am Tag', 'Ein persönlicher Lernplan mit Check-ins deines Coaches', 'Bevorzugter Support: Antwort am selben Tag'],
       },
       couple: {
         name: 'Paare',

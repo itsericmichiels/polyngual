@@ -84,7 +84,7 @@ export const da: SpanishPageContent = {
       intensive: {
         name: 'Tutor Intensiv',
         tagline: 'Til dig, der vil tale spansk hurtigt.',
-        perks: ['Alt i Essential', 'Ubegrænset AI-stemmetutor (rimelig brug)', 'En personlig studieplan med opfølgning fra din coach', 'Prioriteret support: svar samme dag'],
+        perks: ['Alt i Essential', 'Stemme- eller videotutor: op til 30 minutter om dagen', 'En personlig studieplan med opfølgning fra din coach', 'Prioriteret support: svar samme dag'],
       },
       couple: {
         name: 'Par',

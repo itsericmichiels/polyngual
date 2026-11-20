@@ -84,7 +84,7 @@ export const nl: SpanishPageContent = {
       intensive: {
         name: 'Tutor Intensief',
         tagline: 'Voor wie snel Spaans wil spreken.',
-        perks: ['Alles uit Essential', 'Onbeperkte AI-spraaktutor (redelijk gebruik)', 'Een persoonlijk studieplan met check-ins van je coach', 'Voorrang bij support: antwoord dezelfde dag'],
+        perks: ['Alles uit Essential', 'Spraak- of videotutor: tot 30 minuten per dag', 'Een persoonlijk studieplan met check-ins van je coach', 'Voorrang bij support: antwoord dezelfde dag'],
       },
       couple: {
         name: 'Stellen',

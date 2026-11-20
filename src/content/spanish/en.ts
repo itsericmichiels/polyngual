@@ -102,7 +102,7 @@ export const en: SpanishPageContent = {
       intensive: {
         name: 'Tutor Intensive',
         tagline: 'For people who want to speak Spanish fast.',
-        perks: ['Everything in Essential', 'Unlimited AI voice tutor (fair use)', 'A personal study plan, with check-ins from your coach', 'Priority support: answers the same day'],
+        perks: ['Everything in Essential', 'Voice or video tutor: up to 30 minutes a day', 'A personal study plan, with check-ins from your coach', 'Priority support: answers the same day'],
       },
       couple: {
         name: 'Couples',

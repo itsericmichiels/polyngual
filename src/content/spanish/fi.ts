@@ -104,7 +104,7 @@ export const fi: SpanishPageContent = {
       intensive: {
         name: 'Tutor Intensive',
         tagline: 'Niille, jotka haluavat puhua espanjaa nopeasti.',
-        perks: ['Kaikki Essentialin sisältö', 'Rajaton tekoälypuhetuutori (kohtuukäyttö)', 'Henkilökohtainen opiskelusuunnitelma ja valmentajan säännöllinen seuranta', 'Ensisijainen tuki: vastaus samana päivänä'],
+        perks: ['Kaikki Essentialin sisältö', 'Ääni- tai videotuutori: jopa 30 minuuttia päivässä', 'Henkilökohtainen opiskelusuunnitelma ja valmentajan säännöllinen seuranta', 'Ensisijainen tuki: vastaus samana päivänä'],
       },
       couple: {
         name: 'Pariskunta',
