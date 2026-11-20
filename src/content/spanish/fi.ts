@@ -99,12 +99,12 @@ export const fi: SpanishPageContent = {
       essential: {
         name: 'Essential',
         tagline: 'Koko kurssi, puhetuutori ja paikallisuutiset.',
-        perks: ['Koko espanjan kurssi', 'Tekoälypuhetuutori, 3 keskustelua päivässä', 'Kaupunkisi uutiset joka aamu', 'Tarinat, sanasto ja edistymiskarttasi'],
+        perks: ['Koko espanjan kurssi', 'Äänituutori: jopa 15 minuuttia päivässä', 'Kaupunkisi uutiset joka aamu', 'Tarinat, sanasto ja edistymiskarttasi'],
       },
       intensive: {
         name: 'Tutor Intensive',
         tagline: 'Niille, jotka haluavat puhua espanjaa nopeasti.',
-        perks: ['Kaikki Essentialin sisältö', 'Rajaton tekoälypuhetuutori (kohtuukäyttö)', 'Henkilökohtainen opiskelusuunnitelma ja valmentajan säännöllinen seuranta', 'Ensisijainen tuki: vastaus samana päivänä'],
+        perks: ['Kaikki Essentialin sisältö', 'Ääni- tai videotuutori: jopa 30 minuuttia päivässä', 'Henkilökohtainen opiskelusuunnitelma ja valmentajan säännöllinen seuranta', 'Ensisijainen tuki: vastaus samana päivänä'],
       },
       couple: {
         name: 'Pariskunta',

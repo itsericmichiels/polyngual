@@ -97,12 +97,12 @@ export const en: SpanishPageContent = {
       essential: {
         name: 'Essential',
         tagline: 'The full course, the voice tutor and the local news.',
-        perks: ['The full Spanish course', 'AI voice tutor, 3 conversations a day', 'Your town’s news every morning', 'Stories, vocabulary and your progress map'],
+        perks: ['The full Spanish course', 'Voice tutor: up to 15 minutes a day', 'Your town’s news every morning', 'Stories, vocabulary and your progress map'],
       },
       intensive: {
         name: 'Tutor Intensive',
         tagline: 'For people who want to speak Spanish fast.',
-        perks: ['Everything in Essential', 'Unlimited AI voice tutor (fair use)', 'A personal study plan, with check-ins from your coach', 'Priority support: answers the same day'],
+        perks: ['Everything in Essential', 'Voice or video tutor: up to 30 minutes a day', 'A personal study plan, with check-ins from your coach', 'Priority support: answers the same day'],
       },
       couple: {
         name: 'Couples',
